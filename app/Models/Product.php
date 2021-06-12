@@ -16,6 +16,34 @@ class Product extends Model
             return "Hết Hàng";
         }
     }
+    const STATUS_INIT = 0;
+    const STATUS_BUY = 1;
+    const STATUS_STOP = -1;
+    public static $status_text = [
+        self::STATUS_INIT => 'Đang nhập',
+        self::STATUS_BUY => 'Đang bán',
+        self::STATUS_STOP => 'Dừng bán'
+    ];
+    const SIZE_36 = 36;
+    const SIZE_37 = 37;
+    const SIZE_38 = 38;
+    const SIZE_39 = 39;
+    const SIZE_40 = 40;
+    const SIZE_41 = 41;
+    const SIZE_42 = 42;
+    const SIZE_43 = 43;
+    const SIZE_44 = 44;
+    public static $size_text =[
+        self::SIZE_36 => '36',
+        self::SIZE_37 => '37',
+        self::SIZE_38 => '38',
+        self::SIZE_39 => '39',
+        self::SIZE_40 => '40',
+        self::SIZE_41 => '41',
+        self::SIZE_42 => '42',
+        self::SIZE_43 => '43',
+        self::SIZE_44 => '44',
+    ];
     protected $table = 'products';
 
     public function category(){

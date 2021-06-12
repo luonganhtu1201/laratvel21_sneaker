@@ -37,22 +37,37 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên</label>
                                 <input type="text" class="form-control" id="" name="name" value="{{$user->name}}">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" class="form-control" id="" name="email" value="{{$user->email}}">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mật khẩu</label>
                                 <input type="password" class="form-control" name="password" id="">
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone</label>
                                 <input type="text" class="form-control" name="phone" id="" value="{{$user->userinfo->phone}}">
+                                @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Address</label>
                                 <input type="text" class="form-control" name="address" id="" value="{{$user->userinfo->address}}">
+                                @error('address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Quyền</label>
@@ -66,7 +81,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-sm">Update</button>
-                            <button type="submit" class="btn btn-danger btn-sm">Huỷ bỏ</button>
+                            <a class="btn btn-danger btn-sm" href="{{Route('backend.user.index')}}">Huỷ bỏ</a>
                         </div>
                     </form>
                 </div>
@@ -79,4 +94,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

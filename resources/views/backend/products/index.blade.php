@@ -62,6 +62,9 @@
                                 <td>{{$product->user->name}}</td>
                                 <td><span class="tag tag-success">{{$product->status_text}}</span></td>
                                 <td><a href="{{ Route('backend.product.images',['id'=>$product->id]) }}">Xem hình ảnh sản phẩm</a></td>
+                                
+                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.product.destroy',['id'=>$product->id])}}"><i class="fas fa-trash"></i> Delete</a> </td>
+                                <td><a class="btn btn-success btn-sm" href="{{Route('backend.product.edit',['id'=>$product->id])}}"><i class="fas fa-edit"></i> Edit</a></td>
                             </tr>
                             @endforeach
                             </tbody>

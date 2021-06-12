@@ -49,7 +49,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/layout/boxed.html" class="nav-link">
+                                <a href="{{Route('backend.product.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách</p>
                                 </a>
@@ -67,13 +67,13 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="" class="nav-link">
+                                <a href="{{Route('backend.category.create')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Tạo mới</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
+                                <a href="{{Route('backend.category.index')}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Danh sách</p>
                                 </a>

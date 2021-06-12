@@ -36,23 +36,38 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên</label>
-                                <input type="text" class="form-control" id="" name="name" placeholder="Tên người dùng">
+                                <input type="text" value="{{old('name')}}" class="form-control" id="" name="name" placeholder="Tên người dùng">
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
-                                <input type="email" class="form-control" id="" name="email" placeholder="Email">
+                                <input type="email" value="{{old('email')}}" class="form-control" id="" name="email" placeholder="Email">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mật khẩu</label>
                                 <input type="password" class="form-control" name="password" id="">
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone</label>
-                                <input type="text" class="form-control" name="phone" id="">
+                                <input type="text" value="{{old('phone')}}" class="form-control" name="phone" id="">
+                                @error('phone')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Address</label>
-                                <input type="text" class="form-control" name="address" id="">
+                                <input type="text" value="{{old('address')}}" class="form-control" name="address" id="">
+                                @error('address')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Quyền</label>
@@ -67,7 +82,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-sm">Tạo mới</button>
-                            <button type="submit" class="btn btn-danger btn-sm">Huỷ bỏ</button>
+                            <a class="btn btn-danger btn-sm" href="{{Route('backend.user.index')}}">Huỷ bỏ</a>
                         </div>
                     </form>
                 </div>
@@ -80,4 +95,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

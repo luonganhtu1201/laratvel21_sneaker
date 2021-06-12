@@ -31,80 +31,107 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="" placeholder="Điền tên sản phẩm ">
-                            </div>
-                            <div class="form-group">
-                                <label>Danh Mục cha</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn danh mục---</option>
-                                    <option>Điện thoại</option>
-                                    <option>Máy tính</option>
-                                    <option>Máy ảnh</option>
-                                    <option>Phụ kiện</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Thương hiệu sản phẩm</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn thương hiệu---</option>
-                                    <option>Apple</option>
-                                    <option>Samsung</option>
-                                    <option>Nokia</option>
-                                    <option>Oppo</option>
-                                </select>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Giá khuyến mại</label>
-                                        <input type="text" class="form-control" placeholder="Điền giá khuyến mại">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Giá bán</label>
-                                        <input type="text" class="form-control" placeholder="Điền giá gốc">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Mô tả sản phẩm</label>
-                                <textarea class="textarea" placeholder="Place some text here"
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputFile">Hình ảnh sản phẩm</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text" id="">Upload</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Trạng thái sản phẩm</label>
-                                <select class="form-control select2" style="width: 100%;">
-                                    <option>--Chọn trạng thái---</option>
-                                    <option>Đang nhập</option>
-                                    <option>Mở bán</option>
-                                    <option>Hết hàng</option>
-                                </select>
-                            </div>
+                    <form role="form" method="post" action="{{ route('backend.product.store') }}">
+                    @csrf
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tên sản phẩm</label>
+                            <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Điền tên sản phẩm">
+                            @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                        <!-- /.card-body -->
+                        <div class="form-group">
+                            <label>Size</label>
+                            <select name="size" class="form-control select2" style="width: 100%;">
+                                @foreach(\App\Models\Product::$size_text as $key => $value)
+                                <option value="{{$key}}">{{$value}}</option>
+                                @endforeach
+                            </select>
+                            @error('size')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                                <label for="">Color</label>
+                                <input type="text" value="{{old('color')}}" name="color" id="" class="form-control" placeholder="Màu sắc">
+                                @error('color')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Số lượng nhập vào</label>
+                            <input type="text" name="import_goods" value="{{old('import_goods')}}" class="form-control" id="" placeholder="SL nhập vào">
+                            @error('import_goods')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Danh mục sản phẩm</label>
+                            <select name="category_id" class="form-control select2" style="width: 100%;">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Giá gốc</label>
+                                    <input type="text" name="origin_price" value="{{old('origin_price')}}" class="form-control" placeholder="Điền giá gốc">
+                                    @error('origin_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-default">Huỷ bỏ</button>
-                            <button type="submit" class="btn btn-sucess">Tạo mới</button>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Giá bán</label>
+                                    <input type="text" name="sale_price" value="{{old('sale_price')}}" class="form-control" placeholder="Điền giá gốc">
+                                    @error('sale_price')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Mô tả sản phẩm</label>
+                            <textarea class="textarea" value="{{old('content')}}" name="content" placeholder="Place some text here"
+                            style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                            @error('content')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Hình ảnh sản phẩm</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <span class="input-group-text" id="">Upload</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái sản phẩm</label>
+                            <select name="status" class="form-control select2" style="width: 100%;">
+                                <option>--Chọn trạng thái---</option>
+                                @foreach(\App\Models\Product::$status_text as $key => $value)
+                                <option value="{{$key}}">{{$value}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Tạo mới</button>
+                        <a href="{{ route('backend.product.index') }}" class="btn btn-default">Huỷ bỏ</a>
+                    </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -115,4 +142,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

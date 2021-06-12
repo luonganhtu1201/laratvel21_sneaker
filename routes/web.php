@@ -35,14 +35,23 @@ Route::group([
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
     // Quản lý sản phẩm
     Route::group(['prefix' => 'products'], function(){
+        //index
         Route::get('/', [ProductController::class, 'index'])->name('backend.product.index');
+        //create
         Route::get('/create', [ProductController::class, 'create'])->name('backend.product.create');
+        Route::post('/create',[ProductController::class,'store'])->name('backend.product.store');
+        //edit
+        Route::get('/edit/{id}',[ProductController::class,'edit'])->name('backend.product.edit');
+        Route::post('/update/{id}',[ProductController::class,'update'])->name('backend.product.update');
+        //destroy
+        Route::get('/delete/{id}',[ProductController::class,'destroy'])->name('backend.product.destroy');
+        //Show images của product
         Route::get('/product/{id}/images',[ProductController::class,'showImages'])->name('backend.product.images');
      });
     //Quản lý người dùng
     Route::group(['prefix' => 'users'], function(){
         // index
-        Route::get('/', [UserController::class, 'index'])->name('backend.user.index');
+        Route::get('/index', [UserController::class, 'index'])->name('backend.user.index');
         // crete
         Route::get('/create', [UserController::class, 'create'])->name('backend.user.create');
         Route::post('/create', [UserController::class, 'store'])->name('backend.user.store');
@@ -56,8 +65,17 @@ Route::group([
     });
     //Quản lý danh mục
     Route::group(['prefix' => 'categories'], function(){
+        //index
         Route::get('/', [CategoryController::class, 'index'])->name('backend.category.index');
+        //create
         Route::get('/create', [CategoryController::class, 'create'])->name('backend.category.create');
+        Route::post('/create',[CategoryController::class,'store'])->name('backend.category.store');
+        //edit
+        Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('backend.category.edit');
+        Route::post('/update/{id}',[CategoryController::class,'update'])->name('backend.category.update');
+        //destroy
+        Route::get('/delete/{id}',[CategoryController::class,'destroy'])->name('backend.category.destroy');
+        //category->products đã tạo
         Route::get('/category/{category_id}/products',[CategoryController::class, 'showProducts'])->name('backend.category.products');
     });
     //Quản lý order

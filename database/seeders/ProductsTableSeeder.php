@@ -22,8 +22,8 @@ class ProductsTableSeeder extends Seeder
                 'origin_price' => '2'.$i.'000000',
                 'sale_price' => '21'.$i.'00000',
                 'size'=>37,
-                'inventory_number'=>23,
-                'products_sold'=>12,
+                'color'=>'Đỏ',
+                'import_goods'=>12,
                 'user_id'=>'1',
                 'category_id'=>1
             ]);
