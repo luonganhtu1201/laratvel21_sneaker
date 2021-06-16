@@ -51,7 +51,7 @@ Route::group([
     //Quản lý người dùng
     Route::group(['prefix' => 'users'], function(){
         // index
-        Route::get('/index', [UserController::class, 'index'])->name('backend.user.index');
+        Route::get('/', [UserController::class, 'index'])->name('backend.user.index');
         // crete
         Route::get('/create', [UserController::class, 'create'])->name('backend.user.create');
         Route::post('/create', [UserController::class, 'store'])->name('backend.user.store');

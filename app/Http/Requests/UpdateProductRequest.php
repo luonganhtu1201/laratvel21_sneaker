@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'         => 'required|min:10|max:255|unique:products',
+            'name'         => 'required|min:10|max:255',
             'origin_price' => 'required|numeric|digits_between:1,9',
             'sale_price'   => 'required|numeric|digits_between:1,9',
             'color' => 'required',
             'import_goods' => 'required|numeric|digits_between:1,4',
             'content' => 'required',
-            'image'=>'required',
+
             'image.*' => 'mimes:jpeg,png,jpg,gif,svg|max:50000',
         ];
     }
@@ -40,13 +40,12 @@ class StoreProductRequest extends FormRequest
             'name.required' => ':attribute không được để trống',
             'name.min' => ':attribute phải ít nhất 10 ký tự !',
             'name.max' => ':attribute quá số ký tự !',
-            'name.unique' => ':attribute đã tồn tại',
 
             'origin_price.required' => ':attribute không được để trống',
             'origin_price.numeric' => ':attribute phải là số ',
             'origin_price.digits_between' => ':attribute cao nhất là dưới 1 tỷ',
 
-            'sale_price.required' => ':attribute không được để trống',
+            'sale_price.required' => ':attribute này không được để trống',
             'sale_price.numeric' => ':attribute phải là số ',
             'sale_price.digits_between' => ':attribute cao nhất là dưới 1 tỷ',
 
@@ -58,7 +57,6 @@ class StoreProductRequest extends FormRequest
 
             'content.required' => ':attribute không được để trống',
 
-            'image.required' => ':attribute không được để trống',
             'image.*.mimes' => ':attribute sai định dạng',
             'image.*.max' => ':attribute',
 

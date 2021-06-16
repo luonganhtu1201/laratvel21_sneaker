@@ -31,14 +31,14 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{ route('backend.product.update',$product->id) }}">
+                    <form role="form" method="post" enctype="multipart/form-data" action="{{ route('backend.product.update',$product->id) }}">
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                <input type="text" name="name" value="{{$product->name}}" value="{{old('name')}}" class="form-control" id="" placeholder="Điền tên sản phẩm">
+                                <input type="text" name="name" value="{{old('name',$product->name)==$product->name?$product->name:old('name')}}" class="form-control" id="" placeholder="Điền tên sản phẩm">
                                 @error('name')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -49,21 +49,21 @@
                                     @endforeach
                                 </select>
                                 @error('size')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="">Color</label>
-                                <input type="text" value="{{$product->color}}" value="{{old('color')}}" name="color" id="" class="form-control" placeholder="Màu sắc">
+                                <input type="text" value="{{old('color',$product->color)==$product->color?$product->color:old('color')}}" name="color" id="" class="form-control" placeholder="Màu sắc">
                                 @error('color')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Số lượng nhập vào</label>
-                                <input type="text" name="import_goods" value="{{$product->import_goods}}" value="{{old('import_goods')}}" class="form-control" id="" placeholder="SL nhập vào">
+                                <input type="text" name="import_goods" value="{{old('import_goods',$product->import_goods)==$product->import_goods?$product->import_goods:old('import_goods')}}" class="form-control" id="" placeholder="SL nhập vào">
                                 @error('import_goods')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -78,9 +78,9 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá gốc</label>
-                                        <input type="text" name="origin_price" value="{{$product->origin_price}}" value="{{old('origin_price')}}" class="form-control" placeholder="Điền giá gốc">
+                                        <input type="text" name="origin_price" value="{{old('origin_price',$product->origin_price)==$product->origin_price?$product->origin_price:old('origin_price')}}" class="form-control" placeholder="Điền giá gốc">
                                         @error('origin_price')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i class="text-red">{{ $message }}</i>
                                         @enderror
                                     </div>
 
@@ -88,32 +88,36 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Giá bán</label>
-                                        <input type="text" name="sale_price" value="{{$product->sale_price}}" value="{{old('sale_price')}}" class="form-control" placeholder="Điền giá gốc">
+                                        <input type="text" name="sale_price" value="{{old('sale_price',$product->sale_price)==$product->sale_price?$product->sale_price:old('sale_price')}}" class="form-control" placeholder="Điền giá gốc">
                                         @error('sale_price')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i class="text-red">{{ $message }}</i>
                                         @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mô tả sản phẩm</label>
-                                <textarea class="textarea" value="{{$product->content}}" value="{{old('content')}}" name="content" placeholder="Place some text here"
-                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                <textarea class="textarea" name="content" placeholder="Place some text here"
+                                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{old('content',$product->content)==$product->content?$product->content:old('content')}}</textarea>
                                 @error('content')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                                 <div class="input-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                                        <input type="file" id="file-input" accept="image/*" name="image[]" class="custom-file-input" id="exampleInputFile" multiple>
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                     </div>
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="">Upload</span>
                                     </div>
                                 </div>
+                                <div id="preview"></div>
+                                @error('image')
+                                <i class="text-red">{{ $message }}</i>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái sản phẩm</label>
@@ -128,7 +132,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">Tạo mới</button>
+                            <button type="submit" class="btn btn-success">Update</button>
                             <a href="{{ route('backend.product.index') }}" class="btn btn-default">Huỷ bỏ</a>
                         </div>
                     </form>

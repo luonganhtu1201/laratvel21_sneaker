@@ -46,31 +46,43 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Thời gian</th>
+                                <th>Giá bán</th>
                                 <th>Danh Mục</th>
-                                <th>User</th>
-                                <th>Status</th>
+                                <th>Người nhập</th>
+                                <th>Trạng Thái</th>
+                                <th>Image</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($products as $product)
                             <tr>
                                 <td>{{$product->id}}</td>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->created_at}}</td>
+                                <td><a href="{{ Route('backend.product.images',['id'=>$product->id]) }}">{{$product->name}}</a></td>
+                                <td>{{ number_format($product->origin_price) . " VNĐ" }}</td>
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->user->name}}</td>
-                                <td><span class="tag tag-success">{{$product->status_text}}</span></td>
-                                <td><a href="{{ Route('backend.product.images',['id'=>$product->id]) }}">Xem hình ảnh sản phẩm</a></td>
-                                
-                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.product.destroy',['id'=>$product->id])}}"><i class="fas fa-trash"></i> Delete</a> </td>
-                                <td><a class="btn btn-success btn-sm" href="{{Route('backend.product.edit',['id'=>$product->id])}}"><i class="fas fa-edit"></i> Edit</a></td>
+
+                                @if($product->status == 1)
+                                    <td><span class="badge badge-success">{{$product->status_text}}</span></td>
+                                @elseif($product->status == 0)
+                                    <td><span class="badge badge-warning">{{$product->status_text}}</span></td>
+                                @else
+                                    <td><span class="badge badge-danger">{{$product->status_text}}</span></td>
+                                @endif
+                                <td>
+                                    @if(count($product->images)>0)
+                                        {{--                                        <img src="{{url(\Illuminate\Support\Facades\Storage::url($product->images[0]->path))}}">--}}
+                                        <img src="{{$product->images[0]->image_url}}" width="60px">
+                                    @endif
+                                </td>
+                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.product.destroy',['id'=>$product->id])}}"><i class="fas fa-trash"></i></a>
+                                <a class="btn btn-success btn-sm" href="{{Route('backend.product.edit',['id'=>$product->id])}}"><i class="fas fa-edit"></i></a></td>
                             </tr>
                             @endforeach
                             </tbody>
-                            
+
                         </table>
-                        <div>
+                        <div class="d-flex justify-content-center mt-3">
                             {!! $products->links() !!}
                         </div>
                     </div>
@@ -86,4 +98,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

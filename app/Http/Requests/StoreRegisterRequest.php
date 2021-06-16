@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,10 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:60',
-            'email' => 'email',
+            'email' => 'email|unique:users',
             'password' => 'required|min:6|max:50',
             'phone' => 'required|numeric|min:10',
             'address' => 'required',
-            'avatar' => 'file|mimes:jpeg,png,jpg,gif,svg|max:50000',
             'gender' => 'required',
         ];
     }
@@ -40,12 +39,8 @@ class StoreUserRequest extends FormRequest
             'name.min' => ':attribute phải ít nhất 5 ký tự',
             'name.max' => ':attribute nhiều nhất 60 ký tự',
 
-            'avatar.file' => ':attribute sai định dạng' ,
-            'avatar.mimes' => ':attribute sai định dạng' ,
-            'avatar.max' => ':attribute ' ,
-
             'email.email' => ':attribute sai định dạng (vd : example@abc.com)',
-
+            'email.unique' => ':attribute đã được đăng kí tài khoản',
 
             'password.required' => ':attribute không được để trống',
             'password.min' => ':attribute quá ngắn',
@@ -69,7 +64,6 @@ class StoreUserRequest extends FormRequest
             'phone' => 'Số điện thoại',
             'address' => 'Địa chỉ',
             'gender' => 'Giới tính',
-            'avatar'=> 'Ảnh',
         ];
     }
 }

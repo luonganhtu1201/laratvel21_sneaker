@@ -59,15 +59,18 @@
                                 @if($us->role==1)
                                     <td><span class="badge badge-success">{{$us->role_text}}</span></td>
                                 @else
-                                    <td class=""><span class="badge badge-warning"> {{$us->role_text}}</span></td>
+                                    <td><span class="badge badge-warning"> {{$us->role_text}}</span></td>
                                 @endif
                                 <td><a href="{{Route('backend.user.products',['user_id'=>$us->id])}}">Các sản phẩm đã tạo  <i class="fa fa-share"></i></a></td>
-                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.user.destroy',['id'=>$us->id])}}"><i class="fas fa-trash"></i> Delete</a> </td>
-                                <td><a class="btn btn-success btn-sm" href="{{Route('backend.user.edit',['id'=>$us->id])}}"><i class="fas fa-edit"></i> Edit</a></td>
+                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.user.destroy',['id'=>$us->id])}}"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-success btn-sm" href="{{Route('backend.user.edit',['id'=>$us->id])}}"><i class="fas fa-edit"></i></a></td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        <div class="d-flex justify-content-center mt-3">
+                            {!! $users->links() !!}
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -81,4 +84,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

@@ -60,34 +60,63 @@
                                 @csrf
 									<div class="form-group">
 										<label for="f_name" class="input-label">Name</label>
-										<input type="text" id="f_name" class="form-control" name="name" placeholder="example name" required="required">
+										<input type="text" value="{{old('name')}}" id="" class="form-control" name="name" placeholder="example name">
+                                        @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
 									</div>
 									<div class="form-group">
 										<label for="email" class="input-label">Email Address</label>
-										<input type="email" id="email" class="form-control" name="email" placeholder="demo@gmail.com" required="required">
+										<input type="text" value="{{old('email')}}" id="" class="form-control" name="email" placeholder="demo@gmail.com">
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
 									</div>
                                     <div class="form-group">
 										<label class="input-label">Phone</label>
-										<input type="text" id="" class="form-control" name="phone" placeholder="0123456789" required="required">
+										<input type="text" value="{{old('phone')}}" id="" class="form-control" name="phone" placeholder="0123456789">
+                                        @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
 									</div>
                                     <div class="form-group">
-										<labelclass="input-label">Address</label>
-										<input type="text" id="" class="form-control" name="address" placeholder="Viet Nam" required="required">
+										<label class="input-label">Address</label>
+										<input type="text" value="{{old('address')}}" id="" class="form-control" name="address" placeholder="Viet Nam">
+                                        @error('address')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
 									</div>
+                                    <div class="form-group">
+                                        <label>Giới tính</label>
+                                        @foreach(\App\Models\Userinfo::$status_gender as $key => $value)
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="{{$key}}" type="radio" name="gender">
+                                                <label>
+                                                    {{$value}}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                        @error('gender')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
 									<div class="form-group">
 										<label for="password" class="input-label">Password</label>
-										<input id="password" type="password" class="form-control" name="password" placeholder="********" required="required">
+										<input id="password" value="{{old('password')}}" type="password" class="form-control" name="password" placeholder="********">
 										<i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
+                                    @error('password')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
 									<div class="form-group">
 										<label for="c_password" class="input-label">Confirm Password</label>
-										<input id="c_password" type="password" class="form-control" name="c_password" placeholder="********" required="required">
+										<input id="c_password" type="password" class="form-control" name="c_password" placeholder="********">
 										<i toggle="#c_password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
 									<div class="form-group">
 										<div class="fxt-checkbox-area">
 											<div class="checkbox">
-												<input id="checkbox1" type="checkbox">
+												<input checked id="checkbox1" type="checkbox" required="required">
 												<label for="checkbox1">I agree with the terms and condition</label>
 											</div>
 										</div>

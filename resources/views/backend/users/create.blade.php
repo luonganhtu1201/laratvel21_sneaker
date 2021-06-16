@@ -31,42 +31,72 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form action="{{Route('backend.user.store')}}" method="post" role="form">
+                    <form action="{{Route('backend.user.store')}}" method="post" role="form" enctype="multipart/form-data">
                     @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên</label>
                                 <input type="text" value="{{old('name')}}" class="form-control" id="" name="name" placeholder="Tên người dùng">
                                 @error('name')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
                                 <input type="email" value="{{old('email')}}" class="form-control" id="" name="email" placeholder="Email">
                                 @error('email')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mật khẩu</label>
                                 <input type="password" class="form-control" name="password" id="">
                                 @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Phone</label>
                                 <input type="text" value="{{old('phone')}}" class="form-control" name="phone" id="">
                                 @error('phone')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Address</label>
                                 <input type="text" value="{{old('address')}}" class="form-control" name="address" id="">
                                 @error('address')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Giới tính</label>
+                                @foreach(\App\Models\Userinfo::$status_gender as $key => $value)
+                                    <div class="form-check">
+                                        <input class="form-check-input" value="{{$key}}" type="radio" name="gender">
+                                        <label>
+                                            {{$value}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                                @error('gender')
+                                <i class="text-red">{{ $message }}</i>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputFile">Avatar</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input id="file-input" type="file" name="avatar" class="custom-file-input" id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="">Upload</span>
+                                    </div>
+                                </div>
+                                <div id="preview"></div>
+                                @error('avatar')
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">

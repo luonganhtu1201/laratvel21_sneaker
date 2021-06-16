@@ -17,6 +17,8 @@ class CreateUsersInfoTable extends Migration
             $table->id();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
+            $table->string('avatar')->nullable();
+            $table->integer('gender');
             $table->integer('user_id');
             $table->timestamps();
         });

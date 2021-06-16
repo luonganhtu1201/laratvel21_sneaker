@@ -8,15 +8,35 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Order;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
     public function index(){
-        
+
         // $user = User::find(1);
         // $userInfo = $user->userInfo;
         // dd($userInfo);
         // $products = Product::paginate(2);
+
+//        --------------Start Storage-------------
+//        dd(storage_path('app'));
+//        Storage::disk('local_2')->put('file.txt', 'Contents');
+//        Storage::disk('local')->put('file.txt', 'Contents');
+//        Storage::put('file1.txt','Tu');
+//        Storage::disk('public')->put('file3.txt','public');
+//        dd(1);
+//            $disk = Storage::disk('public');
+//            $path = 'file.txt';
+//            if ($disk->exists($path)){
+//                $content = $disk->get($path);
+//                dd($content);
+//            }else{
+//                dd('Không tồn tại');
+//            };
+//            --------------End Storage----------
+
+
         $products = Product::simplePaginate(2);
         return view('backend.dashboard',[
             'products'=>$products
@@ -30,7 +50,7 @@ class DashboardController extends Controller
         // $productSaved = $category->products()->save($product);
 
 
-        // Phương Thức create 
+        // Phương Thức create
         // $category = Category::find(1);
 
         // $product = $category->products()->create([
@@ -46,7 +66,7 @@ class DashboardController extends Controller
         // ]);
 
 
-        // // Liên kết nhiều nhiều 
+        // // Liên kết nhiều nhiều
         // $order = new Order();
         // $order->total = 120500;
         // $order->save();

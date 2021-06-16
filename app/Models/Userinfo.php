@@ -12,4 +12,10 @@ class Userinfo extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    const STATUS_MALE = 0;
+    const STATUS_FEMALE = 1;
+    public static $status_gender = [
+        self::STATUS_MALE => 'Nam',
+        self::STATUS_FEMALE => 'Nữ'
+    ];
 }

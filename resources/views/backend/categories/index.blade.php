@@ -46,8 +46,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên Danh Mục</th>
-                                <th>Parent</th>
-                                <th>Thời gian</th>
+                                <th>Danh Mục cha</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -55,23 +54,21 @@
                             <tr>
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->name}}</td>
-                                
+
                                 @if($category->parent)
                                 <td>{{ $category->parent->name }}</td>
                                 @else
-                                <td></td>    
+                                <td></td>
                                 @endif
 
-                                <td>{{$category->created_at}}</td>
                                 <td><a href="{{Route('backend.category.products',['category_id'=>$category->id])}}">Các sản phẩm thuộc danh mục</a></td>
-                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.category.destroy',['id'=>$category->id])}}"><i class="fas fa-trash"></i> Delete</a> </td>
-                                <td><a class="btn btn-success btn-sm" href="{{Route('backend.category.edit',['id'=>$category->id])}}"><i class="fas fa-edit"></i> Edit</a></td>
+                                <td><a class="btn btn-danger btn-sm" href="{{Route('backend.category.destroy',['id'=>$category->id])}}"><i class="fas fa-trash"></i></a>
+                                    <a class="btn btn-success btn-sm" href="{{Route('backend.category.edit',['id'=>$category->id])}}"><i class="fas fa-edit"></i></a></td>
                             </tr>
                             @endforeach
                             </tbody>
-                            
                         </table>
-                        <div>
+                        <div class="d-flex justify-content-center mt-3">
                             {!! $categories->links() !!}
                         </div>
                     </div>
@@ -87,4 +84,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

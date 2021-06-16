@@ -27,6 +27,8 @@ class UsersTableSeeder extends Seeder
             DB::table('users_info')->insert([
                 'address' => 'Ha Noi',
                 'phone' => '1224104',
+                'avatar' => 'https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg',
+                'gender' => 0,
                 'user_id' => $i
             ]);
         }

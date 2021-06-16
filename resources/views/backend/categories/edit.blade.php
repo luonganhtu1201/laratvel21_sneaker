@@ -36,9 +36,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên sản phẩm</label>
-                                <input type="text" class="form-control" id="" name="name" value="{{$category->name}}">
+                                <input type="text" class="form-control" id="" name="name" value="{{ old('name',$category->name)==$category->name?$category->name:old('name')}}" placeholder="Điền tên danh mục">
                                 @error('name')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -46,7 +46,7 @@
                                 <select class="form-control select2" name="parent_id" style="width: 100%;">
                                     <option {{old('parent_id',$category->parent_id)==0?'selected':''}} value="0">Là Danh mục cha</option>
                                     @foreach($categ_parent_id as $cate)
-                                        <option {{old('parent_id',$category->parent_id)==$cate->id?'selected':''}} value="{{$cate->id}}">{{$cate->name}}</option>
+                                        <option {{old('parent_id',$category->parent_id)==$cate->id?'selected':''}} {{old('parent_id',$category->name)==$cate->name?'hidden':''}} value="{{$cate->id}}">{{$cate->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

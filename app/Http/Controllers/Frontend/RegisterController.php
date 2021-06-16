@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Userinfo;
@@ -12,7 +14,7 @@ class RegisterController extends Controller{
     public function showForm(){
         return view('frontend.auth.register');
     }
-    public function register(Request $request){
+    public function register(StoreRegisterRequest $request){
         User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
@@ -23,6 +25,12 @@ class RegisterController extends Controller{
         $usinf->address = $request->address;
         $usinf->phone = $request->phone;
         $usinf->user_id = $userid;
+        $usinf->gender = $request->gender;
+        if ($request->gender == 0){
+            $usinf->avatar = 'avatar/man.jpg' ;
+        }else{
+            $usinf->avatar = 'avatar/woman.jpg';
+        };
         $usinf->save();
         // Userinfo::create([
         //     'address'=>$request->get('address')

@@ -6,7 +6,7 @@
 @section('content')
 <div class="container-fluid">
         <div class="row">
-          
+
           <div class="col-12">
             <div class="card card-primary">
               <div class="card-header">
@@ -16,11 +16,11 @@
                 <div class="row">
                 @foreach($imgg as $images)
                   <div class="col-sm-2">
-                    <a href="{{$images->path}}" data-toggle="lightbox" data-title="{{$images->name}}" data-gallery="gallery">
-                      <img src="{{$images->path}}" class="img-fluid mb-2" alt="{{$images->name}}"/>
+                    <a href="{{url(\Illuminate\Support\Facades\Storage::url($images->path))}}" data-toggle="lightbox" data-title="{{$images->name}}" data-gallery="gallery">
+                      <img src="{{url(\Illuminate\Support\Facades\Storage::url($images->path))}}" class="img-fluid mb-2" alt="{{$images->name}}"/>
                     </a>
                   </div>
-                @endforeach  
+                @endforeach
                 </div>
               </div>
             </div>
@@ -35,7 +35,7 @@
   <script src="/backend/dist/js/adminlte.min.js"></script>
   <!-- Filterizr-->
   <script src="/backend/plugins/filterizr/jquery.filterizr.min.js"></script>
-  
+
   <!-- Page specific script -->
   <script>
     $(function () {

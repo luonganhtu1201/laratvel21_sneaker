@@ -11,9 +11,11 @@ class Product extends Model
     protected $fillable = ['name','slug','size','inventory_number','products_sold', 'origin_price', 'sale_price', 'content', 'user_id'];
     public function getStatusTextAttribute(){
         if($this->status == 1){
-            return "Còn Hàng";
+            return "Đang bán";
+        }elseif($this->status == 0){
+            return "Đang nhập";
         }else{
-            return "Hết Hàng";
+            return "Dừng bán";
         }
     }
     const STATUS_INIT = 0;

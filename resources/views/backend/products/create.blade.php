@@ -1,6 +1,7 @@
 @extends('backend.layouts.master')
 <!-- css -->
 @section('css')
+
 @endsection
 
 @section('content-header')
@@ -31,14 +32,14 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{ route('backend.product.store') }}">
+                    <form role="form" enctype="multipart/form-data" method="post" action="{{ route('backend.product.store') }}">
                     @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên sản phẩm</label>
                             <input type="text" name="name" value="{{old('name')}}" class="form-control" id="" placeholder="Điền tên sản phẩm">
                             @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <i class="text-red">{{ $message }}</i>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -49,21 +50,21 @@
                                 @endforeach
                             </select>
                             @error('size')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <i class="text-red">{{ $message }}</i>
                             @enderror
                         </div>
                         <div class="form-group">
                                 <label for="">Color</label>
                                 <input type="text" value="{{old('color')}}" name="color" id="" class="form-control" placeholder="Màu sắc">
                                 @error('color')
-                                <div class="alert alert-danger">{{ $message }}</div>
+                                <i class="text-red">{{ $message }}</i>
                                 @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng nhập vào</label>
                             <input type="text" name="import_goods" value="{{old('import_goods')}}" class="form-control" id="" placeholder="SL nhập vào">
                             @error('import_goods')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <i class="text-red">{{ $message }}</i>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -80,7 +81,7 @@
                                     <label>Giá gốc</label>
                                     <input type="text" name="origin_price" value="{{old('origin_price')}}" class="form-control" placeholder="Điền giá gốc">
                                     @error('origin_price')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <i class="text-red">{{ $message }}</i>
                                     @enderror
                                 </div>
 
@@ -90,7 +91,7 @@
                                     <label>Giá bán</label>
                                     <input type="text" name="sale_price" value="{{old('sale_price')}}" class="form-control" placeholder="Điền giá gốc">
                                     @error('sale_price')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <i class="text-red">{{ $message }}</i>
                                     @enderror
                                 </div>
                             </div>
@@ -100,20 +101,24 @@
                             <textarea class="textarea" value="{{old('content')}}" name="content" placeholder="Place some text here"
                             style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                             @error('content')
-                            <div class="alert alert-danger">{{ $message }}</div>
+                            <i class="text-red">{{ $message }}</i>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="exampleInputFile">Hình ảnh sản phẩm</label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                                    <input id="file-input" type="file" accept="image/*" name="image[]" class="custom-file-input" multiple>
                                     <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
                                 <div class="input-group-append">
                                     <span class="input-group-text" id="">Upload</span>
                                 </div>
                             </div>
+                            <div id="preview"></div>
+                            @error('image')
+                            <i class="text-red">{{ $message }}</i>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label>Trạng thái sản phẩm</label>
@@ -141,4 +146,5 @@
 
 <!-- Script -->
 @section('script')
+
 @endsection
