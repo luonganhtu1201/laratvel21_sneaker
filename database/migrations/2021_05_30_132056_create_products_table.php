@@ -20,10 +20,6 @@ class CreateProductsTable extends Migration
             $table->integer('origin_price')->default(0);
             $table->integer('sale_price')->default(0);
             $table->integer('discount_percent')->default(0);
-            $table->integer('size');
-            $table->string('color');
-            $table->integer('import_goods');
-            $table->integer('sold_goods')->default(0);
             $table->text('content')->nullable();
             $table->integer('user_id');
             $table->integer('category_id');

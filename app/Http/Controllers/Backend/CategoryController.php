@@ -7,6 +7,8 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
@@ -17,11 +19,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::orderBy('updated_at','asc')->paginate(3);
+        $parentcate = Category::where('parent_id',0)->get();
+        $categories = Category::search($request)->orderBy('updated_at','asc')->paginate(3);
         // $categories = Category::paginate(3);
-        return view('backend.categories.index',['categories' => $categories]);
+        return view('backend.categories.index',[
+            'categories' => $categories,
+            'parentcate'=> $parentcate
+
+        ]);
     }
 
     /**
@@ -31,6 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Category::class);
         $cate_parent_id=Category::where('parent_id',0)->get();
         return view('backend.categories.create',[
             'categories_parent_id'=>$cate_parent_id
@@ -51,11 +59,19 @@ class CategoryController extends Controller
         //     'parent_id'=>$request->parent_id
         // ]);
         $cate = new Category();
+        $this->authorize('create',$cate);
         $cate->name = $request->name;
         $cate->slug = Str::slug($request->name);
         $cate->parent_id = $request->parent_id;
+        $cate->user_id = Auth::user()->id;
         $cate->save();
-        return redirect()->route('backend.category.index');
+        $save = 1;
+        if ($save){
+            return redirect()->route('backend.category.index')->with('success','Thêm Danh mục thành công !');
+        }else{
+            return redirect()->route('backend.category.index')->with('error','Thêm Danh mục thất bại !');
+        }
+
     }
 
     /**
@@ -95,11 +111,19 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, $id)
     {
         $cate = Category::find($id);
+        $this->authorize('create',$cate);
         $cate->name = $request->name;
         $cate->slug = Str::slug($request->name);
         $cate->parent_id = $request->parent_id;
+        $cate->user_id = Auth::user()->id;
         $cate->update();
-        return redirect()->route('backend.category.index');
+        Cache::forget('categories');
+        $update = 1;
+        if ($update){
+            return redirect()->route('backend.category.index')->with('success','Cập nhật thành công !');
+        }else{
+            return redirect()->route('backend.category.index')->with('error','Cập nhật thất bại !');
+        }
     }
 
     /**
@@ -111,8 +135,12 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $cate = Category::find($id);
-        $cate->delete();
-        return redirect()->route('backend.category.index');
+        $this->authorize('delete',$cate);
+        if ($cate->delete()){
+            return redirect()->route('backend.category.index')->with('success','Xóa thành công !');
+        }else{
+            return redirect()->route('backend.category.index')->with('error','Xóa thất bại !');
+        }
     }
     public function showProducts($category_id){
         $category = Category::find($category_id);
@@ -120,6 +148,17 @@ class CategoryController extends Controller
         // dd($products);
         return view('backend.categories.cate-products',[
             'cateproducts' => $products
+        ]);
+    }
+    public function filter(Request $request){
+        $parentcate = Category::where('parent_id',0)->get();
+        $categories = Category::query()
+            ->child($request)
+            ->paginate(5);
+        ;
+        return view('backend.categories.index',[
+            'categories' => $categories,
+            'parentcate'=> $parentcate
         ]);
     }
 }

@@ -23,4 +23,32 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+    public function scopeSneaker($query, $request)
+    {
+        if ($request->has('sneaker')) {
+
+            $query->where('slug', $request->sneaker)->orderBy('created_at', 'DESC');
+
+        }
+
+        return $query;
+    }
+    public function scopeSearch($query, $request)
+    {
+        if ($request->has('key_search')) {
+            $query->where('name', 'LIKE', '%'.$request->key_search.'%')->orderBy('created_at', 'DESC');
+        }
+
+        return $query;
+    }
+    public function scopeChild($query, $request){
+        if ($request->has('childrencate')){
+            if ($request->get('childrencate') == -1){
+                $query->orderBy('updated_at','asc');
+            }else{
+                $query->where('parent_id',$request->childrencate);
+            }
+        }
+        return $query;
+    }
 }

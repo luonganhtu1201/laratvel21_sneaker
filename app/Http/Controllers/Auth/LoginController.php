@@ -9,6 +9,9 @@ use App\Models\User;
 class LoginController extends Controller{
     public function showLoginForm()
     {
+        return view('frontend.auth.login');
+    }
+    public function showLoginFormAd(){
         return view('backend.auth.login');
     }
     public function login(Request $request){
@@ -18,13 +21,13 @@ class LoginController extends Controller{
         ]);
         if (Auth::attempt($data)) {
             // Authentication passed...
-            
+
             $request->session()->regenerate();
-            if (User::where('email',$request->email)->value('role') == 1) {
+            if (User::where('email',$request->email)->value('role') == 1 || User::where('email',$request->email)->value('role') == 3) {
                 return redirect()->intended('/admin/dashboard');
             }else{
-                
-                return redirect()->intended('/client');
+
+                return redirect()->intended('/');
             }
         }else{
             return back()->withErrors([

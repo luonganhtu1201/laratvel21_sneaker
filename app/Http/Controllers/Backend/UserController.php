@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use App\Models\Userinfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,10 +22,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('updated_at','asc')->paginate(5);
-        return view('backend.users.index',['users'=>$users]);
+        $users = User::search($request)->orderBy('id','DESC')->where('role','<>',3)->paginate(5);
+
+        return view('backend.users.index',[
+            'users'=>$users,
+
+        ]);
     }
 
     /**
@@ -31,6 +39,7 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',User::class);
         return view('backend.users.create');
     }
 
@@ -44,6 +53,7 @@ class UserController extends Controller
     {
 //        dd($request->all());
         $user = new User();
+        $this->authorize('create',User::class);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -68,7 +78,12 @@ class UserController extends Controller
             $usinf->avatar = 'avatar/woman.jpg';
         }
         $usinf->save();
-        return redirect()->intended('/admin/users/index');
+        $save = 1;
+        if ($save){
+            return redirect()->intended('/admin/users')->with('success','Thêm thành công !');
+        }else{
+            return redirect()->intended('/admin/users')->with('error','Thêm thất bại !');
+        }
     }
 
     /**
@@ -90,9 +105,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $userRole = User::find($id);
         return view('backend.users.edit',[
-            'user'=>$user
+            'user'=>$userRole
         ]);
     }
 
@@ -106,6 +121,7 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, $id)
     {
         $user = User::find($id);
+        $this->authorize('update',User::class);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -130,7 +146,12 @@ class UserController extends Controller
 //        dd($request->all());
         $userinf->update();
         $user->update();
-        return redirect()->route('backend.user.index');
+        $update = 1;
+        if ($update){
+            return redirect()->intended('/admin/users')->with('success','Cập nhật thành công !');
+        }else{
+            return redirect()->intended('/admin/users')->with('error','Cập nhật thất bại !');
+        }
     }
 
     /**
@@ -142,10 +163,29 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        if (Gate::denies('role-check',$user)){
+            abort(403);
+        }
         $userinf = Userinfo::where('user_id',$id);
+        $productinf = Product::where('user_id',$id)->get();
+        $categoryinf = Category::where('user_id',$id)->get();
+        foreach ($categoryinf as $cat){
+            $cat->user_id = Auth::user()->id;
+            $cat->update();
+        }
+         foreach ($productinf as $pro){
+           $pro->user_id = Auth::user()->id;
+           $pro->update();
+        }
         $user->delete();
         $userinf->delete();
-        return redirect()->route('backend.user.index');
+        $delete = 1;
+        if ($delete){
+            return redirect()->route('backend.user.index')->with('success','Xóa thành công !');
+        }else{
+            return redirect()->route('backend.user.index')->with('error','Xóa thất bại !');
+        }
+
     }
     public function showProducts($user_id){
         $user = User::find($user_id);
@@ -153,6 +193,16 @@ class UserController extends Controller
         // dd($user);
         return view('backend.users.user-products',[
             'usproducts' => $products
+        ]);
+    }
+    public function filter(Request $request){
+        $users = User::query()
+            ->role($request)
+            ->paginate(5)
+        ;
+        return view('backend.users.index',[
+            'users'=>$users,
+
         ]);
     }
 }

@@ -5,9 +5,9 @@ Template URL: http://html.affixtheme.com/html/xmee
 Description: Creative & Exclusive Login Registration Template
 Author: AffixTheme
 Author URL: https://themeforest.net/user/affixtheme
-Version: 1.5 
+Version: 1.5
 
-======================================  
+======================================
         Table Of Contents
 ======================================
 1. Typography
@@ -4866,6 +4866,16 @@ ul {
   top: 0;
   right: 0;
 }
+.fxt-template-layout133:before {
+    position: absolute;
+    z-index: 0;
+    background-color: #ff3648;
+    content: "";
+    min-height: 100%;
+    width: 35vw;
+    top: 0;
+    right: 0;
+}
 .fxt-template-layout13 .fxt-bg-wrap {
   padding: 8vh 16vw 8vh 0;
   min-height: 100vh;
@@ -5110,6 +5120,33 @@ ul {
   -webkit-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+}
+.fxt-template-layout13 .fxt-btn-filll {
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 17px;
+    font-weight: 500;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    border: 0;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #ff4a5a;
+    padding: 10px 36px;
+    margin-bottom: 10px;
+    width: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.fxt-template-layout13 .fxt-btn-filll:hover {
+    background-color: #f72134;
+    border-color: #f72134;
+}
+.fxt-template-layout13 .fxt-btn-filll:focus {
+    outline: none;
 }
 .fxt-template-layout13 .fxt-btn-fill:hover {
   background-color: #02adcb;

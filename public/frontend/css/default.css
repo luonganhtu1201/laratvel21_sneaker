@@ -11,7 +11,7 @@ Version: 1.0
 [  Table of contents  ]
 ================================================
 01. General
-02. Page section margin padding 
+02. Page section margin padding
 03. Section title 1
 04. Section title 2
 05. button
@@ -26,7 +26,7 @@ Version: 1.0
 14. Back to top
 15. Basic margin padding
 16. Product Modal
- 
+
 ======================================
 [ End table content ]
 ======================================*/
@@ -77,10 +77,16 @@ input {
     outline: medium none;
     color: #f1f1f1;
 }
-.uppercase { 
+.price_a{
+    color: #ffd400;
+}
+.price_a:hover{
+    color: #ff8100;
+}
+.uppercase {
     text-transform: uppercase
 }
-.capitalize { 
+.capitalize {
     text-transform: capitalize
 }
 h1,
@@ -99,8 +105,8 @@ h2 a,
 h3 a,
 h4 a,
 h5 a,
-h6 a { 
-    color: inherit 
+h6 a {
+    color: inherit
 }
 h1 {
     font-size: 40px;
@@ -125,7 +131,7 @@ ul {
     margin: 0px;
     padding: 0px;
 }
-li { list-style: none 
+li { list-style: none
 }
 ul li {
   display: inline-block;
@@ -582,6 +588,16 @@ input {
     color: #626262;
     width: 100%;
 }
+.input_css{
+    background: none !important;
+    height: 45px;
+    box-shadow: none;
+    padding-left: 10px;
+    font-size: 14px;
+    color: #626262;
+    width: 100%;
+    border-bottom: 2px solid #ccc;
+}
 select {
     width: 100%;
     background: #eceff8;
@@ -600,7 +616,7 @@ option {
 }
 input:focus {
     background: transparent;
-    border: 2px solid #4FC1F0;
+    /*border: 2px solid #4FC1F0;*/
 }
 textarea {
     resize: vertical;
@@ -838,7 +854,7 @@ textarea:focus {
 
 
 /***************************
-    Page section padding 
+    Page section padding
 ****************************/
 .ptb-0 { padding: 0 }
 .ptb-10 { padding: 10px 0 }
@@ -862,7 +878,7 @@ textarea:focus {
 .ptb-150 { padding: 150px 0 }
 
 /***************************
-    Page section margin 
+    Page section margin
 ****************************/
 .mtb-0 { margin: 0 }
 .mtb-10 { margin: 10px 0 }
@@ -937,7 +953,7 @@ textarea:focus {
 }
 
 /*************************************
-    Background variation set 
+    Background variation set
  **************************************/
 /*colored background*/
  .white-bg { background: #fff; }
@@ -948,20 +964,20 @@ textarea:focus {
  .transparent-bg { background: transparent; }
  .bg-color-gery {
     background: #F4F4F4;
-} 
+}
 .blue-gery {
     background: #607D8B;
-} 
+}
 .purple-bg {
     background: #AA00FF;
-} 
+}
 .teal-bg {
     background: #FF5722;
-} 
+}
 
 /*Opacity background*/
  .bg-opacity-black-10:before, .bg-opacity-black-20:before, .bg-opacity-black-30:before, .bg-opacity-black-40:before, .bg-opacity-black-50:before, .bg-opacity-black-60:before, .bg-opacity-black-70:before, .bg-opacity-black-80:before, .bg-opacity-black-90:before,  .bg-opacity-white-10:before,  .bg-opacity-white-20:before,  .bg-opacity-white-30:before,  .bg-opacity-white-40:before,  .bg-opacity-white-50:before,  .bg-opacity-white-60:before,  .bg-opacity-white-70:before,  .bg-opacity-white-80:before,  .bg-opacity-white-90:before{
-    content: ""; height: 100%; left: 0; position: absolute; top: 0; width: 100%; z-index: -1; 
+    content: ""; height: 100%; left: 0; position: absolute; top: 0; width: 100%; z-index: -1;
  }
  .bg-opacity-black-10:before {  background: rgba(0, 0, 0, 0.1);}
  .bg-opacity-black-20:before {  background: rgba(0, 0, 0, 0.2);}

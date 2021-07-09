@@ -12,4 +12,10 @@ class LogoutController extends Controller{
         $request->session()->regenerateToken();
         return redirect()->route('login.form');
     }
+    public function logoutAd(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login.store.ad');
+    }
 }

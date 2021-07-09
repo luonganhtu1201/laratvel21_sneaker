@@ -1,7 +1,6 @@
 <footer class="main-footer">
-        <strong>Copyright &copy; 2019 <a href="#">Zent</a>.</strong>
-        All rights reserved.
+        <strong>Tun<span style="color: red">z</span> Sneaker ---</strong>
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 1.0
+            <b>Fashion</b> 4.0
         </div>
     </footer>

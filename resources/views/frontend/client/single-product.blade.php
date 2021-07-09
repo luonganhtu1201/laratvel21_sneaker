@@ -1,5 +1,15 @@
 @extends('frontend.layouts.master')
+@section('css')
+    <style>
+        .bthv:hover{
+            color: white;
+            background-color: #ff3f3f !important;
+            border-color: red;
+        }
+    </style>
+@endsection
 @section('content')
+
 <div class="breadcumb-area overlay pos-rltv">
             <div class="bread-main">
                 <div class="bred-hading text-center">
@@ -11,7 +21,7 @@
             </div>
         </div>
         <!--breadcumb area end -->
-        
+
         <!--single-protfolio-area are start-->
         <div class="single-protfolio-area ptb-70">
           <div class="container">
@@ -22,11 +32,17 @@
                             <div class="tab_thumbnail" data-tabs="tabs">
                                 <div class="thumbnail-carousel">
                                     <ul class="nav">
+                                        @if(count($imgg)==0)
+                                            <li>
+                                                <a class="imgActive"><img src="/frontend/images/no-image.png" alt></a>
+                                            </li>
+                                        @else
                                         @foreach($imgg as $images)
                                        <li>
-                                        <a class="imgActive" href="{{'#view'.$images->id}}" aria-controls="{{'view'.$images->id}}" data-toggle="tab"><img src="{{$images->path}}" alt></a>
+                                        <a class="imgActive" href="{{'#view'.$images->id}}" aria-controls="{{'view'.$images->id}}" data-toggle="tab"><img src="{{url(\Illuminate\Support\Facades\Storage::url($images->path))}}" alt></a>
                                        </li>
                                        @endforeach
+                                        @endif
                                        <!-- <li>
                                         <a href="#view22" class="shadow-box" aria-controls="view22" data-toggle="tab"><img src="/frontend/images/02.jpg" alt></a></li>
                                        <li>
@@ -41,113 +57,118 @@
                            <div class="social-tag">
                               <a href="#"><i class="zmdi zmdi-share"></i></a>
                            </div>
+                            @if(count($imgg)==0)
+                                <div role="tabpanel" class="tab-pane">
+                                    <div class="product-img">
+                                        <a href=""><img src="/frontend/images/no-image.png" alt="Single portfolio"></a>
+                                    </div>
+                                </div>
+                            @else
                            @foreach($imgg as $images)
                             <div role="tabpanel" class="tab-pane" id="{{'view'.$images->id}}">
                                 <div class="product-img">
-                                    <a class="fancybox" data-fancybox-group="group" href="/frontend/images/product/01.jpg"><img src="{{$images->path}}" alt="Single portfolio"></a>
+                                    <a class="fancybox" data-fancybox-group="group" href="/frontend/images/product/01.jpg"><img src="{{url(\Illuminate\Support\Facades\Storage::url($images->path))}}" alt="Single portfolio"></a>
                                 </div>
                             </div>
                             @endforeach
-                            <!-- <div role="tabpanel" class="tab-pane" id="view22">
-                                <div class="product-img">
-                                    <a class="fancybox" data-fancybox-group="group" href="/frontend/images/product/02.jpg"><img src="/frontend/images/02.jpg" alt="Single portfolio"></a>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="view33">
-                                <div class="product-img">
-                                    <a class="fancybox" data-fancybox-group="group" href="/frontend/images/product/03.jpg"><img src="/frontend/images/03.jpg" alt="Single portfolio"></a>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="view44">
-                                <div class="product-img">
-                                    <a class="fancybox" data-fancybox-group="group" href="/frontend/images/product/04.jpg"><img src="/frontend/images/04.jpg" alt="Single portfolio"></a>
-                                </div>
-                            </div> -->
+                            @endif
                         </div>
                     </div>
                 </div>
                     <div class="col-lg-5">
-                        <div class="single-product-description">
-                           <div class="sp-top-des">
-                                <h3>GLOB t-SHIRT <span>(Brand)</span></h3>
+                        <div class="single-product-description p-0">
+                           <div class="sp-top-des pt-3">
+                                <h3>{{$infoProduct->name}}<span>(Brand)</span></h3>
                                 <div class="prodcut-ratting-price">
-                                    <div class="prodcut-ratting"> 
-                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a> 
-                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a> 
-                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a> 
-                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a> 
-                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a> 
+                                    <div class="prodcut-ratting">
+                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
+                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
+                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
+                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
+                                        <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
                                     </div>
                                     <div class="prodcut-price">
-                                        <div class="new-price"> $220 </div>
-                                        <div class="old-price"> <del>$250</del> </div>
+                                        <div class="new-price">{{number_format($infoProduct->sale_price). ' VNĐ'}}</div>
+                                        <div class="old-price"> <del>{{number_format($infoProduct->origin_price). ' VNĐ'}}</del> </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div class="sp-des">
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum</p>
-                            </div>
+
+{{--                            <div class="sp-des">--}}
+{{--                                {!! $infoProduct->content !!}--}}
+{{--                            </div>--}}
                             <div class="sp-bottom-des">
                             <div class="single-product-option">
                                 <div class="sort product-type">
-                                    <label>Color: </label>
-                                    <select id="input-sort-color">
-                                        <option value="#">Red</option>
-                                        <option value="#">Blue</option>
-                                        <option value="#">Green</option>
-                                        <option value="#">Purple</option>
-                                        <option value="#">Yellow</option>
-                                        <option value="#">Black</option>
-                                        <option value="#">Grey</option>
-                                        <option value="#">White</option>
-                                        <option value="#" selected>Chose Your Color</option>
-                                    </select>
-                                </div>
-                                <div class="sort product-type">
                                     <label>Size: </label>
-                                    <select id="input-sort-size">
-                                        <option value="#">S</option>
-                                        <option value="#">M</option>
-                                        <option value="#">L</option>
-                                        <option value="#">XL</option>
-                                        <option value="#">XXL</option>
-                                        <option value="#" selected>Chose Your Size</option>
-                                    </select>
+                                    <ul class="size-filter mt-30">
+                                        @foreach(\App\Models\Product::$size_text as $key => $value)
+{{--                                            {{request()->fullUrlWithQuery(['size'=>$key])}}--}}
+                                            <li><a href="?size={{$key}}" class="{{request()->size==$key?'size-bg':''}} mb-2">{{$value}}</a></li>
+                                        @endforeach
+                                    </ul>
                                 </div>
+                                @if(request()->size)
+                                    <div class="sort product-type">
+                                        <ul class="size-filter mt-30">
+                                            @if(count($color)==1&&$color[0]=='')
+                                                <li><b>Hiện tại mẫu giày chưa có size {{request()->size}}</b></li>
+                                            @else
+                                                <label class="mb-30">Color: </label><br>
+                                                @foreach($color as $colo)
+                                                    <li><a href="{{request()->fullUrlWithQuery(['color'=>$colo])}}" style="background-color: {{'#'.$colo}};{{request()->color==$colo?"box-shadow:5px 5px 5px 1px #9c9c9c":''}}"></a></li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <div class="quantity-area">
                                 <label>Qty :</label>
                                 <div class="cart-quantity">
-                                    <form action="#" method="POST" id="myform">
+                                    <form action="{{ route('frontend.cart.add', ['id' => $infoProduct->id]) }}" method="GET" id="myform">
                                         <div class="product-qty">
                                             <div class="cart-quantity">
                                                 <div class="cart-plus-minus">
                                                     <div class="dec qtybutton">-</div>
-                                                        <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+                                                        <input type="text" value="1" name="qtybutton" class="cart-plus-minus-box">
                                                     <div class="inc qtybutton">+</div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <input type="hidden" value="{{request()->size}}" name="size">
+                                        <input type="hidden" value="{{request()->color}}" name="color">
+                                        <div class="social-icon socile-icon-style-1">
+
+                                                @if(request()->size && request()->color)
+
+                                                    <button type="submit" class="mt-3 btn btn-secondary w-100 h-50 bthv rounded"><h6 class="m-3"><i class="fa fa-cart-plus pr-1"></i> | Add to Cart</h6></button>
+
+                                                @else
+                                                    <button onclick="return false;" class="mt-3 btn btn-secondary w-100 h-50 rounded disabled"><h6 class="m-3"><i class="fa fa-cart-plus pr-1"></i> | Add to Cart</h6></button>
+                                                @endif
+                                        </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="social-icon socile-icon-style-1">
-                                <ul>
-                                    <li><a href="#" data-tooltip="Add To Cart" class="add-cart add-cart-text" data-placement="left" tabindex="0">Add To Cart<i class="fa fa-cart-plus"></i></a></li>
-                                    <li><a href="#" data-tooltip="Wishlist" class="w-list" tabindex="0"><i class="fa fa-heart-o"></i></a></li>
-                                    <li><a href="#" data-tooltip="Compare" class="cpare" tabindex="0"><i class="fa fa-refresh"></i></a></li>
-                                    <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="fa fa-eye"></i></a></li>
-                                </ul>
-                            </div>
+                                <div>
+                                    @if($infoProduct->status == 0)
+                                        <div class="alert alert-success" role="alert">
+                                            <h4 class="alert-heading">Sorry ! </h4>
+                                            <p>{{$infoProduct->name}} temporarily out of stock</p>
+                                            <hr class="m-0">
+                                            <p class="mb-0 mt-3">But you can still add them to your cart..... we will confirm when new stock arrives.</p>
+                                        </div>
+                                    @endif
+                                </div>
                       </div>
                   </div>
               </div>
-          </div>  
+          </div>
         </div>
         </div>
         <!--single-protfolio-area are start-->
-        
+
         <!--descripton-area start -->
         <div class="descripton-area">
             <div class="container">
@@ -158,44 +179,73 @@
                                 <div class="col-lg-12 text-center">
                                     <ul class="nav mb-40 heading-style-2" role="tablist">
                                         <li role="presentation"><a href="#newarrival" aria-controls="newarrival" role="tab" data-toggle="tab">Description</a></li>
-                                        <li role="presentation"><a class="active" href="#bestsellr" aria-controls="bestsellr" role="tab" data-toggle="tab">Review</a></li>
+                                        <li role="presentation"><a class="active" href="#bestsellr" aria-controls="bestsellr" role="tab" data-toggle="tab">Comments</a></li>
                                         <li role="presentation"><a href="#specialoffer" aria-controls="specialoffer" role="tab" data-toggle="tab">Tags</a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="col-lg-12">
-                                <div class="content-tab-product-category">
+                                <div class="content-tab-product-category w-75 m-auto">
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fix fade in" id="newarrival">
                                         <div class="review-wraper">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                                <br> veniam, quis nostrud exercitation.</p>
-                                            <h5>ABOUT ME</h5>
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
-                                            <h5>SIZE & FIT</h5>
-                                            <ul>
-                                                <li>Model wears: Style Photoliya U2980</li>
-                                                <li>Model's height: 185”66</li>
-                                            </ul>
-                                            <h5>Overview</h5>
-                                            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+                                            <b>{!! $infoProduct->content !!}</b>
+                                            @if($infoProduct->content_morez)
+                                                <div class="pt-3">
+                                                    <h3>Thông số</h3>
+                                                    <ul>
+                                                        @foreach($infoProduct->content_morez as $key => $value)
+                                                            <li><i class="fa fa-caret-right pr-3" aria-hidden="true"></i>{{$value}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            @endif
+
+
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane fix fade show active" id="bestsellr">
                                         <div class="review-wraper">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim <br> veniam, quis nostrud exercitation.</p>
-                                           <h5>SIZE & FIT</h5>
-                                           <ul>
-                                               <li>Model wears: Style Photoliya U2980</li>
-                                               <li>Model's height: 185”66</li>
-                                           </ul>
-                                            <h5>ABOUT ME</h5>
-                                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English</p>
-                                           <h5>Overview</h5>
-                                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+{{--                                            @dd(count($comments))--}}
+                                            @if(count($comments)!=0)
+                                                @for($i = 0 ; $i < count($comments) ; $i++)
+                                                    <div class="row">
+                                                        <div class="col-1 pb-3">
+                                                            <img src="{{url(\Illuminate\Support\Facades\Storage::url($users[$i]->userinfo->avatar))}}" alt="" style="width: 50px;height: 50px;border-radius: 50%">
+                                                        </div>
+                                                        <div class="col-11">
+                                                            <div class="row">
+                                                                <div class="col-12">
+                                                                    <p><b>{{$users[$i]->name}}</b></p>
+
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <p class="pl-2">{{$comments[$i]->content}}</p>
+                                                                    <i style="font-size: 10px">{{$comments[$i]->created_at}}</i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr class="m-2">
+                                                @endfor
+                                            @endif
                                         </div>
+                                        @if(\Illuminate\Support\Facades\Auth::user())
+                                            <form action="{{Route('client.comment',$infoProduct->id)}}" method="POST">
+                                                @csrf
+                                                <div class="row w-75 m-auto pt-5">
+                                                    <div class="col-9">
+                                                        <input placeholder="Write a comment....." class="input_css" type="text" name="comment">
+                                                        <input type="text" name="product_id" value="{{$infoProduct->id}}" hidden>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <button type="submit" class="btn btn-secondary w-100 h-100 rounded-right">Comment</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        @endif
                                     </div>
                                     <div role="tabpanel" class="tab-pane fix fade in" id="specialoffer">
                                         <ul class="tag-filter">
@@ -219,9 +269,9 @@
                     </div>
                 </div>
             </div>
-        </div>    
-        <!--descripton-area end--> 
-        
+        </div>
+        <!--descripton-area end-->
+
         <!--new arrival area start-->
         <div class="new-arrival-area ptb-70">
             <div class="container">
@@ -236,268 +286,78 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="product-label">
-                                            <div class="new">New</div>
+                            @foreach($proRelated as $product)
+                                <div class="col-lg-3">
+                                    <!-- single product start-->
+                                    <div class="single-product">
+                                        <div class="product-img">
+                                            <div class="product-label">
+
+                                                @if($product->status == 1)
+                                                    <div class="new" style="background-color: red;color: white">
+                                                        On Sale
+                                                    </div>
+                                                @elseif($product->status == 0)
+                                                    <div class="new" style="background-color: yellow;color: black">
+                                                        Out of
+                                                    </div>
+                                                @else
+                                                    <div class="new" style="background-color: grey;color: white">
+                                                        Stop selling
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                @if(count($product->images) == 0)
+                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                @elseif(count($product->images) == 1)
+                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                @elseif(count($product->images)>=2)
+                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                @endif
+                                            </div>
+                                            <div class="product-icon socile-icon-tooltip text-center">
+                                                <ul>
+                                                    <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+
+                                                    <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/01.jpg" class="primary-image"> <img alt src="/frontend/images/02.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
+                                        <div class="product-text">
+                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                            </div>
+                                            <div class="prodcut-ratting-price">
+                                                <div class="prodcut-price">
+                                                    <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- single product end-->
                                 </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/03.jpg" class="primary-image"> <img alt src="/frontend/images/04.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="product-label">
-                                            <div class="new">Sale</div>
-                                        </div>
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/02.jpg" class="primary-image"> <img alt src="/frontend/images/03.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-ratting">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star-o"></i></a>
-                                            </div>
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/04.jpg" class="primary-image"> <img alt src="/frontend/images/03.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/05.jpg" class="primary-image"> <img alt src="/frontend/images/06.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-ratting">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star-o"></i></a> </div>
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                                <div class="old-price"> <del>$250</del> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="quickview-wrapper">
+        <form>@csrf</form>
             <!-- Modal -->
-            <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-product">
-                              <div class="product-images"> 
-                                   <!--modal tab start-->
-                                    <div class="portfolio-thumbnil-area-2">
-                                        <div class="tab-content active-portfolio-area-2">
-                                            <div role="tabpanel" class="tab-pane active" id="view1">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/01.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="view2">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/02.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="view3">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/03.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="view4">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/04.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-more-views-2">
-                                            <div class="thumbnail-carousel-modal-2" data-tabs="tabs">
-                                                <a href="#view1" aria-controls="view1" data-toggle="tab"><img src="/frontend/images/01.jpg" alt></a>
-                                                <a href="#view2" aria-controls="view2" data-toggle="tab"><img src="/frontend/images/02.jpg" alt></a>
-                                                <a href="#view3" aria-controls="view3" data-toggle="tab"><img src="/frontend/images/03.jpg" alt></a>
-                                                <a href="#view4" aria-controls="view4" data-toggle="tab"><img src="/frontend/images/04.jpg" alt></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <!--modal tab end-->
-                                    <!-- .product-images -->
-                                    <div class="product-info">
-                                        <h1>Aenean eu tristique</h1>
-                                        <div class="price-box-3">
-                                            <div class="s-price-box"> <span class="new-price">$160.00</span> <span class="old-price">$190.00</span> </div>
-                                        </div> <a href="shop.html" class="see-all">See all features</a>
-                                        <div class="quick-add-to-cart">
-                                            <form method="post" class="cart">
-                                                <div class="numbers-row">
-                                                    <input type="number" id="french-hens" value="3" min="1"> </div>
-                                                <button class="single_add_to_cart_button" type="submit">Add to cart</button>
-                                            </form>
-                                        </div>
-                                        <div class="quick-desc"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero.Nam fringilla tristique auctor. </div>
-                                        <div class="social-sharing-modal">
-                                            <div class="widget widget_socialsharing_widget">
-                                                <h3 class="widget-title-modal">Share this product</h3>
-                                                <ul class="social-icons-modal">
-                                                    <li><a target="_blank" title="Facebook" href="#" class="facebook m-single-icon"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a target="_blank" title="Twitter" href="#" class="twitter m-single-icon"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a target="_blank" title="Pinterest" href="#" class="pinterest m-single-icon"><i class="fa fa-pinterest"></i></a></li>
-                                                    <li><a target="_blank" title="Google +" href="#" class="gplus m-single-icon"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a target="_blank" title="LinkedIn" href="#" class="linkedin m-single-icon"><i class="fa fa-linkedin"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- .product-info -->
-                                </div>
-                                <!-- .modal-product -->
-                            </div>
-                            <!-- .modal-body -->
-                        </div>
-                        <!-- .modal-content -->
-                    </div>
-                    <!-- .modal-dialog -->
-                </div>
-                <!-- END Modal -->
-            </div>
+
 @endsection
 @section('js')
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
 
-    //<![CDATA[
+        //<![CDATA[
 
-    // $('.atvnav').addClass('active');
-    
-  $(".imgActive").first().addClass('active');
-  $(".tab-pane").first().addClass('active');
-    //]]>
+        // $('.atvnav').addClass('active');
 
-</script>
+      $(".imgActive").first().addClass('active');
+      $(".tab-pane").first().addClass('active');
+        //]]>
+
+    </script>
 @endsection

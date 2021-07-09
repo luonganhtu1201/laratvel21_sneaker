@@ -11,19 +11,19 @@
                                 <li>
                                     <div class="contact-icon"> <i class="zmdi zmdi-pin-drop"></i> </div>
                                     <div class="contact-text">
-                                        <p>Address: Your address goes here.</p>
+                                        <p>Address: Thai Hoa - Ba Vi - Ha Noi</p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="contact-icon"> <i class="zmdi zmdi-email-open"></i> </div>
                                     <div class="contact-text">
-                                        <p><span><a href="mailto://demo@example.com">demo@example.com</a></span> <span><a href="mailto://demo@example.com">demo@example.com</a></span></p>
+                                        <p><span><a href="mailto://demo@example.com">latu.hubt@gmail.com</a></span> <span><a href="mailto://demo@example.com">contact@tunz.support</a></span></p>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="contact-icon"> <i class="zmdi zmdi-phone-paused"></i> </div>
                                     <div class="contact-text">
-                                        <p><a href="tel://0123456789">0123456789</a> <a href="tel://0123456789">0123456789</a></p>
+                                        <p><a href="tel://0123456789">(+84) 344 659 691</a> <a href="tel://0123456789">(+84) 421 567 888</a></p>
                                     </div>
                                 </li>
                             </ul>
@@ -66,27 +66,19 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 offset-xl-1">
                         <div class="single-footer newslatter-area">
                             <div class="footer-title uppercase">
-                                <h5>Get Newsletters</h5>
+                                <h5>Social Network</h5>
                             </div>
                             <div class="newslatter">
-                                <form action="#" method="post">
-                                    <div class="input-box pos-rltv">
-                                        <input placeholder="Type Your Email hear" type="text">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </form>
+
                                 <div class="social-icon socile-icon-style-3 mt-40">
                                     <div class="footer-title uppercase">
-                                        <h5>Social Network</h5>
+
                                     </div>
                                     <ul>
-                                        <li><a href="#"><i class="zmdi zmdi-facebook"></i></a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-pinterest"></i></a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-google"></i></a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-twitter"></i></a></li>
+                                        <li><a href="https://www.facebook.com/Jikeyazz/" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a> </li>
+                                        <li><a href="https://www.instagram.com/_ah.tuu_/" target="_blank" title="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a> </li>
+                                        <li> <a href="https://www.pinterest.com/TunzPint/_saved/" target="_blank" title="pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                        <li> <a href="https://www.youtube.com/channel/UC8MkxFRKqtvu7vGw-lP03jg" target="_blank" title="youtube"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -106,28 +98,28 @@
                             <div class="col-md-6">
                                <div class="copyrigth">
                                     <p>
-                                        &copy; 2021 <span class="text-uppercase">Clothing</span>. Made
+                                       <span class="text-uppercase">Tun<span style="color: red">z</span> Sneaker</span>  &copy; 2021 . Made
                                         with <i style="color:#f53400;" class="fa fa-heart"></i> by
-                                        <a target="_blank" href="devitems.com">Devitems</a>
+                                        <a target="_blank" href="devitems.com">LAT</a>
                                       </p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <ul class="payment-support text-right">
                                     <li>
-                                        <a href="#"><img src="/frontend/images/pay1.png" alt></a>
+                                        <img src="/frontend/images/pay1.png" alt>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="/frontend/images/pay2.png" alt></a>
+                                        <img src="/frontend/images/pay2.png" alt>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="/frontend/images/pay3.png" alt></a>
+                                       <img src="/frontend/images/pay3.png" alt>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="/frontend/images/pay4.png" alt></a>
+                                       <img src="/frontend/images/pay4.png" alt>
                                     </li>
                                     <li>
-                                        <a href="#"><img src="/frontend/images/pay5.png" alt></a>
+                                       <img src="/frontend/images/pay5.png" alt>
                                     </li>
                                 </ul>
                             </div>

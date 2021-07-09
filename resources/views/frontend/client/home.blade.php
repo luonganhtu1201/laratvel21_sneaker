@@ -1,29 +1,30 @@
 @extends('frontend.layouts.master')
+
 @section('content-carousel')
 <div class="slider-area pos-rltv carosule-pagi cp-line">
             <div class="active-slider">
                 <div class="single-slider pos-rltv">
-                    <div class="slider-img"><img src="/frontend/images/slider01.jpg" alt></div>
+                    <div class="slider-img"><img src="/frontend/images/sneaker3.jpg" alt></div>
                     <div class="slider-content pos-abs">
-                        <h4>Best Collection</h4>
-                        <h1 class="uppercase pos-rltv underline">exclusive Fashion 2019</h1>
-                        <a href="#" class="btn-def btn-white">Shop Now</a>
+                        <h4>Top Prize</h4>
+                        <h1 class="uppercase pos-rltv underline">Most loved brand 2019</h1>
+                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Shop Now</a>
                     </div>
                 </div>
                 <div class="single-slider pos-rltv">
-                    <div class="slider-img"><img src="/frontend/images/slider02.jpg" alt></div>
+                    <div class="slider-img"><img src="/frontend/images/sneaker2.jpg" alt></div>
                     <div class="slider-content pos-abs">
-                        <h4>Best Collection</h4>
-                        <h1 class="uppercase pos-rltv underline">exclusive Fashion 2019</h1>
-                        <a href="#" class="btn-def btn-white">Shop Now</a>
+                        <h4>Best Price</h4>
+                        <h1 class="uppercase pos-rltv underline">Competitive price</h1>
+                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Shop Now</a>
                     </div>
                 </div>
                 <div class="single-slider pos-rltv">
-                    <div class="slider-img"><img src="/frontend/images/slider01.jpg" alt></div>
+                    <div class="slider-img"><img src="/frontend/images/sneaker4.jpg" alt></div>
                     <div class="slider-content pos-abs">
                         <h4>Best Collection</h4>
-                        <h1 class="uppercase pos-rltv underline">exclusive Fashion 2019</h1>
-                        <a href="#" class="btn-def btn-white">Shop Now</a>
+                        <h1 class="uppercase pos-rltv underline">Many shoe models</h1>
+                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -36,7 +37,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="single-service shadow-box text-center">
                             <img src="/frontend/images/garantee.png" alt>
-                            <h5>Money Back Guarantee</h5>
+                            <h5>Money Back <span style="color: red">120%</span></h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
@@ -61,37 +62,43 @@
             </div>
         </div>
         <!--delivery service start-->
-
+        <form action="">@csrf</form>
         <!--branding-section-area start-->
         <div class="branding-section-area">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="active-slider pos-rltv carosule-pagi cp-line pagi-02">
+                            @foreach($topSale as $product)
+
                             <div class="single-slider">
                                 <div class="row">
                                     <div class="col-xl-7 col-lg-6 col-md-6">
                                         <div class="brand-img text-center">
-                                            <img src="/frontend/images/branding.png" alt>
+                                            @if(count($product->images) == 0)
+                                                <img style="width: 60%;margin: 20%;border-radius: 5%;box-shadow: 5px 10px 30px 5px grey" src="/frontend/images/no-image.png" alt>
+                                            @else
+                                                <img style="width: 60%;margin: 20%;border-radius: 5%;box-shadow: 5px 10px 30px 5px grey" src="{{$product->images[0]->image_url}}" alt>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-xl-5 col-lg-6 col-md-6">
                                         <div class="brand-content ptb-55">
                                             <div class="brand-text color-lightgrey">
-                                                <h6>New Fashion</h6>
-                                                <h2 class="uppercase montserrat">Brand Cortta</h2>
-                                                <h3 class="montserrat">$200.00</h3>
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout.</p>
+                                                <h6>Best Sale</h6>
+                                                <h2 class="uppercase montserrat">{{$product->name}}</h2>
+                                                <h3 class="montserrat">{{number_format($product->sale_price).' VNĐ'}}</h3>
+                                                <div class="s-price-box">
+                                                    <h4 class="old-price">{{number_format($product->origin_price).' VNĐ'}}</h4>
+                                                </div>
                                                 <div class="social-icon-wraper mt-35">
                                                     <div class="social-icon">
                                                         <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
+                                                            <li><a href="{{route('productimg.home',['id'=>$product->id])}}" style="width: 150px"><i class="zmdi zmdi-shopping-cart"></i> Shop now </a>
                                                             </li>
-                                                            <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
+{{--                                                            <input type="button"  data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$product->id}}" name="add-to-cart">--}}
 
+                                                            <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -99,7 +106,7 @@
                                             <div class="brand-timer shadow-box-2 mt-50">
                                                 <div class="timer-wraper text-center">
                                                     <div class="timer">
-                                                        <div data-countdown="2015/02/01"></div>
+                                                        <div data-countdown="2021/08/01"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,92 +114,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="single-slider">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-6 col-md-6">
-                                        <div class="brand-img text-center">
-                                            <img src="/frontend/images/branding.png" alt>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-5 col-lg-6 col-md-6">
-                                        <div class="brand-content ptb-55">
-                                            <div class="brand-text color-lightgrey">
-                                                <h6>New Fashion</h6>
-                                                <h2 class="uppercase montserrat">Brand Cortta</h2>
-                                                <h3 class="montserrat">$200.00</h3>
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout.</p>
-                                                <div class="social-icon-wraper mt-35">
-                                                    <div class="social-icon">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
+                            @endforeach
 
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="brand-timer shadow-box-2 mt-50">
-                                                <div class="timer-wraper text-center">
-                                                    <div class="timer">
-                                                        <div data-countdown="2017/02/01"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-slider">
-                                <div class="row">
-                                    <div class="col-xl-7 col-lg-6 col-md-6">
-                                        <div class="brand-img text-center">
-                                            <img src="/frontend/images/branding.png" alt>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-5 col-lg-6 col-md-6">
-                                        <div class="brand-content ptb-55">
-                                            <div class="brand-text color-lightgrey">
-                                                <h6>New Fashion</h6>
-                                                <h2 class="uppercase montserrat">Brand Cortta</h2>
-                                                <h3 class="montserrat">$200.00</h3>
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout.</p>
-                                                <div class="social-icon-wraper mt-35">
-                                                    <div class="social-icon">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a></li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="brand-timer shadow-box-2 mt-50">
-                                                <div class="timer-wraper text-center">
-                                                    <div class="timer">
-                                                        <div data-countdown="2019/02/01"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!--branding-section-area end-->
-
-        <!--new arrival area start-->
         <div class="new-arrival-area pt-70">
             <div class="container">
                 <div class="row">
@@ -203,240 +132,106 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-                <div class="row">
+                <div class="total-shop-product-grid row">
+                    @foreach($productt as $product)
+                        <div class="col-lg-3 col-md-6 item">
+                            <!-- single product start-->
+                            <div class="single-product">
+                                <div class="product-img">
+                                    <div class="product-label">
+                                        @if($product->status == 1)
+                                            <div class="new" style="background-color: red;color: white">
+                                                On Sale
+                                            </div>
+                                        @elseif($product->status == 0)
+                                            <div class="new" style="background-color: yellow;color: black">
+                                                Out of
+                                            </div>
+                                        @else
+                                            <div class="new" style="background-color: grey;color: white">
+                                                Stop selling
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="single-prodcut-img  product-overlay pos-rltv">
+                                        @if(count($product->images) == 0)
+                                            <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                        @elseif(count($product->images) == 1)
+                                            <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                        @elseif(count($product->images)>=2)
+                                            <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                        @endif
+                                    </div>
+                                    <div class="product-icon socile-icon-tooltip text-center">
+                                        <ul>
+                                            <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+
+                                            <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-text">
+                                    <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                    </div>
+                                    <div class="prodcut-ratting-price">
+                                        <div class="prodcut-price">
+                                            <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single product end-->
+                        </div>
+                    @endforeach
                     <div class="col-lg-12">
-                        <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="product-label">
-                                            <div class="new">New</div>
-                                        </div>
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/01.jpg" class="primary-image"> <img alt src="/frontend/images/02.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/03_2.jpg" class="primary-image"> <img alt src="/frontend/images/04_1.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="product-label">
-                                            <div class="new">Sale</div>
-                                        </div>
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/02.jpg" class="primary-image"> <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-ratting">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star-o"></i></a>
-                                            </div>
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/04_1.jpg" class="primary-image"> <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
-                            <div class="col-lg-3">
-                                <!-- single product start-->
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                            <a href="single-product.html"> <img alt src="/frontend/images/05.jpg" class="primary-image"> <img alt src="/frontend/images/06.jpg" class="secondary-image"> </a>
-                                        </div>
-                                        <div class="product-icon socile-icon-tooltip text-center">
-                                            <ul>
-                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a></li>
-                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="product-text">
-                                        <div class="prodcut-name"> <a href="single-product.html">Quisque fringilla</a>
-                                        </div>
-                                        <div class="prodcut-ratting-price">
-                                            <div class="prodcut-ratting">
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                <a href="#"><i class="fa fa-star-o"></i></a> </div>
-                                            <div class="prodcut-price">
-                                                <div class="new-price"> $220 </div>
-                                                <div class="old-price"> <del>$250</del> </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- single product end-->
-                            </div>
+                        <div class="pagination-btn text-center d-flex justify-content-center mt-3">
+                            {!! $productt->appends(request()->input())->links() !!}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--new arrival area start-->
+
         <!--new arrival area end-->
 
         <!--banner area start-->
         <div class="banner-area pt-70">
             <div class="container">
                 <div class="row">
+
+
                     <div class="col-lg-6">
-                        <div class="single-banner gray-bg">
-                            <div class="row">
-                                <div class="col-md-6">
+                        <div class="">
+                            <div class="row  mb-3">
+                                <div class="col-md-12">
                                     <div class="sb-img text-center">
-                                        <img src="/frontend/images/02_1.png" alt>
+                                        @if(count($top1import[0]->images) == 0)
+                                            <img style="width: 70%;margin: 0 auto;border-radius: 30%;box-shadow: 5px 10px 30px 5px grey" src="/frontend/images/no-image.png" alt>
+                                        @else
+                                            <img class="mt-3" style="width: 70%;margin: 0 auto;border-radius: 10% 3%;box-shadow: 5px 10px 30px 5px grey" src="{{$top1import[0]->images[0]->image_url}}" alt>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="sb-content mt-60">
-                                        <div class="banner-text">
+                                        <div class="banner-text text-center">
                                             <h5 class="lato">New Arrival</h5>
-                                            <h2 class="montserrat">Grag T- Shirt</h2>
-                                            <h3 class="montserrat">$99.99</h3>
-                                            <div class="banner-list">
-                                                <ul>
-                                                    <li>Best quality</li>
-                                                    <li>Best quality</li>
-                                                    <li>Best quality</li>
-                                                </ul>
-                                            </div>
-                                            <div class="social-icon-wraper mt-25">
-                                                <div class="social-icon socile-icon-style-1">
-                                                    <ul>
-                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
-                                                        <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i></a>
-                                                        </li>
-                                                        <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target="#productModal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        <li><a href="#"><i class="zmdi zmdi-repeat"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
+                                            <h4 class="montserrat"><b>{{$top1import[0]->name}}</b></h4>
+                                            <h4 class="montserrat">{{number_format($top1import[0]->sale_price).' VNĐ'}}</h4>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <div class="w-50 m-auto">
+                                        <a class="btn-def  btn2 w-100 m-auto text-center" href="{{Route('productimg.home',['id'=>$top1import[0]->id])}}">SHOP NOW</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="single-banner gray-bg">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="sb-img text-center">
-                                        <img src="/frontend/images/01_1.png" alt>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="sb-content mt-60">
-                                        <div class="banner-text">
-                                            <h5 class="lato">New Arrival</h5>
-                                            <h2 class="montserrat">Grag T- Shirt</h2>
-                                            <h3 class="montserrat">$99.99</h3>
-                                            <p>It is a long established fact that a reader will be distracted by the
-                                                readable content.</p>
-                                            <a class="btn-def btn2" href="#">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <img class="w-100" src="https://streetstyle.vn/images/news/18/2..jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -452,10 +247,10 @@
                             <div class="title-tab-product-category">
                                 <div class="col-lg-12 text-center">
                                     <ul class="nav mb-40 heading-style-2" role="tablist">
-                                        <li role="presentation"><a class="active" href="#newarrival" aria-controls="newarrival" role="tab" data-toggle="tab">New Arrival</a>
+                                        <li role="presentation"><a class="active" href="#newarrival" aria-controls="newarrival" role="tab" data-toggle="tab">Nike</a>
                                         </li>
-                                        <li role="presentation"><a href="#bestsellr" aria-controls="bestsellr" role="tab" data-toggle="tab">Best Seller</a></li>
-                                        <li role="presentation"><a href="#specialoffer" aria-controls="specialoffer" role="tab" data-toggle="tab">Special Offer</a></li>
+                                        <li role="presentation"><a href="#bestsellr" aria-controls="bestsellr" role="tab" data-toggle="tab">Adidas</a></li>
+                                        <li role="presentation"><a href="#specialoffer" aria-controls="specialoffer" role="tab" data-toggle="tab">Balenciaga</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -465,524 +260,169 @@
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fade in active" id="newarrival">
                                         <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="product-label">
-                                                            <div class="new">New</div>
+                                            @foreach($proNike as $product)
+                                                <div class="col-lg-3">
+                                                    <!-- single product start-->
+                                                    <div class="single-product">
+                                                        <div class="product-img">
+                                                            <div class="product-label">
+
+                                                                @if($product->status == 1)
+                                                                    <div class="new" style="background-color: red;color: white">
+                                                                        On Sale
+                                                                    </div>
+                                                                @elseif($product->status == 0)
+                                                                    <div class="new" style="background-color: yellow;color: black">
+                                                                        Out of
+                                                                    </div>
+                                                                @else
+                                                                    <div class="new" style="background-color: grey;color: white">
+                                                                        Stop selling
+                                                                    </div>
+                                                                @endif
+
+                                                            </div>
+                                                            <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                                @if(count($product->images) == 0)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                                @elseif(count($product->images) == 1)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                                @elseif(count($product->images)>=2)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                                @endif
+                                                            </div>
+                                                            <div class="product-icon socile-icon-tooltip text-center">
+                                                                <ul>
+                                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+
+                                                                    <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/01.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/02.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
+                                                        <div class="product-text">
+                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                            </div>
+                                                            <div class="prodcut-ratting-price">
+                                                                <div class="prodcut-price">
+                                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- single product end-->
                                                 </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/03_2.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/04_1.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="product-label">
-                                                            <div class="new">Sale</div>
-                                                        </div>
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/02.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-ratting">
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star-o"></i></a>
-                                                            </div>
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/04_1.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/05.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/06.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-ratting">
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star-o"></i></a> </div>
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                                <div class="old-price"> <del>$250</del> </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane  fade in" id="bestsellr">
                                         <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="product-label">
-                                                            <div class="new">New</div>
+                                            @foreach($proAdidas as $product)
+                                                <div class="col-lg-3">
+                                                    <!-- single product start-->
+                                                    <div class="single-product">
+                                                        <div class="product-img">
+                                                            <div class="product-label">
+
+                                                                @if($product->status == 1)
+                                                                    <div class="new" style="background-color: red;color: white">
+                                                                        On Sale
+                                                                    </div>
+                                                                @elseif($product->status == 0)
+                                                                    <div class="new" style="background-color: yellow;color: black">
+                                                                        Out of
+                                                                    </div>
+                                                                @else
+                                                                    <div class="new" style="background-color: grey;color: white">
+                                                                        Stop selling
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                            <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                                @if(count($product->images) == 0)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                                @elseif(count($product->images) == 1)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                                @elseif(count($product->images)>=2)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                                @endif
+                                                            </div>
+                                                            <div class="product-icon socile-icon-tooltip text-center">
+                                                                <ul>
+                                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+
+                                                                    <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/01.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/02.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
+                                                        <div class="product-text">
+                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                            </div>
+                                                            <div class="prodcut-ratting-price">
+                                                                <div class="prodcut-price">
+                                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- single product end-->
                                                 </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="product-label">
-                                                            <div class="new">Sale</div>
-                                                        </div>
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/02.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-ratting">
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star-o"></i></a>
-                                                            </div>
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/04_1.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/03_2.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/04_1.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/05.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/06.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-ratting">
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star-o"></i></a> </div>
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                                <div class="old-price"> <del>$250</del> </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div role="tabpanel" class="tab-pane  fade in" id="specialoffer">
                                         <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/04_1.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
+                                            @foreach($proBalen as $product)
+                                                <div class="col-lg-3">
+                                                    <!-- single product start-->
+                                                    <div class="single-product">
+                                                        <div class="product-img">
+                                                            <div class="product-label">
+
+                                                                @if($product->status == 1)
+                                                                    <div class="new" style="background-color: red;color: white">
+                                                                        On Sale
+                                                                    </div>
+                                                                @elseif($product->status == 0)
+                                                                    <div class="new" style="background-color: yellow;color: black">
+                                                                        Out of
+                                                                    </div>
+                                                                @else
+                                                                    <div class="new" style="background-color: grey;color: white">
+                                                                        Stop selling
+                                                                    </div>
+                                                                @endif
+
+                                                            </div>
+                                                            <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                                @if(count($product->images) == 0)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                                @elseif(count($product->images) == 1)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                                @elseif(count($product->images)>=2)
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                                @endif
+                                                            </div>
+                                                            <div class="product-icon socile-icon-tooltip text-center">
+                                                                <ul>
+                                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+
+                                                                    <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
+                                                        <div class="product-text">
+                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                            </div>
+                                                            <div class="prodcut-ratting-price">
+                                                                <div class="prodcut-price">
+                                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- single product end-->
                                                 </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/05.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/06.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-ratting">
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star-o"></i></a> </div>
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                                <div class="old-price"> <del>$250</del> </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="product-label">
-                                                            <div class="new">New</div>
-                                                        </div>
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/01.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/02.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/03_2.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/04_1.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <!-- single product start-->
-                                                <div class="single-product">
-                                                    <div class="product-img">
-                                                        <div class="product-label">
-                                                            <div class="new">Sale</div>
-                                                        </div>
-                                                        <div class="single-prodcut-img  product-overlay pos-rltv">
-                                                            <a href="single-product.html"> <img alt src="/frontend/images/02.jpg" class="primary-image">
-                                                                <img alt src="/frontend/images/03_2.jpg" class="secondary-image"> </a>
-                                                        </div>
-                                                        <div class="product-icon socile-icon-tooltip text-center">
-                                                            <ul>
-                                                                <li><a href="#" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Wishlist" class="w-list"><i class="fa fa-heart-o"></i></a>
-                                                                </li>
-                                                                <li><a href="#" data-tooltip="Compare" class="cpare"><i class="fa fa-refresh"></i></a></li>
-                                                                <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal"><i class="fa fa-eye"></i></a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="single-product.html">Quisque
-                                                                fringilla</a> </div>
-                                                        <div class="prodcut-ratting-price">
-                                                            <div class="prodcut-ratting">
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star"></i></a>
-                                                                <a href="#"><i class="fa fa-star-o"></i></a>
-                                                            </div>
-                                                            <div class="prodcut-price">
-                                                                <div class="new-price"> $220 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- single product end-->
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -999,60 +439,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <div class="heading-title color-lightgrey mb-40 text-center">
-                            <h5 class="uppercase">Testimonial</h5>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="total-testimonial active-slider carosule-pagi pagi-03">
-                            <div class="single-testimonial">
-                                <div class="testimonial-img">
-                                    <img src="/frontend/images/testi-03.jpg" alt>
-                                </div>
-                                <div class="testimonial-content color-lightgrey">
-                                    <div class="name-degi pos-rltv">
-                                        <h5>Alexandra</h5>
-                                        <p>Developer</p>
-                                    </div>
-                                    <div class="testi-text">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-testimonial">
-                                <div class="testimonial-img">
-                                    <img src="/frontend/images/testi-02.jpg" alt>
-                                </div>
-                                <div class="testimonial-content color-lightgrey">
-                                    <div class="name-degi pos-rltv">
-                                        <h5>Amelia</h5>
-                                        <p>Facebook Liker</p>
-                                    </div>
-                                    <div class="testi-text">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-testimonial">
-                                <div class="testimonial-img">
-                                    <img src="/frontend/images/testi-01.jpg" alt>
-                                </div>
-                                <div class="testimonial-content color-lightgrey">
-                                    <div class="name-degi pos-rltv">
-                                        <h5>Amanda</h5>
-                                        <p>Designer</p>
-                                    </div>
-                                    <div class="testi-text">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco.</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="heading-title color-lightgrey text-center">
+                            <img src="/frontend/register/images/logo-14.png" alt="">
+                            <h2>-----Tun<span style="color: red">z</span>-----</h2>
                         </div>
                     </div>
                 </div>
@@ -1061,304 +450,71 @@
         <!--testimonial-area-end-->
 
         <!--new-arrival on-sale Top-ratted area start-->
-        <div class="arrival-ratted-sale-area pt-70">
+        <div class="new-arrival-area pt-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-lg-12 text-center">
                         <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                            <h5 class="uppercase">New Arrival</h5>
-                        </div>
-                        <div class="ctg-slider-active">
-                            <div class="single-ctg new-arrival-ctg">
-                                <div class="single-ctg-item">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-img pos-rltv product-overlay">
-                                                <a href="single-product.html"><img src="/frontend/images/s01.jpg" alt></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-content">
-                                                <p>Primo Court Mid Suede</p>
-                                                <p class="font-bold">$236.99</p>
-                                                <div class="social-icon socile-icon-style-1 mt-15">
-                                                    <ul>
-                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
-                                                        <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-ctg-item">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-img pos-rltv product-overlay">
-                                                <a href="single-product.html"><img src="/frontend/images/s02.jpg" alt></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-content">
-                                                <p>Primo Court Mid Suede</p>
-                                                <p class="font-bold">$236.99</p>
-                                                <div class="social-icon socile-icon-style-1 mt-15">
-                                                    <ul>
-                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
-                                                        <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-ctg new-arrival-ctg">
-                                <div class="single-ctg-item">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-img pos-rltv product-overlay">
-                                                <a href="single-product.html"><img src="/frontend/images/s01.jpg" alt></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-content">
-                                                <p>Primo Court Mid Suede</p>
-                                                <p class="font-bold">$236.99</p>
-                                                <div class="social-icon socile-icon-style-1 mt-15">
-                                                    <ul>
-                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
-                                                        <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-ctg-item">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-img pos-rltv product-overlay">
-                                                <a href="single-product.html"><img src="/frontend/images/s02.jpg" alt></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-6">
-                                            <div class="product-ctg-content">
-                                                <p>Primo Court Mid Suede</p>
-                                                <p class="font-bold">$236.99</p>
-                                                <div class="social-icon socile-icon-style-1 mt-15">
-                                                    <ul>
-                                                        <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a></li>
-                                                        <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h5 class="uppercase">Other</h5>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="single-ctg on-sale-ctg">
-                            <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                                <h5 class="uppercase">On Sale</h5>
-                            </div>
-                            <div class="ctg-slider-active">
-                                <div class="single-ctg new-arrival-ctg">
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s01.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="total-new-arrival new-arrival-slider-active carsoule-btn row">
+                            @foreach($proOut as $product)
+                                <div class="col-lg-3">
+                                    <!-- single product start-->
+                                    <div class="single-product">
+                                        <div class="product-img">
+                                            <div class="product-label">
+
+                                                @if($product->status == 1)
+                                                    <div class="new" style="background-color: red;color: white">
+                                                        On Sale
                                                     </div>
+                                                @elseif($product->status == 0)
+                                                    <div class="new" style="background-color: yellow;color: black">
+                                                        Out of
+                                                    </div>
+                                                @else
+                                                    <div class="new" style="background-color: grey;color: white">
+                                                        Stop selling
+                                                    </div>
+                                                @endif
+
+                                            </div>
+                                            <div class="single-prodcut-img  product-overlay pos-rltv">
+                                                @if(count($product->images) == 0)
+                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                @elseif(count($product->images) == 1)
+                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                @elseif(count($product->images)>=2)
+                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                @endif
+                                            </div>
+                                            <div class="product-icon socile-icon-tooltip text-center">
+                                                <ul>
+                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+
+                                                    <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-text">
+                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                            </div>
+                                            <div class="prodcut-ratting-price">
+                                                <div class="prodcut-price">
+                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s02.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- single product end-->
                                 </div>
-                                <div class="single-ctg new-arrival-ctg">
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s01.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s02.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="single-ctg top-rated-ctg">
-                            <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                                <h5 class="uppercase">Top Rated</h5>
-                            </div>
-                            <div class="ctg-slider-active">
-                                <div class="single-ctg new-arrival-ctg">
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s01.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s02.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-ctg new-arrival-ctg">
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s01.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-ctg-item">
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-img pos-rltv product-overlay">
-                                                    <a href="single-product.html"><img src="/frontend/images/s02.jpg" alt></a>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-6">
-                                                <div class="product-ctg-content">
-                                                    <p>Primo Court Mid Suede</p>
-                                                    <p class="font-bold">$236.99</p>
-                                                    <div class="social-icon socile-icon-style-1 mt-15">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-shopping-cart"></i></a>
-                                                            </li>
-                                                            <li><a href="#" data-tooltip="Quick View" class="q-view" data-toggle="modal" data-target=".modal" tabindex="0"><i class="zmdi zmdi-eye"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -1413,37 +569,12 @@
         <div class="blog-area pb-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                            <h5 class="uppercase">Blog</h5>
-                        </div>
-                    </div>
                     <div class="col-lg-12">
                         <div class="total-blog row">
                             <div class="col-md-4">
                                 <div class="single-blog">
                                     <div class="blog-img pos-rltv product-overlay">
                                         <a href="#"><img src="/frontend/images/01_2.jpg" alt></a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="blog-title">
-                                            <h5 class="uppercase font-bold"><a href="#">New fashion collection 2019</a></h5>
-                                            <div class="like-comments-date">
-                                                <ul>
-                                                    <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13 Like</a>
-                                                    </li>
-                                                    <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03 Comments</a>
-                                                    </li>
-                                                    <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16 jun 2019</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="blog-text">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using.</p>
-                                            </div>
-                                            <a class="read-more montserrat" href="single-blog.html">Read More</a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1452,26 +583,6 @@
                                     <div class="blog-img pos-rltv product-overlay">
                                         <a href="#"><img src="/frontend/images/02_1.jpg" alt></a>
                                     </div>
-                                    <div class="blog-content">
-                                        <div class="blog-title">
-                                            <h5 class="uppercase font-bold"><a href="#">New fashion collection 2019</a></h5>
-                                            <div class="like-comments-date">
-                                                <ul>
-                                                    <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13 Like</a>
-                                                    </li>
-                                                    <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03 Comments</a>
-                                                    </li>
-                                                    <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16 jun 2019</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="blog-text">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using.</p>
-                                            </div>
-                                            <a class="read-more montserrat" href="single-blog.html">Read More</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -1479,53 +590,6 @@
                                     <div class="blog-img pos-rltv product-overlay">
                                         <a href="#"><img src="/frontend/images/03.jpg" alt></a>
                                     </div>
-                                    <div class="blog-content">
-                                        <div class="blog-title">
-                                            <h5 class="uppercase font-bold"><a href="#">New fashion collection 2019</a></h5>
-                                            <div class="like-comments-date">
-                                                <ul>
-                                                    <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13 Like</a>
-                                                    </li>
-                                                    <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03 Comments</a>
-                                                    </li>
-                                                    <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16 jun 2019</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="blog-text">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using.</p>
-                                            </div>
-                                            <a class="read-more montserrat" href="single-blog.html">Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="single-blog">
-                                    <div class="blog-img pos-rltv product-overlay">
-                                        <a href="#"><img src="/frontend/images/01_2.jpg" alt></a>
-                                    </div>
-                                    <div class="blog-content">
-                                        <div class="blog-title">
-                                            <h5 class="uppercase font-bold"><a href="#">New fashion collection 2019</a></h5>
-                                            <div class="like-comments-date">
-                                                <ul>
-                                                    <li><a href="#"><i class="zmdi zmdi-favorite-outline"></i>13 Like</a>
-                                                    </li>
-                                                    <li><a href="#"><i class="zmdi zmdi-comment-outline"></i>03 Comments</a>
-                                                    </li>
-                                                    <li class="blog-date"><a href="#"><i class="zmdi zmdi-calendar-alt"></i>16 jun 2019</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="blog-text">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using.</p>
-                                            </div>
-                                            <a class="read-more montserrat" href="single-blog.html">Read More</a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1533,98 +597,16 @@
                 </div>
             </div>
         </div>
-        <!-- QUICKVIEW PRODUCT -->
-        <div id="quickview-wrapper">
-            <!-- Modal -->
-            <div class="modal fade" id="productModal" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="modal-product">
-                                <div class="product-images">
-                                    <!--modal tab start-->
-                                    <div class="portfolio-thumbnil-area-2">
-                                        <div class="tab-content active-portfolio-area-2">
-                                            <div role="tabpanel" class="tab-pane active" id="view1">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/01.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="view2">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/02.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="view3">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/03_2.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="view4">
-                                                <div class="product-img">
-                                                    <a href="#"><img src="/frontend/images/04_1.jpg" alt="Single portfolio"></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-more-views-2">
-                                            <div class="thumbnail-carousel-modal-2" data-tabs="tabs">
-                                                <a href="#view1" aria-controls="view1" data-toggle="tab"><img src="/frontend/images/01.jpg" alt></a>
-                                                <a href="#view2" aria-controls="view2" data-toggle="tab"><img src="/frontend/images/02.jpg" alt></a>
-                                                <a href="#view3" aria-controls="view3" data-toggle="tab"><img src="/frontend/images/03_2.jpg" alt></a>
-                                                <a href="#view4" aria-controls="view4" data-toggle="tab"><img src="/frontend/images/04_1.jpg" alt></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--modal tab end-->
-                                <!-- .product-images -->
-                                <div class="product-info">
-                                    <h1>Aenean eu tristique</h1>
-                                    <div class="price-box-3">
-                                        <div class="s-price-box"> <span class="new-price">$160.00</span> <span class="old-price">$190.00</span> </div>
-                                    </div> <a href="shop.html" class="see-all">See all features</a>
-                                    <div class="quick-add-to-cart">
-                                        <form method="post" class="cart">
-                                            <div class="numbers-row">
-                                                <input type="number" id="french-hens" value="3" min="1"> </div>
-                                            <button class="single_add_to_cart_button" type="submit">Add to cart</button>
-                                        </form>
-                                    </div>
-                                    <div class="quick-desc"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-                                        fringilla augue nec est tristique auctor. Donec non est at libero.Lorem ipsum dolor
-                                        sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor.
-                                        Donec non est at libero.Nam fringilla tristique auctor. </div>
-                                    <div class="social-sharing-modal">
-                                        <div class="widget widget_socialsharing_widget">
-                                            <h3 class="widget-title-modal">Share this product</h3>
-                                            <ul class="social-icons-modal">
-                                                <li><a target="_blank" title="Facebook" href="#" class="facebook m-single-icon"><i class="fa fa-facebook"></i></a>
-                                                </li>
-                                                <li><a target="_blank" title="Twitter" href="#" class="twitter m-single-icon"><i class="fa fa-twitter"></i></a></li>
-                                                <li><a target="_blank" title="Pinterest" href="#" class="pinterest m-single-icon"><i class="fa fa-pinterest"></i></a>
-                                                </li>
-                                                <li><a target="_blank" title="Google +" href="#" class="gplus m-single-icon"><i class="fa fa-google-plus"></i></a>
-                                                </li>
-                                                <li><a target="_blank" title="LinkedIn" href="#" class="linkedin m-single-icon"><i class="fa fa-linkedin"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- .product-info -->
-                            </div>
-                            <!-- .modal-product -->
-                        </div>
-                        <!-- .modal-body -->
-                    </div>
-                    <!-- .modal-content -->
-                </div>
-                <!-- .modal-dialog -->
-            </div>
-            <!-- END Modal -->
-        </div>
-        <!-- END QUICKVIEW PRODUCT -->
+
+@endsection
+@section('js')
+    <script>
+        $('[data-countdown]').each(function() {
+            var $this = $(this), finalDate = $(this).data('countdown');
+            $this.countdown(finalDate, function(event) {
+                $this.html(event.strftime('%D days %H:%M:%S'));
+            });
+        });
+    </script>
+
 @endsection

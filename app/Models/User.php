@@ -59,11 +59,14 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    const ADMIN = 1;
+    const USER = 0;
+    const SPADMIN = 3;
 
     public function getRoleTextAttribute(){
         if ($this->role == 1) {
             return "Admin";
-        }else{
+        }elseif($this->role == 0){
             return "User";
         }
     }
@@ -74,5 +77,30 @@ class User extends Authenticatable
     }
     public function userinfo(){
         return $this->hasOne(Userinfo::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+    public function scopeSearch($query, $request)
+    {
+        if ($request->has('key_search')) {
+            $query->where('name', 'LIKE', '%'.$request->key_search.'%')->orderBy('created_at', 'DESC');
+        }
+
+        return $query;
+    }
+    public function scopeRole($query, $request){
+        if ($request->has('role')){
+            if ($request->get('role')==1){
+                $query->where('role',1)->orderBy('id','DESC');
+            }elseif ($request->get('role')==0){
+                $query->where('role',0)->orderBy('id','DESC');
+            }else{
+                $query->orderBy('id','DESC');
+            }
+        }
     }
 }

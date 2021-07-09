@@ -17,7 +17,7 @@
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{Route('logout')}}" class="nav-link">Logout <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                <a href="{{Route('logout.ad')}}" class="nav-link">Logout <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
             </li>
         </ul>
     </nav>

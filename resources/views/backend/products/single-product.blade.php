@@ -11,6 +11,10 @@
             <div class="card card-primary">
               <div class="card-header">
                 <h4 class="card-title">{{$product->name}}</h4>
+
+{{--                  @foreach ($product->content_morez as $key => $value)--}}
+{{--                      {{ $key }}--}}
+{{--                  @endforeach--}}
               </div>
               <div class="card-body">
                 <div class="row">

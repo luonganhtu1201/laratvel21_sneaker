@@ -25,17 +25,17 @@ CSS INDEX
 13. breadcumb
 14. pagination
 15. shop side bar
-16. copmare page 
-17. cart page 
+16. copmare page
+17. cart page
 18. Wishlist page
-19. checkout page 
-20. login Page 
-21. about us page 
-22. contact-page 
+19. checkout page
+20. login Page
+21. about us page
+22. contact-page
 23. Blog Page
-24. comments 
-25. 404 page 
-26. Scroll UP 
+24. comments
+25. 404 page
+26. Scroll UP
 27. Contact Form
 28. FAQ
 
@@ -47,7 +47,7 @@ CSS INDEX
 /*  5. promo style
 /*----------------------------------------*/
 /*************************************
- Custom-content all   
+ Custom-content all
 **************************************/
 
 .boxed-layout .wrapper,
@@ -186,7 +186,8 @@ CSS INDEX
     z-index: 1;
 }
 .product-img img {
-    width: 100%
+    width: 100%;
+    padding: 6px;
 }
 .single-product:hover .product-img a img.secondary-image {
     opacity: 1;
@@ -1130,6 +1131,10 @@ CSS INDEX
     text-align: center;
     width: 40px;
 }
+.size-bg{
+    background: black;
+    color: white !important;
+}
 .size-filter li a:hover,
 .tag-filter li a:hover {
     background: #666;
@@ -1220,7 +1225,7 @@ CSS INDEX
     width: 25%;
 }
 /*----------------------------------------*/
-/*  16. copmare page 
+/*  16. copmare page
 /*----------------------------------------*/
 
 .cart-area .cart_item td {
@@ -1621,7 +1626,7 @@ input,
 textarea {
     border: 1px solid transparent;
 }
-input:focus,
+/*input:focus,*/
 textarea:focus {
     border: 1px solid #ccc;
 }
@@ -2269,13 +2274,13 @@ textarea {
 #scrollUp {
     background: #333 none repeat scroll 0 0;
     border: 1px solid #ffffff;
-    bottom: 60px;
+    bottom: 35px !important;
     color: #fff;
     font-size: 20px;
     font-weight: 700;
     height: 45px;
     line-height: 40px;
-    right: 30px;
+    right: 30px !important;
     text-align: center;
     -webkit-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;

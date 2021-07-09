@@ -5,11 +5,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Tunz | Fashion Sneaker</title>
+	<title>Tunz Sneaker | Register</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/x-icon" href="/frontend/register/images/logo-14.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/frontend/register/images/logo-15.png">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="/frontend/register/css/bootstrap.min.css">
 	<!-- Fontawesome CSS -->
