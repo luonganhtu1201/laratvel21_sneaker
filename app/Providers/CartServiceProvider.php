@@ -25,7 +25,7 @@ class CartServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer([
-            'frontend.includes.header,frontend.layouts.master,frontend.includes.footer,frontend.includes.children_menus'
+            'frontend.includes.header','frontend.layouts.master'
         ],CartProductComposer::class);
     }
 }
