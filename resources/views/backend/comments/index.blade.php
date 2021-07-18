@@ -33,7 +33,6 @@
                                 <th>ID</th>
                                 <th>Tên Người Dùng</th>
                                 <th>Nội dung</th>
-                                <th>Xem trên trang bình luận</th>
                                 <th>Chức năng</th>
                             </tr>
                             </thead>
@@ -43,13 +42,9 @@
                                     <td>{{$cmt->id}}</td>
                                     <td>{{$cmt->user->name}}</td>
                                     <td>{{$cmt->content}}</td>
-                                    <td><a target="_blank" href="{{Route('productimg.home',$cmt->product_id)}}">Trang sản phẩm</a></td>
                                     <td>
                                         @can('delete',$cmt)
                                             <a onclick="return confirm('Bạn có muốn xóa ?')" class="btn btn-danger btn-sm" href="{{Route('backend.comments.destroy',$cmt->id)}}"><i class="fas fa-trash"></i></a>
-                                        @endcan
-                                        @can('update',$cmt)
-                                            <a class="btn btn-success btn-sm" href="{{Route('backend.comment.edit',$cmt->id)}}"><i class="fas fa-edit"></i></a>
                                         @endcan
                                     </td>
                                 </tr>

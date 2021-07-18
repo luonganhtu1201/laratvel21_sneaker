@@ -84,14 +84,14 @@
                             @foreach($products as $product)
                             <tr>
                                 <td>{{$product->id}}</td>
-                                <td><a href="{{ Route('productimg.home',['id'=>$product->id]) }}" target="_blank">{{$product->name}}</a></td>
+                                <td><a href="{{ Route('productimg.home',['id'=>$product->slug]) }}" target="_blank">{{$product->name}}</a></td>
                                 <td>
                                     @if(count($product->images)>0)
                                         {{--                                        <img src="{{url(\Illuminate\Support\Facades\Storage::url($product->images[0]->path))}}">--}}
                                         <img src="{{$product->images[0]->image_url}}" width="60px">
                                     @endif
                                 </td>
-                                <td>{{ number_format($product->origin_price) . " $" }}</td>
+                                <td>{{ number_format($product->sale_price) . " $" }}</td>
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->user->name}}</td>
 

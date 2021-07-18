@@ -67,15 +67,15 @@
 										<input id="password" type="password" class="form-control" name="password" placeholder="********" required="required">
 										<i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
-                                    <div class="form-group">
-                                        <div class="fxt-checkbox-area">
-                                            <div class="checkbox">
-                                                <input id="checkbox1" type="checkbox">
-                                                <label for="checkbox1">Keep me logged in</label>
-                                            </div>
-                                            <a href="forgot-password-13.html" class="switcher-text">Forgot Password</a>
-                                        </div>
-                                    </div>
+{{--                                    <div class="form-group">--}}
+{{--                                        <div class="fxt-checkbox-area">--}}
+{{--                                            <div class="checkbox">--}}
+{{--                                                <input id="checkbox1" type="checkbox">--}}
+{{--                                                <label for="checkbox1">Keep me logged in</label>--}}
+{{--                                            </div>--}}
+{{--                                            <a href="forgot-password-13.html" class="switcher-text">Forgot Password</a>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 									@if($errors->any())
                                         @foreach($errors->all() as $error)
                                             <p style="color: red;">{{$error}}</p>

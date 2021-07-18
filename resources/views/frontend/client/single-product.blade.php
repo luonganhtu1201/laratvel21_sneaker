@@ -304,10 +304,10 @@
                                                             <div class="col-6">
                                                                 <table class="table table-striped">
                                                                     <tr>
-                                                                        <td>EU (Size chính thức tại SaigonSneaker)</td>
+                                                                        <td>EU</td>
                                                                         <td>US men</td>
                                                                         <td>US women</td>
-                                                                        <td>Chiều dài chân</td>
+                                                                        <td>Foot length</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>36</td>

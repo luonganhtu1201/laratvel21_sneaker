@@ -118,7 +118,6 @@
                                                                 <form action="{{Route('frontend.cart.destroy')}}" method="GET" class="d-inline-block">
                                                                     <a href="#" class="btn-def btn2 delete-confirm">Deletee All</a>
                                                                 </form>
-                                                                <a href="#" class="btn-def btn2">Update Cart</a>
                                                                 <a href="{{Route('client.home')}}" class="btn-def btn2">Continue
                                                                     Shopping</a>
                                                             </div>

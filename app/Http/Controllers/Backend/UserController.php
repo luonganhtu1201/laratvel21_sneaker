@@ -27,9 +27,9 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if ($user->role == 3){
-            $users = User::search($request)->orderBy('id','DESC')->where('role','<>',3)->paginate(5);
+            $users = User::query()->search($request)->orderBy('id','DESC')->where('role','<>',3)->paginate(5);
         }elseif ($user->role == 1){
-            $users = User::search($request)->orderBy('id','DESC')->where('role','=',0)->paginate(5);
+            $users = User::query()->search($request)->orderBy('id','DESC')->where('role','=',0)->paginate(5);
         }
 
         return view('backend.users.index',[

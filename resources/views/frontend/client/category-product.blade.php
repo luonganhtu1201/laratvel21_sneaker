@@ -199,10 +199,10 @@
                             <div class="">
                                 <div id=""></div>
                                 <div>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>1])}}"> Less than 1.000.000</a></i></p>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>2])}}"> From 1.000.000 to 1.500.000</a></i></p>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>3])}}"> From 1.500.000 to 3.500.000</a></i></p>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>4])}}"> Over 3.500.000</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>1])}}"> Less than 500 $</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>2])}}"> From 500 $ to 1.000 $</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>3])}}"> From 1.000 $ to 2.500 $</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>4])}}"> Over 2.500 $</a></i></p>
                                 </div>
                             </div>
                         </aside>
