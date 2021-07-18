@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\views;
+namespace App\Http\Views;
 use App\Models\Category;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Cache;
