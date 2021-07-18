@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Views;
+namespace App\Http\views;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\view\view;
 class CartImportComposer

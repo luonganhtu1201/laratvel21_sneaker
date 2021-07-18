@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Views;
+namespace App\Http\views;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\view\view;
 use App\Models\Category;
