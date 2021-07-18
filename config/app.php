@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://tunzsneaker.herokuapp.com'),
+    'url' => env('APP_URL', 'http://tunzsneaker.herokuapp.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
