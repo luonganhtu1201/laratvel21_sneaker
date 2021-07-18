@@ -5,10 +5,12 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Product;
+use App\Models\Supplier;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\ProductPolicy;
+use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         Product::class => ProductPolicy::class,
         User::class => UserPolicy::class,
         Category::class => CategoryPolicy::class,
-        Comment::class => CommentPolicy::class
+        Comment::class => CommentPolicy::class,
+        Supplier::class => SupplierPolicy::class,
 
     ];
 

@@ -34,13 +34,14 @@
                     <div class="fxt-bg-img" data-bg-image="/frontend/register/images/sneaker_banner.jpg">
                         <div class="fxt-header">
                             <div class="fxt-transformY-50 fxt-transition-delay-1">
-                                <a href="/frontend/register/images/login-14.html" class="fxt-logo"><img src="/frontend/register/images/logo-14.png" alt="Logo"></a>
+                                <a href="" class="fxt-logo"><img src="/frontend/register/images/logo-14.png" alt="Logo"></a>
                             </div>
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
                                 <h1>Welcome To Tun<span style="color: red;">z</span></h1>
                             </div>
                             <div class="fxt-transformY-50 fxt-transition-delay-3">
-                                <p>Grursus mal suada faci lisis Lorem ipsum dolarorit more ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum that dolocons rsus mal suada and fadolorit to the dummy consectetur elit the Lorem Ipsum genera.</p>
+                                <p>Welcome to the exclusive sneaker store in the North. Our team is sure to bring you the hottest shoes on the market, constantly updated with unmatched services and offers.
+                                    What are you waiting for without logging in to have a great experience...</p>
                             </div>
                         </div>
                         <ul class="fxt-socials">
@@ -60,7 +61,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="email" class="input-label">Email Address</label>
-                                    <input type="email" id="email" class="form-control" name="email" placeholder="demo@gmail.com" required="required">
+                                    <input type="email" id="email" class="form-control" name="email" placeholder="demo@gmail.com">
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="input-label">Password</label>
@@ -70,10 +71,8 @@
                                 <div class="form-group">
                                     <div class="fxt-checkbox-area">
                                         <div class="checkbox">
-                                            <input id="checkbox1" type="checkbox">
-                                            <label for="checkbox1">Keep me logged in</label>
                                         </div>
-                                        <a href="forgot-password-13.html" class="switcher-text">Forgot Password</a>
+                                        <a href="{{route('client.forgot.password')}}" class="switcher-text">Forgot Password</a>
                                     </div>
                                 </div>
                                 @if($errors->any())
@@ -95,6 +94,7 @@
         </div>
     </div>
 </div>
+@include('sweetalert::alert')
 <!-- jquery-->
 <script src="/frontend/register/js/jquery-3.5.0.min.js"></script>
 <!-- Popper js -->

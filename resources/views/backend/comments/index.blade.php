@@ -24,31 +24,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Danh sách bình luận</h3>
-
-                        <div class="card-tools">
-                            <form action="" method="GET">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" value="{{request()->key_search}}" name="key_search" class="form-control float-right" placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="card-tools pr-5">
-                            <form action="" method="GET">
-                                <div class="input-group input-group-sm" >
-                                    <select name="childrencate" id="" class="form-control">
-                                        <option value="-1">--Chọn danh mục--</option>
-                                    </select>
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">Lọc</button>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">

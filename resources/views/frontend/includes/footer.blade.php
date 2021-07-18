@@ -36,12 +36,11 @@
                             </div>
                             <div class="informatoin">
                                 <ul>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="#">Wishlist</a></li>
-                                    <li><a href="#">Returnes</a></li>
-                                    <li><a href="#">Private Policy</a></li>
-                                    <li><a href="#">Site Map</a></li>
+                                    @if(\Illuminate\Support\Facades\Auth::user())
+                                        <li><a href="{{route('client.profile')}}">My Account</a></li>
+                                        <li><a href="{{route('frontend.cart.status')}}">Order Tracking</a></li>
+                                    @endif
+                                    <li><a href="{{route('frontend.cart.index')}}">View Cart & Checkout</a></li>
                                 </ul>
                             </div>
                         </div>

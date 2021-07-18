@@ -6,10 +6,10 @@
                             <div class="login-register-area">
                                 <ul>
                                 @if(!(Illuminate\Support\Facades\Auth::user()))
-                                    <li><a href="{{Route('login.form')}}">Login</a></li>
+                                    <li><a href="{{Route('login')}}">Login</a></li>
                                     <li><a href="{{Route('user.register.form')}}">Register</a></li>
                                 @else
-                                <li><a href="#">{{Illuminate\Support\Facades\Auth::user()->name}}</a></li>
+                                <li><a href="{{route('client.profile')}}">{{Illuminate\Support\Facades\Auth::user()->name}}</a></li>
                                 <li><a href="{{Route('logout')}}">Logout</a></li>
                                 @endif
                                 </ul>
@@ -54,7 +54,7 @@
                                                             <div class="cart-content">
                                                                 <div class="cart-name"> <a href="#">{{$item->name}}</a>
                                                                 </div>
-                                                                <div class="cart-price">{{number_format($item->price).' VNĐ'}}</div>
+                                                                <div class="cart-price">{{number_format($item->price).' $'}}</div>
                                                                 <div class="cart-qty"> Qty: <span>{{$item->qty}}</span> </div>
                                                             </div>
                                                             <div class="remove"> <a href="{{ route('frontend.cart.remove', ['id' => $item->rowId]) }}"><i class="zmdi zmdi-close"></i></a>
@@ -62,7 +62,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                <div class="cart-subtotal"> Subtotal: <span>{{number_format($subtotal).' VNĐ'}}</span> </div>
+                                                <div class="cart-subtotal"> Subtotal: <span>{{number_format($subtotal).' $'}}</span> </div>
                                                 <div class="cart-check-btn">
                                                     <div class="view-cart"> <a class="btn-def" href="{{route('frontend.cart.index')}}">View Cart & Checkout</a> </div>
                                                 </div>
@@ -96,14 +96,15 @@
                                             <li class=""><a href="{{Route('client.home')}}">Home</a></li>
                                             @foreach($menus as $value)
                                                 <li class="">
-                                                    <a class="" href="{{Route('client.category').'?category='.$value->id}}">{{$value->name}}</a>
+                                                    <a class="" href="{{Route('client.category').'?category='.$value->slug}}">{{$value->name}}</a>
                                                     @if($value->children)
-                                                        @foreach($value->children as $children)
                                                         <ul class="dropdown">
-                                                            <li><a href="{{Route('client.category').'?category='.$children->id}}">{{$children->name}}</a></li>
-                                                        </ul>
-                                                        @endforeach
+                                                            @foreach($value->children as $children)
 
+                                                                <li><a href="{{Route('client.category').'?category='.$children->slug}}">{{$children->name}}</a></li>
+
+                                                            @endforeach
+                                                        </ul>
                                                     @endif
                                                 </li>
                                             @endforeach
@@ -144,14 +145,15 @@
                                                         <li class=""><a href="{{Route('client.home')}}">Home</a></li>
                                                         @foreach($menus as $value)
                                                             <li class="">
-                                                                <a class="" href="{{Route('client.category').'?category='.$value->id}}">{{$value->name}}</a>
+                                                                <a class="" href="{{Route('client.category').'?category='.$value->slug}}">{{$value->name}}</a>
                                                                 @if($value->children)
-                                                                    @foreach($value->children as $children)
-                                                                        <ul class="">
-                                                                            <li><a href="{{Route('client.category').'?category='.$children->id}}">{{$children->name}}</a></li>
-                                                                        </ul>
-                                                                    @endforeach
+                                                                    <ul class="">
+                                                                        @foreach($value->children as $children)
 
+                                                                                <li><a href="{{Route('client.category').'?category='.$children->slug}}">{{$children->name}}</a></li>
+
+                                                                        @endforeach
+                                                                    </ul>
                                                                 @endif
                                                             </li>
                                                         @endforeach

@@ -55,7 +55,7 @@ class ProductController extends Controller
 //        }
 //        cách 2
         $this->authorize('create',Product::class);
-        $categories = Category::get();
+        $categories = Category::where('parent_id','<>',0)->get();
         return view('backend.products.create',[
             'categories'=>$categories
         ]);
@@ -89,7 +89,7 @@ class ProductController extends Controller
             }
             $product->content_more = json_encode($arr1, JSON_UNESCAPED_UNICODE);
         }
-        $product->status = $request->get('status');
+        $product->status = -1;
 //        $product->size = $request->get('size');
 //        $product->color = $request->get('color');
 //        $product->import_goods = $request->get('import_goods');
@@ -127,8 +127,8 @@ class ProductController extends Controller
             $warehouse = new Warehouse();
             $warehouse->size = $request->size[$i];
             $warehouse->color = Str::replace('#','',$request->color[$i]);
-            $warehouse->import_goods = $request->import_goods[$i];
-            $warehouse->inventory = $request->import_goods[$i];
+            $warehouse->import_goods = 0;
+            $warehouse->inventory = 0;
             $warehouse->product_id = $product->id;
             $warehouse->save();
         }

@@ -69,16 +69,16 @@ class WarehouseController extends Controller
             $warehouse = new Warehouse();
             $warehouse->size = $request->size[$j];
             $warehouse->color = Str::replace('#','',$request->color[$j]);
-            $warehouse->import_goods = $request->import_goods[$j];
-            $warehouse->inventory = $request->import_goods[$j];
+            $warehouse->import_goods = 0;
+            $warehouse->inventory = 0;
             $warehouse->product_id = $request->product_id;
             $warehouse->save();
         }
         $flag = 1;
         if ($flag){
-            return redirect()->route('backend.warehouse.index')->with('success','Thêm mới thành công !');
+            return back()->with('success','Thêm mới thành công !');
         }else{
-            return redirect()->route('backend.warehouse.index')->with('error','Thêm mới thất bại !');
+            return back()->with('error','Thêm mới thất bại !');
         }
     }
 }

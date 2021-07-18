@@ -12,9 +12,12 @@
                                                                aria-controls="cart" role="tab" data-toggle="tab"><span>01</span>
                                             Shopping
                                             cart</a></li>
-                                    <li role="presentation"><a class="shadow-box" href="#checkout"
-                                                               aria-controls="checkout" role="tab"
-                                                               data-toggle="tab"><span>02</span>Checkout</a></li>
+                                    @if(count($items)!=0)
+                                        <li role="presentation"><a class="shadow-box" href="#checkout"
+                                                                   aria-controls="checkout" role="tab"
+                                                                   data-toggle="tab"><span>02</span>Checkout</a></li>
+                                    @endif
+
                                 </ul>
                             </div>
                         </div>
@@ -90,11 +93,14 @@
                                                                     <p style="width: 35px;height: 35px;background-color: {{'#'.$item->options->color}}"
                                                                        class="d-flex justify-content-center m-auto rounded-circle shadow p-3 mb-5 rounded"></p>
                                                                 </td>
-                                                                <td class="item-price">{{number_format($item->price) .' VNĐ'}}</td>
+                                                                <td class="item-price">{{number_format($item->price) .' $'}}</td>
                                                                 <td class="total-price">
-                                                                    <strong>{{number_format($item->price*$item->qty) .' VNĐ'}}</strong>
+                                                                    <strong>{{number_format($item->price*$item->qty) .' $'}}</strong>
                                                                 </td>
-                                                                <td class="remove-item"><a href="{{ route('frontend.cart.remove', ['id' => $item->rowId]) }}"><i class="fa fa-trash-o"></i></a></td>
+                                                                <td class="remove-item">
+                                                                    <a data-id="{{$item->rowId}}" class="delee"><i class="fa fa-trash-o"></i></a>
+                                                                </td>
+{{--                                                                <td class="remove-item"><a href="{{ route('frontend.cart.remove', ['id' => $item->rowId]) }}"><i class="fa fa-trash-o"></i></a></td>--}}
                                                             </tr>
                                                         @endforeach
                                                     </form>
@@ -132,7 +138,7 @@
                                                             </div>
                                                             <div class="process-cart-total border-top">
                                                                 <p>Total
-                                                                    <span>{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::subtotal())  .' VNĐ'}}</span>
+                                                                    <span>{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('order-product')->subtotal())  .' $'}}</span>
                                                                 </p>
                                                             </div>
                                                             <p class="text-center border-top">The price of the product
@@ -256,7 +262,7 @@
                                                                                                 ×
                                                                                                 <span>{{$item->qty}}</span>
                                                                                             </td>
-                                                                                            <td class="cgt-des"> {{number_format($item->price*$item->qty) .' VNĐ'}}</td>
+                                                                                            <td class="cgt-des"> {{number_format($item->price*$item->qty) .' $'}}</td>
                                                                                         </tr>
                                                                                     @endforeach
 
@@ -269,7 +275,7 @@
                                                                                         <td class="ctg-type crt-total">
                                                                                             Total
                                                                                         </td>
-                                                                                        <td class="cgt-des prc-total">{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::subtotal()) .' VNĐ'}}</td>
+                                                                                        <td class="cgt-des prc-total">{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('order-product')->subtotal()) .' $'}}</td>
                                                                                     </tr>
                                                                                     </tbody>
                                                                                 </table>
@@ -329,28 +335,26 @@
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Delete All !", "You deleted all !", "success");
-                        form.submit().delay("slow").fadeIn();
+                        form.submit();
                     }
                 });
         });
     </script>
+
     <script>
-        $('.remove-confirm').click(function (event) {
-            var form = $(this).closest("form");
-            var name = $(this).data("name");
+        $('.delee').click(function (event) {
+            var id = $(this).attr('data-id');
             event.preventDefault();
             swal({
-                title: `Delete all ?`,
-                text: "If deleted, you will not be able to recover ?",
+                title: `Remove ?`,
+                text: "If removed, you will not be able to recover ?",
                 icon: "warning",
                 buttons: ["No", "Yes"],
                 dangerMode: true,
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal("Delete All !", "You deleted all !", "success");
-                        form.submit().delay("slow").fadeIn();
+                        window.location = "/products/cart/remove/"+id;
                     }
                 });
         });

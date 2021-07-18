@@ -31,7 +31,7 @@ class LoginController extends Controller{
             }
         }else{
             return back()->withErrors([
-                'email'=>'Thông tin user không đúng'
+                'email'=>'User information is incorrect'
             ]);
         }
     }

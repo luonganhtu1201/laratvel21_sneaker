@@ -40,6 +40,7 @@
                                 </div>
                             </form>
                         </div>
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == 3)
                         <div class="card-tools pr-5">
                             <form action="{{Route('backend.user.filter')}}" method="GET">
                                 <div class="input-group input-group-sm" >
@@ -54,6 +55,7 @@
                                 </div>
                             </form>
                         </div>
+                        @endif
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive p-0">

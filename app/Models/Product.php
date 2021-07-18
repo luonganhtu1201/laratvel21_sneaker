@@ -84,7 +84,7 @@ class Product extends Model
             if ($request->get('status') == -2) {
                 $query;
             } else {
-                $query->where('status', $request->status)->orderBy('created_at', 'DESC');
+                $query->where('status', $request->status)->where('status','<>',-1)->orderBy('created_at', 'DESC');
             }
         }
 
@@ -96,7 +96,17 @@ class Product extends Model
             if ($request->get('category') == -1) {
                 $query;
             } else {
-                $query->where('category_id', $request->category)->orderBy('created_at', 'DESC');
+                $category = Category::where('slug',$request->category)->first();
+                $childrens = Category::where('parent_id',$category->id)->get();
+                if (count($childrens)<1){
+                    $query->where([['category_id',$category->id],['status','<>',-1]]);
+                }else{
+                    foreach ($childrens as $children){
+                        $arr[] = $children->id;
+                    }
+                    $query->whereIn('category_id',$arr)->where('status','<>',-1)->orderBy('created_at', 'DESC');
+                }
+//                $query->where('category_id', $request->category)->where('status','<>',-1));
             }
         }
 
@@ -106,11 +116,19 @@ class Product extends Model
     {
         if ($request->has('orderby')){
             if( $request->get('orderby') == 'price_desc' ) {
-                $query->orderBy('sale_price', 'DESC');
+                $query->orderBy('sale_price', 'DESC')->where('status','<>',-1);
             } elseif ($request->get('orderby') == 'price_asc'){
-                $query->orderBy('sale_price', 'ASC');
+                $query->orderBy('sale_price', 'ASC')->where('status','<>',-1);
+            } elseif ($request->get('orderby') == 'name_asc'){
+                $query->orderBy('name', 'ASC')->where('status','<>',-1);
+            } elseif ($request->get('orderby') == 'name_desc'){
+                $query->orderBy('name', 'ASC')->where('status','<>',-1);
+            }  elseif ($request->get('orderby') == 'id_asc'){
+                $query->orderBy('id', 'ASC')->where('status','<>',-1);
+            }  elseif ($request->get('orderby') == 'id_desc'){
+                $query->orderBy('id', 'ASC')->where('status','<>',-1);
             } else{
-                $query->orderBy('id','desc');
+                $query->orderBy('id','desc')->where('status','<>',-1);
             }
         }
 
@@ -120,13 +138,13 @@ class Product extends Model
     {
         if ($request->has('price')){
             if( $request->get('price') == '1' ) {
-                $query->where('sale_price','<', 1000000);
+                $query->where('sale_price','<', 1000000)->where('status','<>',-1);
             } elseif ($request->get('price') == '2'){
-                $query->whereBetween('sale_price',[1000000,1500000]);
+                $query->whereBetween('sale_price',[1000000,1500000])->where('status','<>',-1);
             } elseif ($request->get('price') == '3'){
-                $query->whereBetween('sale_price',[1500000,3500000]);
+                $query->whereBetween('sale_price',[1500000,3500000])->where('status','<>',-1);
             }else{
-                $query->where('sale_price','>',3500000);
+                $query->where('sale_price','>',3500000)->where('status','<>',-1);
             }
         }
 
@@ -140,7 +158,7 @@ class Product extends Model
                 $q->where('size',$size);
             })->get();
         }else{
-            $query->orderBy('id','desc');
+            $query->orderBy('id','desc')->where('status','<>',-1);
         }
         return $query;
     }
@@ -148,7 +166,7 @@ class Product extends Model
     public function scopeSearch($query, $request)
     {
         if ($request->has('key_search')) {
-            $query->where('name', 'LIKE', '%'.$request->key_search.'%')->orderBy('created_at', 'DESC');
+            $query->where('name', 'LIKE', '%'.$request->key_search.'%')->where('status','<>',-1)->orderBy('created_at', 'DESC');
         }
 
         return $query;

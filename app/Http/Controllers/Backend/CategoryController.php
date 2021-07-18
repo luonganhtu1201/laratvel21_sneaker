@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
@@ -144,7 +145,17 @@ class CategoryController extends Controller
     }
     public function showProducts($category_id){
         $category = Category::find($category_id);
-        $products = $category->products;
+        if ($category->parent_id == 0){
+            $childrens = Category::where('parent_id',$category->id)->get();
+//            dd($childrens);
+            foreach ($childrens as $children){
+                $arr[] = $children->id;
+            }
+            $products = Product::whereIn('category_id',$arr)->orderBy('created_at', 'DESC')->get();
+//            dd($products);
+        }else{
+            $products = $category->products;
+        }
         // dd($products);
         return view('backend.categories.cate-products',[
             'cateproducts' => $products

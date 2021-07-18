@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -24,11 +25,15 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::search($request)->orderBy('id','DESC')->where('role','<>',3)->paginate(5);
+        $user = Auth::user();
+        if ($user->role == 3){
+            $users = User::search($request)->orderBy('id','DESC')->where('role','<>',3)->paginate(5);
+        }elseif ($user->role == 1){
+            $users = User::search($request)->orderBy('id','DESC')->where('role','=',0)->paginate(5);
+        }
 
         return view('backend.users.index',[
             'users'=>$users,
-
         ]);
     }
 
@@ -73,7 +78,7 @@ class UserController extends Controller
             $path = Storage::disk($disk_name)->putFileAs('avatar', $file, $name);
             $usinf->avatar = $path;
         }elseif ($request->gender == 0){
-            $usinf->avatar = 'avatar/man.jpg' ;
+            $usinf->avatar = 'avatar/man.jpg';
         }else {
             $usinf->avatar = 'avatar/woman.jpg';
         }
@@ -130,7 +135,6 @@ class UserController extends Controller
         $userinf->phone = $request->phone;
         $userinf->address = $request->address;
         $userinf->gender = $request->gender;
-//        dd($userinf->avatar);
         if ($request->hasFile('avatar')){
             $file = $request->file('avatar');
             $name = $file->getClientOriginalName();
@@ -141,9 +145,6 @@ class UserController extends Controller
             }
             $userinf->avatar = $path;
         };
-
-
-//        dd($request->all());
         $userinf->update();
         $user->update();
         $update = 1;
@@ -151,6 +152,35 @@ class UserController extends Controller
             return redirect()->intended('/admin/users')->with('success','Cập nhật thành công !');
         }else{
             return redirect()->intended('/admin/users')->with('error','Cập nhật thất bại !');
+        }
+    }
+    public function update_Self(UpdateUserRequest $request, $id){
+        $user = User::find($id);
+        $this->authorize('update',User::class);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->role = $request->role;
+        $userinf = $user->userinfo;
+        $userinf->phone = $request->phone;
+        $userinf->address = $request->address;
+        $userinf->gender = $request->gender;
+        if ($request->hasFile('avatar')){
+            $file = $request->file('avatar');
+            $name = $file->getClientOriginalName();
+            $disk_name ='public';
+            $path = Storage::disk($disk_name)->putFileAs('avatar', $file, $name);
+            if ($userinf->avatar != "avatar/man.jpg" && $userinf->avatar != "avatar/woman.jpg") {
+                Storage::disk($disk_name)->delete($userinf->avatar);
+            }
+            $userinf->avatar = $path;
+        };
+        $userinf->update();
+        $user->update();
+        if (Auth::attempt(['email'=>$user->email,'password'=>$request->password])) {
+            $request->session()->regenerate();
+            Alert::success('Thành công','Thông tin của bạn đã được cập nhật !');
+            return redirect()->intended('/admin/users/update-self')->with('success','Cập nhật thành công !');
         }
     }
 
@@ -203,6 +233,14 @@ class UserController extends Controller
         return view('backend.users.index',[
             'users'=>$users,
 
+        ]);
+    }
+    public function updateSelf(){
+        $userRole = Auth::user();
+        $us = User::find($userRole->id)->created_at;
+//        dd($us);
+        return view('backend.users.update_self',[
+            'user'=>$userRole
         ]);
     }
 }

@@ -9,10 +9,13 @@ use App\Http\Controllers\Auth\LogoutController;
 // use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Frontend\RegisterController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\SupplierController;
+use App\Http\Controllers\Backend\CartinputController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\WarehouseController;
 use App\Http\Controllers\Backend\CommentController;
+use App\Http\Controllers\Backend\StatisticalController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\CartController;
 
@@ -36,35 +39,25 @@ Route::group([
     'middleware' => ['auth','check_admin']
 ], function (){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('backend.dashboard');
-    Route::get('/chartjs', [DashboardController::class,'chartjs']);
+//    Route::get('/chartjs', [DashboardController::class,'chartjs']);
+    Route::post('/filter-by-date',[DashboardController::class,'filter_by_date'])->name('backend.filter.by.date');
+    Route::post('/days-order',[DashboardController::class,'days_order'])->name('backend.days.order');
+    Route::post('/select-filter',[DashboardController::class,'select_filter'])->name('backend.select.filter');
     // Quản lý sản phẩm
     Route::group(['prefix' => 'products'], function(){
         //index
         Route::get('/', [ProductController::class, 'index'])->name('backend.product.index');
         //create
-        Route::get('/create', [ProductController::class, 'create'])
-            ->name('backend.product.create')
-        ;
-        Route::post('/create',[ProductController::class,'store'])
-            ->name('backend.product.store')
-        ;
+        Route::get('/create', [ProductController::class, 'create'])->name('backend.product.create');
+        Route::post('/create',[ProductController::class,'store'])->name('backend.product.store');
         //edit
-        Route::get('/edit/{product}',[ProductController::class,'edit'])
-            ->name('backend.product.edit')
-            ->middleware('can:update,product')
-        ;
-        Route::post('/update/{product}',[ProductController::class,'update'])
-            ->name('backend.product.update')
-        ;
+        Route::get('/edit/{product}',[ProductController::class,'edit'])->name('backend.product.edit')->middleware('can:update,product');
+        Route::post('/update/{product}',[ProductController::class,'update'])->name('backend.product.update');
         //destroy
-        Route::get('/delete/{product}',[ProductController::class,'destroy'])
-            ->name('backend.product.destroy')
-        ;
+        Route::get('/delete/{product}',[ProductController::class,'destroy'])->name('backend.product.destroy');
 
         //Filter
-        Route::get('/filter',[ProductController::class,'filter'])
-            ->name('backend.product.filter')
-        ;
+        Route::get('/filter',[ProductController::class,'filter'])->name('backend.product.filter');
 
         //Show images của product
         Route::get('/product/{id}/images',[ProductController::class,'showImages'])->name('backend.product.images');
@@ -75,22 +68,32 @@ Route::group([
     Route::group(['prefix' => 'users'], function(){
         // index
         Route::get('/', [UserController::class, 'index'])->name('backend.user.index');
-
         // crete
         Route::get('/create', [UserController::class, 'create'])->name('backend.user.create');
         Route::post('/create', [UserController::class, 'store'])->name('backend.user.store');
         // edit
-        Route::get('/edit/{id}',[UserController::class,'edit'])
-            ->name('backend.user.edit')
-        ;
+        Route::get('/edit/{id}',[UserController::class,'edit'])->name('backend.user.edit');
         Route::post('/update/{id}',[UserController::class,'update'])->name('backend.user.update');
+        Route::post('/update-self/{id}',[UserController::class,'update_Self'])->name('backend.user.update.self');
         //destroy
         Route::get('/delete/{id}',[UserController::class,'destroy'])->name('backend.user.destroy');
         //user->products đã tạo
         Route::get('/user/{user_id}/products',[UserController::class,'showProducts'])->name('backend.user.products');
-        Route::get('/filter',[UserController::class,'filter'])
-            ->name('backend.user.filter')
-        ;
+        Route::get('/filter',[UserController::class,'filter'])->name('backend.user.filter');
+        Route::get('/update-self',[UserController::class,'updateSelf'])->name('backend.update.self');
+    });
+    Route::group(['prefix' => 'suppliers'], function(){
+        // index
+        Route::get('/', [SupplierController::class, 'index'])->name('backend.supplier.index');
+
+        // crete
+        Route::get('/create', [SupplierController::class, 'create'])->name('backend.supplier.create');
+        Route::post('/create', [SupplierController::class, 'store'])->name('backend.supplier.store');
+        // edit
+        Route::get('/edit/{id}',[SupplierController::class,'edit'])->name('backend.supplier.edit');
+        Route::post('/update/{id}',[SupplierController::class,'update'])->name('backend.supplier.update');
+        //destroy
+        Route::get('/delete/{id}',[SupplierController::class,'destroy'])->name('backend.supplier.destroy');
     });
     //Quản lý danh mục
     Route::group(['prefix' => 'categories'], function(){
@@ -100,10 +103,7 @@ Route::group([
         Route::get('/create', [CategoryController::class, 'create'])->name('backend.category.create');
         Route::post('/create',[CategoryController::class,'store'])->name('backend.category.store');
         //edit
-        Route::get('/edit/{id}',[CategoryController::class,'edit'])
-            ->name('backend.category.edit')
-//            ->middleware('can:update,id')
-        ;
+        Route::get('/edit/{id}',[CategoryController::class,'edit'])->name('backend.category.edit');
         Route::post('/update/{id}',[CategoryController::class,'update'])->name('backend.category.update');
         //destroy
         Route::get('/delete/{id}',[CategoryController::class,'destroy'])->name('backend.category.destroy');
@@ -116,7 +116,7 @@ Route::group([
     //Quản lý order
     Route::group(['prefix'=>'orders'],function(){
         Route::get('/',[OrderController::class,'index'])->name('backend.orders.index');
-        Route::get('/{id}/products',[OrderController::class,'showProducts'])->name('backend.orders.products');
+        Route::get('/bill/{id}',[OrderController::class,'showProducts'])->name('backend.orders.products');
         Route::get('/Cancel-Order/{id}',[OrderController::class,'cancelOrder'])->name('backend.orders.cancel');
         Route::get('/Add-cart/{id}',[OrderController::class,'addCart'])->name('backend.orders.add');
         Route::get('/No-return/{id}',[OrderController::class,'noReturn'])->name('backend.orders.noreturn');
@@ -140,13 +140,29 @@ Route::group([
         Route::get('/create/{id}',[WarehouseController::class,'create'])->name('backend.warehouse.create');
         Route::post('/create',[WarehouseController::class,'store'])->name('backend.warehouse.store');
     });
-    //Nhập hàng :
-    Route::group(['prefix'=>'imports'],function (){
+    //Trạng thái hàng :
+    Route::group(['prefix'=>'imports-status'],function (){
         Route::get('/', [ImportproController::class, 'index'])->name('backend.imports.index');
         Route::get('/filter',[ImportproController::class,'filter'])->name('backend.imports.filter');
         Route::get('/on-sale/{id}',[ImportproController::class,'onSale'])->name('backend.imports.onsale');
         Route::get('/importing/{id}',[ImportproController::class,'importing'])->name('backend.imports.importing');
         Route::get('/stop-selling/{id}',[ImportproController::class,'stopSell'])->name('backend.imports.stopsell');
+    });
+    //Nhập hàng :
+    Route::group(['prefix'=>'import-goods'],function (){
+        Route::get('/',[CartinputController::class,'index'])->name('backend.cartinput.index');
+        Route::post('/supp',[CartinputController::class,'supp'])->name('backend.cart.supp');
+        Route::post('/add-to-ware',[CartinputController::class,'addImports'])->name('backend.add.ware');
+        Route::get('/add-import/{id}',[CartinputController::class,'add'])->name('backend.import.product');
+        Route::get('cart/remove/{id}', [CartinputController::class,'remove'])->name('backend.import.remove');
+        Route::get('/show-imports',[CartinputController::class,'showImport'])->name('backend.show.imports');
+        Route::get('/Add-ware/{id}',[CartinputController::class,'addWare'])->name('backend.import.pro');
+        Route::get('/remove-import/{id}',[CartinputController::class,'removeImport'])->name('backend.ban.import');
+        Route::get('/bill/{id}',[CartinputController::class,'billImport'])->name('backend.bill.import');
+    });
+//    Thống kê :
+    Route::group(['prefix'=>'statistical'],function (){
+        Route::get('/',[StatisticalController::class,'index'])->name('backend.statistical.index');
     });
 });
 
@@ -161,7 +177,13 @@ Route::group([
     Route::get('/collections/filter',[HomeController::class,'filter'])->name('frontend.product.filter');
     Route::post('/comment/{id}',[HomeController::class,'comment'])->name('client.comment');
     Route::get('/cart',[HomeController::class,'cart'])->name('cart.client');
-
+    Route::get('/my-account',[HomeController::class,'profile'])->name('client.profile');
+    Route::get('/forgot-password',[HomeController::class,'forgot_password'])->name('client.forgot.password');
+    Route::get('/change-password',[HomeController::class,'change_passsword'])->name('client.change.password');
+    Route::post('/success-new-passsword',[HomeController::class,'change_pass_success'])->name('client.change.password.success');
+    Route::post('/password-retrieval',[HomeController::class,'password_retrieval'])->name('client.password.retrieval');
+    Route::post('/update-profile/{id}',[HomeController::class,'update'])->name('client.profile.update');
+    Route::post('/update-passwword-profile/{id}',[HomeController::class,'updatePass'])->name('profile.update.pass');
     Route::post('/quickview',[HomeController::class,'quickview'])->name('quickview');
 });
 
@@ -171,8 +193,8 @@ Route::group([
 
 
     //Login
-    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login.form');
-    Route::get('/admin/login', 'Auth\LoginController@showLoginFormAd')->name('login');
+    Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::get('/admin/login', 'Auth\LoginController@showLoginFormAd')->name('login.form');
     Route::post('/login', 'Auth\LoginController@login')->name('login.store');
     Route::post('/admin/login', 'Auth\LoginController@login')->name('login.store.ad');
     Route::get('/admin/logout', 'Auth\LogoutController@logoutAd')->name('logout.ad');

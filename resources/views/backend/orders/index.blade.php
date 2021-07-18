@@ -91,7 +91,7 @@
                                 <td>{{$order->name}}</td>
                                 <td>{{$order->phone}}</td>
                                 <td>{{$order->address}}</td>
-                                <td>{{number_format($order->total).' VNĐ'}}</td>
+                                <td>{{number_format($order->total).' $'}}</td>
                                 <td>
                                     @if(!($order->status == -1 || $order->status == 0 || $order->status == -5))
                                         <a href="{{Route('backend.orders.products',['id'=>$order->id])}}">Hóa đơn</a>

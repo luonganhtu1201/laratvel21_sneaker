@@ -34,6 +34,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+{{--    //datepicker--}}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{--    //morris.char--}}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+
     <style>
         #preview img{
             margin: 10px;
@@ -46,12 +52,24 @@
             background-color: #717171 !important;
             color: white !important;
         }
+        #timedate {
+            font: small-caps lighter 25px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+            text-align:left;
+            /*width: 50%;*/
+            /*margin: 40px auto;*/
+            color:black;
+            padding: 0px;
+            margin-bottom: 5px;
+        }
+        #timedate a {
+            padding-left: 5px;
+        }
     </style>
 
 
     @yield('css')
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" onLoad="initClock()">
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -116,6 +134,12 @@
 <script src="/backend/dist/js/demo.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
+{{--//datepicker--}}
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{{--//morris.char--}}
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
 <script>
     function previewImages() {
 
@@ -149,6 +173,121 @@
     }
 
     document.querySelector('#file-input').addEventListener("change", previewImages);
+</script>
+<script>
+    $(function (){
+        $('#datepicker').datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin: ["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+            duration: "slow",
+        });
+        $('#datepicker2').datepicker({
+            prevText:"Tháng trước",
+            nextText:"Tháng sau",
+            dateFormat:"yy-mm-dd",
+            dayNamesMin: ["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chủ nhật"],
+            duration: "slow",
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function (){
+        chart30daysorder();
+        var char = new Morris.Area({
+            element: 'myfirstchart',
+            lineColors:['#819C79','#fc8710','#FF6541','#A4ADD3','#766856'],
+            pointFillColors:['#FFFFFF'],
+            pointStrokeColors:['black'],
+             fillOpacity:0.6,
+            hideHover:'auto',
+            parseTime:'false',
+            xkey:'period',
+            ykeys:['order','sales','profit','quantity'],
+            behaveLikeLine:true,
+            labels:['Đơn hàng','Doanh số','Lợi nhuận','số lượng']
+        });
+        function chart30daysorder(){
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/admin/days-order')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{_token:_token},
+                success:function(data){
+                    char.setData(data);
+                },
+                // error: function (){
+                //     swal("Cảnh báo!", "Không có dữ liệu !", "error");
+                // }
+            });
+        }
+
+        $('.dashboard-filter').change(function (){
+            var dashboard_value = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{url('/admin/select-filter')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{dashboard_value:dashboard_value,_token:_token},
+                success:function (data){
+                    char.setData(data);
+                },
+                error: function (){
+                    swal("Xin Lỗi !", "Không có dữ liệu cần tìm !", "error");
+                }
+            });
+        });
+
+        $('#btn-dashboard-filter').click(function (){
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            $.ajax({
+                url:"{{url('/admin/filter-by-date')}}",
+                method:"POST",
+                dataType:"JSON",
+                data:{from_date:from_date,to_date:to_date,_token:_token},
+                success:function(data){
+                    char.setData(data);
+                },
+                error: function (){
+                    swal("Xin lỗi !", "Không có dữ liệu cần tìm !", "error");
+                }
+            });
+        });
+    });
+
+</script>
+<script>
+    Number.prototype.pad = function(n) {
+        for (var r = this.toString(); r.length < n; r = 0 + r);
+        return r;
+    };
+
+    function updateClock() {
+        var now = new Date();
+        var milli = now.getMilliseconds(),
+            sec = now.getSeconds(),
+            min = now.getMinutes(),
+            hou = now.getHours(),
+            mo = now.getMonth(),
+            dy = now.getDate(),
+            yr = now.getFullYear();
+        var months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+        var tags = ["mon", "d", "y", "h", "m", "s", "mi"],
+            corr = [months[mo], dy, yr, hou.pad(2), min.pad(2), sec.pad(2), milli];
+        for (var i = 0; i < tags.length; i++)
+            document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
+    }
+
+    function initClock() {
+        updateClock();
+        window.setInterval("updateClock()", 1);
+    }
 </script>
 
 

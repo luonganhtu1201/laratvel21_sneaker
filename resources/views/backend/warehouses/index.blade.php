@@ -58,8 +58,9 @@
                                 <th>Size</th>
                                 <th>Màu sắc</th>
                                 <th>Nhập vào</th>
-                                <th>Bán ra</th>
+                                <th>Đã bán</th>
                                 <th>Tồn kho</th>
+                                <th>Nhập thêm hàng</th>
                                 <th>Chức năng</th>
                             </tr>
                             </thead>
@@ -72,17 +73,29 @@
                                     <td ><p class="text-center"><i class="fa fa-tint" style="color: {{'#'.$ware->color}};text-shadow: 2px 1px gray" aria-hidden="true"></i></p></td>
                                     <td>{{$ware->import_goods}}</td>
                                     <td>{{$ware->sold_goods}}</td>
-                                    <td>{{$ware->import_goods-$ware->sold_goods}}</td>
+                                    <td>{{$ware->inventory}}</td>
                                     <td>
-                                        @can('delete',$ware)
-                                            <a onclick="return confirm('Bạn có muốn xóa ?')" class="btn btn-danger btn-sm" href="{{Route('backend.warehouse.destroy',['id'=>$ware->id])}}"><i class="fas fa-trash"></i></a>
-                                        @endcan
-                                        @can('update',$ware)
-                                            <a class="btn btn-success btn-sm" href="{{Route('backend.warehouse.edit',['id'=>$ware->id])}}"><i class="fas fa-edit"></i></a>
-                                        @endcan
+                                        <form action="{{route('backend.import.product',['id'=>$ware->product_id])}}">
+                                            @csrf
+                                            <input type="number" min="1" value="" class="form-control d-inline-block w-25" name="qty">
+                                            <input type="hidden" value="{{$ware->product->name}}" class="form-control d-inline-block w-25" name="product_name">
+                                            <input type="hidden" value="{{$ware->product->origin_price}}" class="form-control d-inline-block w-25" name="input_price">
+                                            <input type="hidden" value="{{$ware->size}}" class="form-control d-inline-block w-25" name="size">
+                                            <input type="hidden" value="{{$ware->color}}" class="form-control d-inline-block w-25" name="color">
+                                            <button type="submit" class="btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+                                        </form>
+                                    </td>
+                                    <td>
+{{--                                        @can('delete',$ware)--}}
+{{--                                            <a onclick="return confirm('Bạn có muốn xóa ?')" class="btn btn-danger btn-sm" href="{{Route('backend.warehouse.destroy',['id'=>$ware->id])}}"><i class="fas fa-trash"></i></a>--}}
+{{--                                        @endcan--}}
+{{--                                        @can('update',$ware)--}}
+{{--                                            <a class="btn btn-success btn-sm" href="{{Route('backend.warehouse.edit',['id'=>$ware->id])}}"><i class="fas fa-edit"></i></a>--}}
+{{--                                        @endcan--}}
                                         @can('create',\App\Models\Warehouse::class)
                                             <a class="btn btn-primary btn-sm" href="{{route('backend.warehouse.create',['id'=>$ware->product_id])}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                         @endcan
+
                                     </td>
                                 </tr>
                             @endforeach

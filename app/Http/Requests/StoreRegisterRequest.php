@@ -27,7 +27,8 @@ class StoreRegisterRequest extends FormRequest
             'name' => 'required|min:5|max:60',
             'email' => 'email|unique:users',
             'password' => 'required|min:6|max:50',
-            'phone' => 'required|numeric|min:10',
+            'enterpass' => 'required:password|same:password|min:6|max:50',
+            'phone' => 'required|digits_between:10,11|regex:/(0)[0-9]{9}/',
             'address' => 'required',
             'gender' => 'required',
         ];
@@ -35,35 +36,41 @@ class StoreRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => ':attribute không được để trống',
-            'name.min' => ':attribute phải ít nhất 5 ký tự',
-            'name.max' => ':attribute nhiều nhất 60 ký tự',
+            'name.required' => ':attribute cannot be left blank .',
+            'name.min' => ':attribute is too short .',
+            'name.max' => ':attribute is too long .',
 
-            'email.email' => ':attribute sai định dạng (vd : example@abc.com)',
-            'email.unique' => ':attribute đã được đăng kí tài khoản',
+            'email.email' => ':attribute is wrong format (ex : example@abc.com) .',
+            'email.unique' => ':attribute already registered .',
 
-            'password.required' => ':attribute không được để trống',
-            'password.min' => ':attribute quá ngắn',
-            'password.max' => ':attribute chỉ được phép dưới 50 ký tự',
+            'password.required' => ':attribute cannot be left blank .',
+            'password.min' => ':attribute is too short .',
+            'password.max' => ':attribute is too long .',
 
-            'phone.required' => ':attribute không được để trống',
-            'phone.numeric' => ':attribute phải là số',
-            'phone.min' => ':attribute ít nhất 10 ký tự',
+            'enterpass.required' => ':attribute can not be blank .',
+            'enterpass.min' => ':attribute is too short .',
+            'enterpass.max' => ':attribute is too long .',
+            'enterpass.same' => ':attribute incorrect .',
 
-            'address.required' => ':attribute không được để trống',
+            'phone.required' => ':attribute cannot be left blank .',
+            'phone.digits_between' => ':attribute number is wrong format .',
+            'phone.regex' => ':attribute number must start with 0 .',
 
-            'gender.required' => ':attribute chưa được chọn',
+            'address.required' => ':attribute cannot be left blank .',
+
+            'gender.required' => ':attribute has not been selected .',
         ];
     }
     public function attributes()
     {
         return [
-            'name' => 'Tên',
+            'name' => 'Name',
             'email' => 'Email',
-            'password' => 'Mật khẩu',
-            'phone' => 'Số điện thoại',
-            'address' => 'Địa chỉ',
-            'gender' => 'Giới tính',
+            'password' => 'Password',
+            'phone' => 'Phone',
+            'address' => 'Address',
+            'gender' => 'Gender',
+            'enterpass' => 'Confirmed password',
         ];
     }
 }

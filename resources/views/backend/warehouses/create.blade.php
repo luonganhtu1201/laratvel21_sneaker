@@ -93,12 +93,12 @@
                                                     <input type="color" class="form-control" name="color[]" value="{{old('color')[$i]}}">
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <label>Số Lượng</label>
-                                                    <input type="text" class="form-control" name="import_goods[]" value="{{old('import_goods')[$i]}}">
-                                                </div>
-                                            </div>
+{{--                                            <div class="col-3">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label>Số Lượng</label>--}}
+{{--                                                    <input type="text" class="form-control" name="import_goods[]" value="{{old('import_goods')[$i]}}">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <p class="pb-3"></p>
@@ -125,12 +125,12 @@
                                                 <input type="color" class="form-control" name="color[]" value="#ff0000">
                                             </div>
                                         </div>
-                                        <div class="col-3">
-                                            <div class="form-group">
-                                                <label>Số Lượng</label>
-                                                <input type="number" min="1" class="form-control" name="import_goods[]">
-                                            </div>
-                                        </div>
+{{--                                        <div class="col-3">--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <label>Số Lượng</label>--}}
+{{--                                                <input type="number" min="1" class="form-control" name="import_goods[]">--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         <div class="col-3">
                                             <div class="form-group">
                                                 <p class="pb-3"></p>
@@ -170,9 +170,7 @@
                     '<div class="form-group">'+'<label>Color</label>'+
                     '<input type="color" class="form-control" name="color[]" value="#ff0000">'+
                     '</div></div>'+
-                    '<div class="col-3"><div class="form-group">'+'<label>Số lượng</label>'+
-                    '<input type="text" class="form-control" name="import_goods[]">'+
-                    '</div></div>'+'<div class="col-3"><div class="form-group">'+'<p class="pb-3"></p>'+
+                    '<div class="col-3"><div class="form-group">'+'<p class="pb-3"></p>'+
                     '<input class="btn btn-danger closee" id="'+i+'" value="Xóa">'+
                     '</div></div></div>'
                 )

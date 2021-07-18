@@ -8,7 +8,7 @@ class CartProductComposer
 {
     public function compose(view $view)
     {
-        $items = Cart::content();
+        $items = Cart::instance('order-product')->content();
         $view->with([
             'items' => $items
         ]);

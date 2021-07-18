@@ -16,20 +16,20 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function index(){
-        $items = Cart::content();
+        $items = Cart::instance('order-product')->content();
         return view('frontend.client.cart')->with(['items'=>$items]);
     }
     public function add(Request $request,$id){
-        $product =Product::find($id);
+        $product =Product::where('slug',$id)->first();
         $qty = $request->qtybutton;
         if ($request->size && $request->color){
-            Cart::add($product->id,$product->name,$qty,$product->sale_price,0,[
+            Cart::instance('order-product')->add($product->id,$product->name,$qty,$product->sale_price,0,[
                 'image' => $product->images[0]->path,
                 'size' => $request->size,
                 'color' => $request->color
             ]);
         }else{
-            Cart::add($product->id,$product->name,1,$product->sale_price,0,[
+            Cart::instance('order-product')->add($product->id,$product->name,1,$product->sale_price,0,[
                 'image' => $product->images[0]->path,
                 'size' => $product->warehouses[0]->size,
                 'color' => $product->warehouses[0]->color
@@ -45,7 +45,7 @@ class CartController extends Controller
         return redirect()->route('frontend.cart.index');
     }
     public function remove($cart_id){
-        Cart::remove($cart_id);
+        Cart::instance('order-product')->remove($cart_id);
         $remove = 1;
         if ($remove) {
             alert()->success('Remove', 'Remove Successfully');
@@ -55,27 +55,25 @@ class CartController extends Controller
         return back();
     }
     public function destroy(){
-        Cart::destroy();
-        return redirect()->route('frontend.cart.index');
+        Cart::instance('order-product')->destroy();
+        $destroy = 1;
+        if ($destroy) {
+            alert()->success('Delete All', 'Delete Successfully');
+        }else {
+            alert()->error('Delete All', 'Something went wrong!');
+        }
+        return back();
     }
 
     public function update(Request $request){
 //        dd($request->qty);
-        Cart::update($request->rowId,$request->qty);
+        Cart::instance('order-product')->update($request->rowId,$request->qty);
     }
     public function addtoOrder(Request $request){
 
         //cái total này !
-        $items = Cart::content();
-        $total = Cart::subtotal();
-//        foreach ($items as $item){
-//            $check=Warehouse::where('product_id',$item->id)
-//                ->where('size',$item->options->size)
-//                ->where('color',$item->options->color)
-//                ->get();
-//            $check[0]->sold_goods+=$item->qty;
-//            $check[0]->update();
-//        }
+        $items = Cart::instance('order-product')->content();
+        $total = Cart::instance('order-product')->subtotal();
         $data = $request->except('_token');
         $data['user_id'] = Auth::user()->id;
         $data['status'] = 0;
@@ -95,7 +93,7 @@ class CartController extends Controller
                 'updated_at' => Carbon::now(),
             ]);
         }
-        Cart::destroy();
+        Cart::instance('order-product')->destroy();
         $user = Auth::user()->id;
         $order = Order::where('user_id',$user)->orderBy('id','DESC')->get();
         $orderss = 1;

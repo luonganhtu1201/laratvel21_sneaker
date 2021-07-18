@@ -41,31 +41,6 @@
                             <i class="text-red">{{ $message }}</i>
                             @enderror
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <label>Size</label>--}}
-{{--                            <select name="size" class="form-control select2" style="width: 100%;">--}}
-{{--                                @foreach(\App\Models\Product::$size_text as $key => $value)--}}
-{{--                                <option value="{{$key}}">{{$value}}</option>--}}
-{{--                                @endforeach--}}
-{{--                            </select>--}}
-{{--                            @error('size')--}}
-{{--                            <i class="text-red">{{ $message }}</i>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                                <label for="">Color</label>--}}
-{{--                                <input type="text" value="{{old('color')}}" name="color" id="" class="form-control" placeholder="Màu sắc">--}}
-{{--                                @error('color')--}}
-{{--                                <i class="text-red">{{ $message }}</i>--}}
-{{--                                @enderror--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="exampleInputEmail1">Số lượng nhập vào</label>--}}
-{{--                            <input type="text" name="import_goods" value="{{old('import_goods')}}" class="form-control" id="" placeholder="SL nhập vào">--}}
-{{--                            @error('import_goods')--}}
-{{--                            <i class="text-red">{{ $message }}</i>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
                         <div class="form-group">
                             <label>Danh mục sản phẩm</label>
                             <select name="category_id" class="form-control select2" style="width: 100%;">
@@ -152,12 +127,12 @@
                                                     <input type="color" class="form-control" name="color[]" value="{{old('color')[$i]}}">
                                                 </div>
                                             </div>
-                                            <div class="col-3">
-                                                <div class="form-group">
-                                                    <label>Số Lượng</label>
-                                                    <input type="text" class="form-control" name="import_goods[]" value="{{old('import_goods')[$i]}}">
-                                                </div>
-                                            </div>
+{{--                                            <div class="col-3">--}}
+{{--                                                <div class="form-group">--}}
+{{--                                                    <label>Số Lượng</label>--}}
+{{--                                                    <input type="text" class="form-control" name="import_goods[]" value="{{old('import_goods')[$i]}}">--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <p class="pb-3"></p>
@@ -184,12 +159,12 @@
                                         <input type="color" class="form-control" name="color[]" value="#ff0000">
                                     </div>
                                 </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Số Lượng</label>
-                                        <input type="text" class="form-control" name="import_goods[]">
-                                    </div>
-                                </div>
+{{--                                <div class="col-3">--}}
+{{--                                    <div class="form-group">--}}
+{{--                                        <label>Số Lượng</label>--}}
+{{--                                        <input type="text" class="form-control" name="import_goods[]">--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                                 <div class="col-3">
                                     <div class="form-group">
                                         <p class="pb-3"></p>
@@ -215,15 +190,15 @@
                             <i class="text-red">{{ $message }}</i>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label>Trạng thái sản phẩm</label>
-                            <select name="status" class="form-control select2" style="width: 100%;">
-                                <option>--Chọn trạng thái---</option>
-                                @foreach(\App\Models\Product::$status_text as $key => $value)
-                                <option {{old('status',request()->status)==$key?'selected':''}} value="{{$key}}">{{$value}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label>Trạng thái sản phẩm</label>--}}
+{{--                            <select name="status" class="form-control select2" style="width: 100%;">--}}
+{{--                                <option>--Chọn trạng thái---</option>--}}
+{{--                                @foreach(\App\Models\Product::$status_text as $key => $value)--}}
+{{--                                <option {{old('status',request()->status)==$key?'selected':''}} value="{{$key}}">{{$value}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
                     </div>
                     <!-- /.card-body -->
 
@@ -280,9 +255,7 @@
                     '<div class="form-group">'+'<label>Color</label>'+
                     '<input type="color" class="form-control" name="color[]" value="#ff0000">'+
                     '</div></div>'+
-                    '<div class="col-3"><div class="form-group">'+'<label>Số lượng</label>'+
-                    '<input type="text" class="form-control" name="import_goods[]">'+
-                    '</div></div>'+'<div class="col-3"><div class="form-group">'+'<p class="pb-3"></p>'+
+                    '<div class="col-3"><div class="form-group">'+'<p class="pb-3"></p>'+
                     '<input class="btn btn-danger closee" id="'+i+'" value="Xóa">'+
                     '</div></div></div>'
                 )

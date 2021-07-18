@@ -31,15 +31,19 @@
                                                 <form action="{{Route('frontend.product.filter')}}" id="form_order" method="GET">
                                                 <div class="row">
                                                     <select name="category" id="" class="form-control col-3 mr-2">
-                                                        <option value="-1">--Chọn danh mục--</option>
+                                                        <option value="-1">--Select category--</option>
                                                         @foreach($categories as $category)
-                                                            <option {{old('orderby',$category->id) == request()->category?'selected':''}} value="{{$category->id}}">{{$category->name}}</option>
+                                                            <option {{old('category',$category->slug) == request()->category?'selected':''}} value="{{$category->slug}}">{{$category->name}}</option>
                                                         @endforeach
                                                     </select>
                                                     <select name="orderby" class="form-control col-3 mr-2" id="input-sort">
                                                         <option {{old('orderby',request()->orderby)=='default'?'selected':''}} value="" selected>Default</option>
                                                         <option {{old('orderby',request()->orderby)=='price_asc'?'selected':''}} value="price_asc">Prices go up</option>
                                                         <option {{old('orderby',request()->orderby)=='price_desc'?'selected':''}} value="price_desc">Prices go down</option>
+                                                        <option {{old('orderby',request()->orderby)=='name_asc'?'selected':''}} value="name_asc">Name : A - Z</option>
+                                                        <option {{old('orderby',request()->orderby)=='name_desc'?'selected':''}} value="name_desc">Name : Z - A</option>
+                                                        <option {{old('orderby',request()->orderby)=='id_asc'?'selected':''}} value="id_asc">Oldest Product</option>
+                                                        <option {{old('orderby',request()->orderby)=='id_desc'?'selected':''}} value="id_desc">Latest Product</option>
                                                     </select>
                                                     <div class="col-2 d-flex justify-content-center">
                                                         <button type="submit" class="btn btn-light w-100 h-100">Filter</button>
@@ -96,26 +100,26 @@
                                                         </div>
                                                         <div class="single-prodcut-img  product-overlay pos-rltv">
                                                             @if(count($product->images) == 0)
-                                                                <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image"> <img alt src="/frontend/images/no-image.png" class="secondary-image"> </a>
+                                                                <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image"> <img alt src="/frontend/images/no-image.png" class="secondary-image"> </a>
                                                             @elseif(count($product->images) == 1)
-                                                                <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[0]->image_url}}" class="secondary-image"> </a>
+                                                                <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[0]->image_url}}" class="secondary-image"> </a>
                                                             @elseif(count($product->images)>=2)
-                                                                <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[1]->image_url}}" class="secondary-image"> </a>
+                                                                <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[1]->image_url}}" class="secondary-image"> </a>
                                                             @endif
                                                         </div>
                                                         <div class="product-icon socile-icon-tooltip text-center">
                                                             <ul>
-                                                                <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                                                <li><a href="{{ route('frontend.cart.add', ['id' => $product->slug]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
                                                                 <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
                                                     <div class="product-text">
-                                                        <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                        <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="prodcut-ratting-price">
                                                             <div class="prodcut-price">
-                                                                <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,13 +165,13 @@
                                     <ul>
                                 @foreach($menus as $value)
                                             <li class="closed">
-                                                <a href="{{Route('client.category').'?category='.$value->id}}">{{$value->name}}</a>
+                                                <a href="{{Route('client.category').'?category='.$value->slug}}">{{$value->name}}</a>
                                                 @if($value->children)
 
                                                         @foreach($value->children as $children)
                                                         <ul>
                                                             <li>
-                                                                <a href="{{Route('client.category').'?category='.$children->id}}">{{$children->name}}</a>
+                                                                <a href="{{Route('client.category').'?category='.$children->slug}}">{{$children->name}}</a>
 {{--                                                                @if($children->children)--}}
 {{--                                                                    @foreach($children->children as $child)--}}
 {{--                                                                        <ul>--}}
@@ -231,11 +235,11 @@
                                             <div class="product-img col-5">
                                                 <div class="single-prodcut-img  product-overlay pos-rltv">
                                                     @if(count($product->images) == 0)
-                                                        <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image"> <img alt src="/frontend/images/no-image.png" class="secondary-image"> </a>
+                                                        <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image"> <img alt src="/frontend/images/no-image.png" class="secondary-image"> </a>
                                                     @elseif(count($product->images) == 1)
-                                                        <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[0]->image_url}}" class="secondary-image"> </a>
+                                                        <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[0]->image_url}}" class="secondary-image"> </a>
                                                     @elseif(count($product->images)>=2)
-                                                        <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[1]->image_url}}" class="secondary-image"> </a>
+                                                        <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image"> <img alt src="{{$product->images[1]->image_url}}" class="secondary-image"> </a>
                                                     @endif
                                                 </div>
                                             </div>
@@ -244,7 +248,7 @@
                                                 <div class="prodcut-ratting-price">
                                                     <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star-o"></i></a> </div>
                                                     <div class="prodcut-price">
-                                                        <div class="new-price">{{number_format($product->sale_price).' VNĐ'}}</div>
+                                                        <div class="new-price">{{number_format($product->sale_price).' $'}}</div>
                                                     </div>
                                                 </div>
                                             </div>

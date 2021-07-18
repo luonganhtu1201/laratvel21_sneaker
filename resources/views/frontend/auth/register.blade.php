@@ -40,7 +40,8 @@
 									<h1>Welcome To Tun<span style="color: red;">z</span></h1>
 								</div>
 								<div class="fxt-transformY-50 fxt-transition-delay-3">
-									<p>Grursus mal suada faci lisis Lorem ipsum dolarorit more ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm ipsum that dolocons rsus mal suada and fadolorit to the dummy consectetur elit the Lorem Ipsum genera.</p>
+									<p>Welcome to the exclusive sneaker store in the North. Our team is sure to bring you the hottest shoes on the market, constantly updated with unmatched services and offers.
+                                        What are you waiting for without registering to have a great experience...</p>
 								</div>
 							</div>
 							<ul class="fxt-socials">
@@ -62,42 +63,46 @@
 										<label for="f_name" class="input-label">Name</label>
 										<input type="text" value="{{old('name')}}" id="" class="form-control" name="name" placeholder="example name">
                                         @error('name')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
 									<div class="form-group">
 										<label for="email" class="input-label">Email Address</label>
 										<input type="text" value="{{old('email')}}" id="" class="form-control" name="email" placeholder="demo@gmail.com">
                                         @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
                                     <div class="form-group">
 										<label class="input-label">Phone</label>
 										<input type="text" value="{{old('phone')}}" id="" class="form-control" name="phone" placeholder="0123456789">
                                         @error('phone')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
                                     <div class="form-group">
 										<label class="input-label">Address</label>
 										<input type="text" value="{{old('address')}}" id="" class="form-control" name="address" placeholder="Viet Nam">
                                         @error('address')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
                                     <div class="form-group">
-                                        <label>Giới tính</label>
-                                        @foreach(\App\Models\Userinfo::$status_gender as $key => $value)
+                                        <label>Gender</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" value="{{$key}}" type="radio" name="gender">
+                                                <input class="form-check-input" value="0" type="radio" name="gender">
                                                 <label>
-                                                    {{$value}}
+                                                    Male
                                                 </label>
                                             </div>
-                                        @endforeach
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="1" type="radio" name="gender">
+                                                <label>
+                                                    Female
+                                                </label>
+                                            </div>
                                         @error('gender')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <i style="color: red">{{ $message }}</i>
                                         @enderror
                                     </div>
 									<div class="form-group">
@@ -106,13 +111,16 @@
 										<i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
                                     @error('password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <i style="color: red">{{ $message }}</i>
                                     @enderror
 									<div class="form-group">
 										<label for="c_password" class="input-label">Confirm Password</label>
-										<input id="c_password" type="password" class="form-control" name="c_password" placeholder="********">
+										<input id="c_password" type="password" class="form-control" name="enterpass" placeholder="********">
 										<i toggle="#c_password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
+                                    @error('enterpass')
+                                    <i style="color: red">{{ $message }}</i>
+                                    @enderror
 									<div class="form-group">
 										<div class="fxt-checkbox-area">
 											<div class="checkbox">
@@ -127,7 +135,7 @@
 								</form>
 							</div>
 							<div class="text-center">
-								<p>Have an account?<a href="{{Route('login.form')}}" class="switcher-text2 inline-text">Log in</a></p>
+								<p>Have an account?<a href="{{Route('login')}}" class="switcher-text2 inline-text">Log in</a></p>
 							</div>
 						</div>
 					</div>

@@ -46,10 +46,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Thời gian</th>
                                 <th>Danh Mục</th>
                                 <th>Status</th>
-                                <th>Mô tả</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,14 +55,12 @@
                             <tr>
                                 <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->created_at}}</td>
                                 <td>{{$product->category->name}}</td>
                                 <td><span class="tag tag-success">{{$product->status_text}}</span></td>
-                                <td>{{$product->content}}</td>
                             </tr>
                             @endforeach
                             </tbody>
-                            
+
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -79,4 +75,3 @@
 <!-- Script -->
 @section('script')
 @endsection
- 

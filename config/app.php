@@ -178,7 +178,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         App\Providers\CategoryServiceProvider::class,
-        App\Providers\CartServiceProvider::class
+        App\Providers\CartServiceProvider::class,
+        App\Providers\CartipServiceProvider::class,
 
     ],
 

@@ -76,22 +76,6 @@
                                 <div id="product_quickview_id" class="quick-add-to-cart">
                                 </div>
                                 <div id="product_quickview_content"></div>
-                                <div class="social-sharing-modal">
-                                    <div class="widget widget_socialsharing_widget">
-                                        <h3 class="widget-title-modal"><i>Share this product</i></h3>
-                                        <ul class="social-icons-modal">
-                                            <li><a target="_blank" title="Facebook" href="#" class="facebook m-single-icon"><i class="fa fa-facebook"></i></a>
-                                            </li>
-                                            <li><a target="_blank" title="Twitter" href="#" class="twitter m-single-icon"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a target="_blank" title="Pinterest" href="#" class="pinterest m-single-icon"><i class="fa fa-pinterest"></i></a>
-                                            </li>
-                                            <li><a target="_blank" title="Google +" href="#" class="gplus m-single-icon"><i class="fa fa-google-plus"></i></a>
-                                            </li>
-                                            <li><a target="_blank" title="LinkedIn" href="#" class="linkedin m-single-icon"><i class="fa fa-linkedin"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
                             </div>
                             <!-- .product-info -->
                         </div>

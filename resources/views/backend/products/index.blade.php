@@ -91,7 +91,7 @@
                                         <img src="{{$product->images[0]->image_url}}" width="60px">
                                     @endif
                                 </td>
-                                <td>{{ number_format($product->origin_price) . " VNĐ" }}</td>
+                                <td>{{ number_format($product->origin_price) . " $" }}</td>
                                 <td>{{$product->category->name}}</td>
                                 <td>{{$product->user->name}}</td>
 

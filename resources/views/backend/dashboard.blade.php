@@ -44,7 +44,7 @@
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('backend.orders.index')}}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -59,7 +59,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('backend.product.index')}}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -74,7 +74,7 @@
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('backend.user.index')}}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -82,172 +82,226 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65,000,000 </h3>
+                                <h3>{{number_format($revenue)}}</h3>
 
-                                <p>Doanh thu</p>
+                                <p>Doanh số</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="#" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{route('backend.statistical.index')}}" class="small-box-footer">Xem thêm <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
                 </div>
-
-                <div class="row">
-
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Sản phẩm mới nhập</h3>
-
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Thời gian</th>
-                                        <th>Status</th>
-                                        <th>Mô tả</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($products as $product)
-                                    <tr>
-                                        <td>{{$product->id}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->created_at}}</td>
-                                        <td><span class="tag tag-success">{{$product->status}}</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-
-                                    @endforeach
-
-                                    </tbody>
-                                </table>
-                                <div>
-                                    {!! $products->links() !!}
-                                    </div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                </div>
             </div>
         </section>
-        <div class="container">
-            <canvas id="myChart"></canvas>
-        </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-6 col-md-offset-1">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
-                    <div class="panel-body">
-                        <canvas id="canvas" height="280" width="600"></canvas>
+        <div class="w-100 m-auto row">
+            <div class="col-8">
+                <div class="w-100 row">
+                    <h5>Thống kê 30 ngày gần nhất</h5>
+                    <form action="" autocomplete="off">
+                        @csrf
+{{--                        <div class="col-2">--}}
+{{--                            <p>Từ ngày :--}}
+{{--                                <input type="text" class="form-control" id="datepicker">--}}
+{{--                                <input type="button" id="btn-dashboard-filter" class="btn btn-success btn-sm" value="Lọc">--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-2">--}}
+{{--                            <p>Đến ngày :--}}
+{{--                                <input type="text" id="datepicker2" class="form-control">--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
+                    </form>
+
+                    <div class="col-12">
+                        <div id="myfirstchart" style="height: 100%;width: 100%"></div>
                     </div>
                 </div>
             </div>
+            <div class="col-4">
+                <div class="card" style="border-left: 7px solid #ed1f24;">
+                    <div id="timedate">
+                        <a id="mon">January</a>-
+                        <a id="d">1</a>-
+                        <a id="y">0</a><br />
+                        <a id="h">12</a> :
+                        <a id="m">00</a> :
+                        <a id="s">00</a>
+                        <a hidden id="mi">000</a>
+                    </div>
+                </div>
+
+                <div class="card card-body">
+                    <table class="table text-center table-dark table-striped w-100">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Admin Mới</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($admins as $admin)
+                            <tr>
+                                <td>
+                                    <img src="{{url(\Illuminate\Support\Facades\Storage::url($admin->userinfo->avatar))}}" class="img-circle elevation-2" alt="User Image" style="width: 35px;height: 35px;object-fit: cover; ">
+                                </td>
+                                <td>{{$admin->name}}</td>
+                                <td>
+                                    @if($admin->userinfo->gender == 0)
+                                        <i class="fa fa-mars" style="color: #0c84ff" aria-hidden="true"></i>
+                                    @else
+                                        <i class="fa fa-venus" style="color: red" aria-hidden="true"></i>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
         </div>
-    </div>
+        <div class="row w-100 pt-5 pb-5 m-0" >
+            <div class="col-4 p-0" style="background-color: #2c3034">
+                <div class="imgTop w-25 m-auto text-center">
+                    <div class="imgcr w-50 pt-5 m-auto">
+                        <img src="/backend/dist/img/crown4.png" alt="" class="w-100" style="object-fit: cover;">
+                    </div>
+                    <img src="{{url(\Illuminate\Support\Facades\Storage::url($topUser[0]->userinfo->avatar))}}" class="img-circle elevation-2 w-100" alt="User Image" style="object-fit: cover; ">
+                </div>
+                <h2 class="text-center pt-2 text-white">
+                    {{$topUser[0]->name}}<br>
+                    @if($topUser[0]->userinfo->gender == 0)
+                        <i class="fa fa-mars" style="color: #0c84ff" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-venus" style="color: red" aria-hidden="true"></i>
+                    @endif
+                </h2>
+            </div>
+            <div class="col-8 p-0">
+                <table class="table text-center w-100 m-0" >
+
+                    <tr class="text-white thead-dark">
+                        <th colspan="2">Khách hàng nổi bật</th>
+                        <th>Đơn đã order</th>
+                        <th>Tổng mua</th>
+                    </tr>
+
+                    <tbody>
+                    @foreach($topUser as $us)
+                        <tr>
+                            <td>
+                                <img src="{{url(\Illuminate\Support\Facades\Storage::url($us->userinfo->avatar))}}" class="img-circle elevation-2" alt="User Image" style="width: 35px;height: 35px;object-fit: cover; ">
+                            </td>
+                            <td>{{$us->name}}
+                                @if($us->userinfo->gender == 0)
+                                    <i class="fa fa-mars pl-1" style="color: #0c84ff" aria-hidden="true"></i>
+                                @else
+                                    <i class="fa fa-venus pl-1" style="color: red" aria-hidden="true"></i>
+                                @endif
+                            </td>
+                            <td>{{$us->orders->where('status',3)->count('id')}}</td>
+                            <td>{{number_format($us->orders->where('status',3)->sum('total')).' $'}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+        <div class="row w-100 text-center">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <td colspan="3"><h5>Sản phẩm mới nhập</h5></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($products as $product)
+                                <tr>
+                                    <td>
+                                        @if(count($product->images)>0)
+                                            <img class="rounded-circle" src="{{$product->images[0]->image_url}}" width="60px">
+                                        @endif
+                                    </td>
+                                    <td>{{$product->name}}</td>
+                                    @if($product->status == 1)
+                                        <td><span class="badge badge-success">{{$product->status_text}}</span></td>
+                                    @elseif($product->status == 0)
+                                        <td><span class="badge badge-warning">{{$product->status_text}}</span></td>
+                                    @elseif($product->status == -1)
+                                        <td><span class="badge badge-danger">{{$product->status_text}}</span></td>
+                                    @endif
+                                </tr>
+
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                        <div>
+{{--                            {!! $products->links() !!}--}}
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <td colspan="2"><h5>Sản phẩm bán chạy</h5></td>
+                                    <td>Size</td>
+                                    <td>Màu</td>
+                                    <td>Đã bán</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($topSale as $ware)
+                                <tr>
+                                    <td>
+                                        @if(count($ware->product->images)>0)
+                                            <img class="rounded-circle" src="{{$ware->product->images[0]->image_url}}" width="60px">
+                                        @endif
+                                    </td>
+                                    <td>{{$ware->product->name}}</td>
+                                    <td>{{$ware->size}}</td>
+                                    <td ><p class="text-center"><i class="fa fa-tint" style="color: {{'#'.$ware->color}};text-shadow: 2px 1px gray" aria-hidden="true"></i></p></td>
+                                    <td>{{$ware->sold_goods}}</td>
+                                </tr>
+
+                            @endforeach
+
+                            </tbody>
+                        </table>
+                        <div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
 @endsection
 
 <!-- Script -->
 @section('script')
-    <script src="https://raw.githubusercontent.com/nnnick/Chart.js/master/dist/Chart.bundle.js"></script>
     <script>
-        var year = ['2013','2014','2015', '2016'];
-        var data_click = <?php echo $click; ?>;
-        var data_viewer = <?php echo $viewer; ?>;
-
-
-        var barChartData = {
-            labels: year,
-            datasets: [{
-                label: 'Click',
-                backgroundColor: "rgba(220,220,220,0.5)",
-                data: data_click
-            }, {
-                label: 'View',
-                backgroundColor: "rgba(151,187,205,0.5)",
-                data: data_viewer
-            }]
-        };
-
-
-        window.onload = function() {
-            var ctx = document.getElementById("canvas").getContext("2d");
-            window.myBar = new Chart(ctx, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    elements: {
-                        rectangle: {
-                            borderWidth: 2,
-                            borderColor: 'rgb(0, 255, 0)',
-                            borderSkipped: 'bottom'
-                        }
-                    },
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Yearly Website Visitor'
-                    }
-                }
+        $(document).ready(function (){
+            $('#calendar').datetimepicker({
+                format: 'L',
+                inline: true
             });
-
-
-        };
-    </script>
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
         });
+
     </script>
 @endsection

@@ -87,14 +87,14 @@
                                             <div class="brand-text color-lightgrey">
                                                 <h6>Best Sale</h6>
                                                 <h2 class="uppercase montserrat">{{$product->name}}</h2>
-                                                <h3 class="montserrat">{{number_format($product->sale_price).' VNĐ'}}</h3>
+                                                <h3 class="montserrat">{{number_format($product->sale_price).' $'}}</h3>
                                                 <div class="s-price-box">
-                                                    <h4 class="old-price">{{number_format($product->origin_price).' VNĐ'}}</h4>
+                                                    <h4 class="old-price">{{number_format($product->sale_price+$product->sale_price*30/100).' $'}}</h4>
                                                 </div>
                                                 <div class="social-icon-wraper mt-35">
                                                     <div class="social-icon">
                                                         <ul>
-                                                            <li><a href="{{route('productimg.home',['id'=>$product->id])}}" style="width: 150px"><i class="zmdi zmdi-shopping-cart"></i> Shop now </a>
+                                                            <li><a href="{{route('productimg.home',['id'=>$product->slug])}}" style="width: 150px"><i class="zmdi zmdi-shopping-cart"></i> Shop now </a>
                                                             </li>
 {{--                                                            <input type="button"  data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$product->id}}" name="add-to-cart">--}}
 
@@ -155,27 +155,27 @@
                                     </div>
                                     <div class="single-prodcut-img  product-overlay pos-rltv">
                                         @if(count($product->images) == 0)
-                                            <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                            <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
                                         @elseif(count($product->images) == 1)
-                                            <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                            <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
                                         @elseif(count($product->images)>=2)
-                                            <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                            <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
                                         @endif
                                     </div>
                                     <div class="product-icon socile-icon-tooltip text-center">
                                         <ul>
-                                            <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                            <li><a href="{{ route('frontend.cart.add', ['id'=>$product->slug]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
 
                                             <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="product-text">
-                                    <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                    <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a>
                                     </div>
                                     <div class="prodcut-ratting-price">
                                         <div class="prodcut-price">
-                                            <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                            <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -218,13 +218,13 @@
                                         <div class="banner-text text-center">
                                             <h5 class="lato">New Arrival</h5>
                                             <h4 class="montserrat"><b>{{$top1import[0]->name}}</b></h4>
-                                            <h4 class="montserrat">{{number_format($top1import[0]->sale_price).' VNĐ'}}</h4>
+                                            <h4 class="montserrat">{{number_format($top1import[0]->sale_price).' $'}}</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <div class="w-50 m-auto">
-                                        <a class="btn-def  btn2 w-100 m-auto text-center" href="{{Route('productimg.home',['id'=>$top1import[0]->id])}}">SHOP NOW</a>
+                                        <a class="btn-def  btn2 w-100 m-auto text-center" href="{{Route('productimg.home',['id'=>$top1import[0]->slug])}}">SHOP NOW</a>
                                     </div>
                                 </div>
                             </div>
@@ -284,27 +284,27 @@
                                                             </div>
                                                             <div class="single-prodcut-img  product-overlay pos-rltv">
                                                                 @if(count($product->images) == 0)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
                                                                 @elseif(count($product->images) == 1)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
                                                                 @elseif(count($product->images)>=2)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
                                                                 @endif
                                                             </div>
                                                             <div class="product-icon socile-icon-tooltip text-center">
                                                                 <ul>
-                                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                                                    <li><a href="{{ route('frontend.cart.add', ['id'=>$product->slug]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
 
                                                                     <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                         <div class="product-text">
-                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="prodcut-ratting-price">
                                                                 <div class="prodcut-price">
-                                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -339,27 +339,27 @@
                                                             </div>
                                                             <div class="single-prodcut-img  product-overlay pos-rltv">
                                                                 @if(count($product->images) == 0)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
                                                                 @elseif(count($product->images) == 1)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
                                                                 @elseif(count($product->images)>=2)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
                                                                 @endif
                                                             </div>
                                                             <div class="product-icon socile-icon-tooltip text-center">
                                                                 <ul>
-                                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                                                    <li><a href="{{ route('frontend.cart.add', ['id'=>$product->slug]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
 
                                                                     <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                         <div class="product-text">
-                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="prodcut-ratting-price">
                                                                 <div class="prodcut-price">
-                                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -395,27 +395,27 @@
                                                             </div>
                                                             <div class="single-prodcut-img  product-overlay pos-rltv">
                                                                 @if(count($product->images) == 0)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
                                                                 @elseif(count($product->images) == 1)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
                                                                 @elseif(count($product->images)>=2)
-                                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
                                                                 @endif
                                                             </div>
                                                             <div class="product-icon socile-icon-tooltip text-center">
                                                                 <ul>
-                                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                                                    <li><a href="{{ route('frontend.cart.add', ['id'=>$product->slug]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
 
                                                                     <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                         <div class="product-text">
-                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="prodcut-ratting-price">
                                                                 <div class="prodcut-price">
-                                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -439,9 +439,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <div class="heading-title color-lightgrey text-center">
-                            <img src="/frontend/register/images/logo-14.png" alt="">
-                            <h2>-----Tun<span style="color: red">z</span>-----</h2>
+                        <div class="heading-title color-lightgrey text-center w-50">
+                            <img src="/frontend/register/images/logo-14.png" style="width: 100%" alt="">
                         </div>
                     </div>
                 </div>
@@ -487,27 +486,27 @@
                                             </div>
                                             <div class="single-prodcut-img  product-overlay pos-rltv">
                                                 @if(count($product->images) == 0)
-                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
+                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="/frontend/images/no-image.png" class="primary-image" > <img alt src="/frontend/images/no-image.png" class="secondary-image" > </a>
                                                 @elseif(count($product->images) == 1)
-                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
+                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[0]->image_url}}" class="secondary-image" > </a>
                                                 @elseif(count($product->images)>=2)
-                                                    <a href="{{Route('productimg.home',['id'=>$product->id])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
+                                                    <a href="{{Route('productimg.home',['id'=>$product->slug])}}"> <img alt src="{{$product->images[0]->image_url}}" class="primary-image" > <img alt src="{{$product->images[1]->image_url}}" class="secondary-image" > </a>
                                                 @endif
                                             </div>
                                             <div class="product-icon socile-icon-tooltip text-center">
                                                 <ul>
-                                                    <li><a href="{{ route('frontend.cart.add', ['id' => $product->id]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
+                                                    <li><a href="{{ route('frontend.cart.add', ['id'=>$product->slug]) }}" data-tooltip="Add To Cart" class="add-cart" data-placement="left"><i class="fa fa-cart-plus"></i></a></li>
 
                                                     <li><a href="#" data-toggle="modal" data-target="#xemnhanh" class="q-view xemnhanh" data-id_product="{{$product->id}}"><i class="zmdi zmdi-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="product-text">
-                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->id])}}">{{$product->name}}</a>
+                                            <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a>
                                             </div>
                                             <div class="prodcut-ratting-price">
                                                 <div class="prodcut-price">
-                                                    <div class="new-price">{{ number_format($product->sale_price).'VNĐ' }}</div>
+                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
                                                 </div>
                                             </div>
                                         </div>

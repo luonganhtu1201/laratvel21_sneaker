@@ -27,7 +27,7 @@ class UpdateUserRequest extends FormRequest
             'name' => 'required|min:5|max:60',
             'email' => 'email',
             'password' => 'required|min:6|max:50',
-            'phone' => 'required|numeric|min:10',
+            'phone' => 'required|digits_between:10,11|regex:/(0)[0-9]{9}/',
             'address' => 'required',
             'avatar' => 'file|mimes:jpeg,png,jpg,gif,svg|max:50000',
             'gender' => 'required',
@@ -47,8 +47,8 @@ class UpdateUserRequest extends FormRequest
             'password.max' => ':attribute chỉ được phép dưới 50 ký tự',
 
             'phone.required' => ':attribute không được để trống',
-            'phone.numeric' => ':attribute phải là số',
-            'phone.min' => ':attribute ít nhất 10 ký tự',
+            'phone.digits_between' => ':attribute ít nhất từ 10 kí tự đến nhiều nhất 11 kí tự',
+            'phone.regex' => ':attribute phải bắt đầu bằng số 0',
 
             'address.required' => ':attribute không được để trống',
 

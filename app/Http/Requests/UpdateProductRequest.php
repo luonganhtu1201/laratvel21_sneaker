@@ -25,8 +25,8 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name'         => 'required|min:10|max:255',
-            'origin_price' => 'required|numeric|digits_between:1,9|gte:sale_price',
-            'sale_price'   => 'required|numeric|digits_between:1,9',
+            'origin_price' => 'required|numeric|digits_between:1,9',
+            'sale_price'   => 'required|numeric|digits_between:1,9|gte:origin_price',
             'color.*' => 'required',
             'import_goods.*' => 'required|numeric|digits_between:1,4',
             'content' => 'required',
@@ -44,7 +44,7 @@ class UpdateProductRequest extends FormRequest
             'origin_price.required' => ':attribute không được để trống',
             'origin_price.numeric' => ':attribute phải là số ',
             'origin_price.digits_between' => ':attribute cao nhất là dưới 1 tỷ',
-            'origin_price.gte'=>':attribute phải lớn hơn hoặc bằng Giá bán',
+            'sale_price.gte'=>':attribute phải lớn hơn hoặc bằng Giá nhập',
 
             'sale_price.required' => ':attribute này không được để trống',
             'sale_price.numeric' => ':attribute phải là số ',
