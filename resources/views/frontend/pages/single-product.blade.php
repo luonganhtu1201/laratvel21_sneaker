@@ -21,10 +21,10 @@
 <div class="breadcumb-area overlay pos-rltv">
             <div class="bread-main">
                 <div class="bred-hading text-center">
-                    <h5>Prodcut Details</h5> </div>
+                    <h5>Chi Tiết Sản Phẩm</h5> </div>
                 <ol class="breadcrumb">
-                    <li class="home"><a title="Go to Home Page" href="{{route('client.home')}}">Home</a></li>
-                    <li class="active">product-details</li>
+                    <li class="home"><a title="Go to Home Page" href="{{route('client.home')}}">Trang chủ</a></li>
+                    <li class="active">Chi tiết sản phẩm</li>
                 </ol>
             </div>
         </div>
@@ -96,8 +96,8 @@
                                         <a href="#" tabindex="0"><i class="fa fa-star-o"></i></a>
                                     </div>
                                     <div class="prodcut-price">
-                                        <div class="new-price">{{number_format($infoProduct->sale_price). ' $'}}</div>
-                                        <div class="old-price"> <del>{{number_format($infoProduct->sale_price+$infoProduct->sale_price*40/100). ' $'}}</del> </div>
+                                        <div class="new-price">{{number_format($infoProduct->sale_price). ' VNĐ'}}</div>
+                                        <div class="old-price"> <del>{{number_format($infoProduct->sale_price+$infoProduct->sale_price*40/100). ' VNĐ'}}</del> </div>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                             @if(count($color)==1&&$color[0]=='')
                                                 <li><b>Hiện tại mẫu giày chưa có size {{request()->size}}</b></li>
                                             @else
-                                                <label class="mb-30">Color: </label><br>
+                                                <label class="mb-30">Màu : </label><br>
                                                 @foreach($color as $colo)
                                                     <li><a href="{{request()->fullUrlWithQuery(['color'=>$colo])}}" style="background-color: {{'#'.$colo}};{{request()->color==$colo?"box-shadow:5px 5px 5px 1px #9c9c9c":''}}"></a></li>
                                                 @endforeach
@@ -132,7 +132,7 @@
                                 @endif
                             </div>
                             <div class="quantity-area">
-                                <label>Qty :</label>
+                                <label>Số lượng : </label>
                                 <div class="cart-quantity">
                                     <form action="{{ route('frontend.cart.add', ['id' => $infoProduct->slug]) }}" method="GET" id="myform">
                                         <div class="product-qty">
@@ -150,10 +150,10 @@
 
                                                 @if(request()->size && request()->color)
 
-                                                    <button type="submit" class="mt-3 btn btn-secondary w-100 h-50 bthv rounded"><h6 class="m-3"><i class="fa fa-cart-plus pr-1"></i> | Add to Cart</h6></button>
+                                                    <button type="submit" class="mt-3 btn btn-secondary w-100 h-50 bthv rounded"><h6 class="m-3"><i class="fa fa-cart-plus pr-1"></i> | Thêm vào giỏ</h6></button>
 
                                                 @else
-                                                    <button onclick="return false;" class="mt-3 btn btn-secondary w-100 h-50 rounded disabled"><h6 class="m-3"><i class="fa fa-cart-plus pr-1"></i> | Add to Cart</h6></button>
+                                                    <button onclick="return false;" class="mt-3 btn btn-secondary w-100 h-50 rounded disabled"><h6 class="m-3"><i class="fa fa-cart-plus pr-1"></i> | Thêm vào giỏ</h6></button>
                                                 @endif
                                         </div>
                                     </form>
@@ -162,10 +162,10 @@
                                 <div>
                                     @if($infoProduct->status == 0)
                                         <div class="alert alert-success" role="alert">
-                                            <h4 class="alert-heading">Sorry ! </h4>
-                                            <p>{{$infoProduct->name}} temporarily out of stock</p>
+                                            <h4 class="alert-heading">Xin lỗi ! </h4>
+                                            <p>{{$infoProduct->name}} hiện tại đang hết hàng</p>
                                             <hr class="m-0">
-                                            <p class="mb-0 mt-3">But you can still add them to your cart..... we will confirm when new stock arrives.</p>
+                                            <p class="mb-0 mt-3">Nhưng bạn vẫn có thể thêm chúng vào giỏ hàng của mình ... chúng tôi sẽ xác nhận khi hàng mới về.</p>
                                         </div>
                                     @endif
                                 </div>
@@ -186,9 +186,9 @@
                             <div class="title-tab-product-category row">
                                 <div class="col-lg-12 text-center">
                                     <ul class="nav mb-40 heading-style-2" role="tablist">
-                                        <li role="presentation"><a href="#newarrival" aria-controls="newarrival" role="tab" data-toggle="tab">Description</a></li>
-                                        <li role="presentation"><a class="active" href="#bestsellr" aria-controls="bestsellr" role="tab" data-toggle="tab">Comments</a></li>
-                                        <li role="presentation"><a href="#specialoffer" aria-controls="specialoffer" role="tab" data-toggle="tab">Size guide</a></li>
+                                        <li role="presentation"><a href="#newarrival" aria-controls="newarrival" role="tab" data-toggle="tab">Mô tả</a></li>
+                                        <li role="presentation"><a class="active" href="#bestsellr" aria-controls="bestsellr" role="tab" data-toggle="tab">Bình luận</a></li>
+                                        <li role="presentation"><a href="#specialoffer" aria-controls="specialoffer" role="tab" data-toggle="tab">Cách chọn size</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -198,11 +198,11 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content">
                                     <div role="tabpanel" class="tab-pane fix fade in w-75 m-auto" id="newarrival">
-                                        <div class="review-wraper" style="font-family: 'Encode Sans SC', sans-serif !important;">
+                                        <div class="review-wraper font-roboto">
                                             <b>{!! $infoProduct->content !!}</b>
                                             @if($infoProduct->content_morez)
                                                 <div class="pt-3">
-                                                    <h3>Information</h3>
+                                                    <h3>Thông tin</h3>
                                                     <ul>
                                                         @foreach($infoProduct->content_morez as $key => $value)
                                                             <li><i class="fa fa-caret-right pr-3" aria-hidden="true"></i>{{$value}}</li>
@@ -247,7 +247,7 @@
                                                         <input type="text" name="product_id" value="{{$infoProduct->id}}" hidden>
                                                     </div>
                                                     <div class="col-3">
-                                                        <button type="submit" class="btn btn-secondary w-100 h-100 rounded-right">Comment</button>
+                                                        <button type="submit" class="btn btn-secondary w-100 h-100 rounded-right">Gửi</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -257,8 +257,8 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                                    <strong>Please note!</strong> <br>
-                                                    Each shoe model and each shoe brand will have its own measurement, so there will be errors. The sizing guide and size chart below are just to help customers find their approximate size. We encourage customers to come directly to the store to try on to choose the most accurate size.
+                                                    <strong>Lưu ý !</strong> <br>
+                                                    Mỗi mẫu giày và mỗi thương hiệu giày sẽ có số đo riêng nên sẽ có sai số. Hướng dẫn định cỡ và biểu đồ kích thước bên dưới chỉ để giúp khách hàng tìm thấy kích thước gần đúng của họ. Chúng tôi khuyến khích khách hàng đến trực tiếp cửa hàng để mặc thử để chọn size chính xác nhất.
                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -272,8 +272,8 @@
                                                                 <img src="/frontend/register/images/tim-size-giay1.jpg" class="w-100" alt="">
                                                             </div>
                                                             <div class="col-6">
-                                                                <h4><b>Step 1:</b></h4>
-                                                                <p>Place a sheet of paper on the floor with one end touching the edge of the wall. Stand on the paper so that your heels just touch the edge of the wall.</p>
+                                                                <h4><b>Bước 1:</b></h4>
+                                                                <p>Đặt một tờ giấy trên sàn với một đầu chạm vào mép tường. Đứng trên tờ giấy sao cho gót chân của bạn vừa chạm vào mép tường.</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -283,8 +283,8 @@
                                                                 <img src="/frontend/register/images/tim-size-giay2.jpg" class="w-100" alt="">
                                                             </div>
                                                             <div class="col-6">
-                                                                <h4><b>Step 2:</b></h4>
-                                                                <p>Mark the longest point of the toe. If your feet are uneven (long side, short side), measure the longer foot. Tip: It's easier if you don't and have someone else check it out.</p>
+                                                                <h4><b>Bước 2:</b></h4>
+                                                                <p>Đánh dấu điểm dài nhất của ngón chân. Nếu bàn chân của bạn không đều nhau (bên dài, bên ngắn), hãy đo bàn chân dài hơn. Mẹo: Sẽ dễ dàng hơn nếu bạn không có và nhờ người khác kiểm tra.</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -294,8 +294,8 @@
                                                                 <img src="/frontend/register/images/tim-size-giay3.jpg" class="w-100" alt="">
                                                             </div>
                                                             <div class="col-6">
-                                                                <h4><b>Step 3:</b></h4>
-                                                                <p>Use a ruler to measure the distance from your heel to the longest point of your toe. Use the size conversion table below to convert centimeters to your shoe size.</p>
+                                                                <h4><b>Bước 3:</b></h4>
+                                                                <p>Dùng thước để đo khoảng cách từ gót chân đến điểm dài nhất của ngón chân. Sử dụng bảng chuyển đổi kích thước bên dưới để chuyển đổi cm sang kích thước giày của bạn.</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -305,9 +305,9 @@
                                                                 <table class="table table-striped">
                                                                     <tr>
                                                                         <td>EU</td>
-                                                                        <td>US men</td>
-                                                                        <td>US women</td>
-                                                                        <td>Foot length</td>
+                                                                        <td>US nam</td>
+                                                                        <td>US nữ</td>
+                                                                        <td>Chiều dài chân</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td>36</td>
@@ -366,13 +366,13 @@
                                                                 </table>
                                                             </div>
                                                             <div class="col-6">
-                                                                <h4><b>Tips to find the most accurate shoe size</b></h4>
-                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>It is best to measure your shoe size at the end of the day because your feet are at their maximum expansion at this time.</p>
-                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>You should measure both feet, if there is an error between your feet, choose shoes that are the same size as your larger foot.</p>
-                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>If you are someone who likes to wear shoes that are a bit wide for comfort. Please add 1cm – 1.5cm when measuring foot length.</p>
-                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>If your feet are fat, thick and wide, then choose the size according to the instructions above plus 1 to 1.5 sizes.</p>
-                                                                <i><b style="color: red">Please note :</b>That the shoe size conversion chart above is an approximate estimate based on ideal sizes, with each brand having its own sizing. As a result, your size may vary by brand (for example, your Nike shoe size is 40, but your adidas shoe size may be 40.5 or 39). SaigonSneaker does not claim that this shoe size chart is 100% accurate for all shoe brands. The purpose of this size chart is to help you have information for reference and consider the relative size for yourself. You can be tighter or wider when you use this size chart to choose your size when buying shoes. If you feel unsure which size you should choose when ordering, don't hesitate to contact our staff directly.</i>
-                                                                <p><b style="color: red">*The size used on our website is EU size</b></p>
+                                                                <h4><b>Mẹo tìm size giày chính xác nhất</b></h4>
+                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>Tốt nhất nên đo cỡ giày của bạn vào cuối ngày vì lúc này chân của bạn đã được thư dãn.</p>
+                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>Bạn nên đo cả hai bàn chân, nếu có sai số giữa hai bàn chân, hãy chọn những đôi giày có kích thước vừa với bàn chân lớn hơn của bạn.</p>
+                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>Nếu bạn là người thích đi những đôi giày hơi rộng một chút cho thoải mái. Vui lòng cộng thêm 1cm - 1.5 cm khi đo chiều dài bàn chân.</p>
+                                                                <p><i class="fa fa-circle-o pr-2" aria-hidden="true"></i>Nếu chân bạn mập, dày và rộng thì chọn size theo hướng dẫn ở trên cộng thêm 1 đến 1,5 size.</p>
+                                                                <p><b style="color: red">Hãy lưu ý rằng : </b>Bảng chuyển đổi kích thước giày ở trên là ước tính gần đúng dựa trên kích thước lý tưởng, với mỗi thương hiệu có kích thước riêng. Do đó, kích cỡ của bạn có thể thay đổi theo thương hiệu (ví dụ: cỡ giày Nike của bạn là 40, nhưng cỡ giày adidas của bạn có thể là 40,5 hoặc 39). TunzSneaker không tuyên bố rằng bảng kích thước giày này là chính xác 100% cho tất cả các thương hiệu giày. Mục đích của bảng kích thước này là giúp bạn có thông tin để tham khảo và cân nhắc kích thước tương đối cho mình. Bạn có thể chật hơn hoặc rộng hơn khi sử dụng bảng kích thước này để chọn kích cỡ của mình khi mua giày. Nếu bạn cảm thấy không biết mình nên chọn size nào khi đặt hàng, đừng ngần ngại liên hệ trực tiếp với nhân viên của chúng tôi.</p>
+                                                                <p><b style="color: red">* Kích thước được sử dụng trên trang web của chúng tôi là kích thước EU</b></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -396,7 +396,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                            <h5 class="uppercase">Related Product</h5>
+                            <h5 class="uppercase">Có thể bạn quan tâm</h5>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -413,15 +413,15 @@
 
                                                 @if($product->status == 1)
                                                     <div class="new" style="background-color: red;color: white">
-                                                        On Sale
+                                                        Giảm giá
                                                     </div>
                                                 @elseif($product->status == 0)
                                                     <div class="new" style="background-color: yellow;color: black">
-                                                        Out of
+                                                        Tạm hết hàng
                                                     </div>
                                                 @else
                                                     <div class="new" style="background-color: grey;color: white">
-                                                        Stop selling
+                                                        Tạm dừng bán
                                                     </div>
                                                 @endif
 
@@ -448,7 +448,7 @@
                                             </div>
                                             <div class="prodcut-ratting-price">
                                                 <div class="prodcut-price">
-                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                                    <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                                 </div>
                                             </div>
                                         </div>

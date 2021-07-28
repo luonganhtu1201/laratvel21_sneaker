@@ -5,7 +5,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Tunz Sneaker | Register</title>
+	<title>Tunz Sneaker | Đăng kí</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Favicon -->
@@ -37,11 +37,11 @@
 									<a href="/frontend/register/images/login-14.html" class="fxt-logo"><img src="/frontend/register/images/logo-14.png" alt="Logo"></a>
 								</div>
 								<div class="fxt-transformY-50 fxt-transition-delay-2">
-									<h1>Welcome To Tun<span style="color: red;">z</span></h1>
+									<h1>Tun<span style="color: red;">z </span>Sneaker</h1>
 								</div>
 								<div class="fxt-transformY-50 fxt-transition-delay-3">
-									<p>Welcome to the exclusive sneaker store in the North. Our team is sure to bring you the hottest shoes on the market, constantly updated with unmatched services and offers.
-                                        What are you waiting for without registering to have a great experience...</p>
+									<p>Chào mừng bạn đến với cửa hàng giày sneaker độc quyền tại Miền Bắc. Đội ngũ của chúng tôi chắc chắn sẽ mang đến cho bạn những đôi giày hot nhất trên thị trường, được cập nhật liên tục với những dịch vụ và ưu đãi chưa từng có.
+                                        Còn chờ gì nữa mà không đăng ký để có những trải nghiệm tuyệt vời ...</p>
 								</div>
 							</div>
 							<ul class="fxt-socials">
@@ -55,50 +55,50 @@
 					</div>
 					<div class="col-md-6 col-12 order-md-1 fxt-bg-color">
 						<div class="fxt-content">
-							<h2>Register</h2>
+							<h2>Đăng Kí</h2>
 							<div class="fxt-form">
 								<form action="{{ Route('user.register.store') }}" method="POST">
                                 @csrf
 									<div class="form-group">
-										<label for="f_name" class="input-label">Name</label>
+										<label for="f_name" class="input-label">Tên</label>
 										<input type="text" value="{{old('name')}}" id="" class="form-control" name="name" placeholder="example name">
                                         @error('name')
                                         <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
 									<div class="form-group">
-										<label for="email" class="input-label">Email Address</label>
+										<label for="email" class="input-label">Email</label>
 										<input type="text" value="{{old('email')}}" id="" class="form-control" name="email" placeholder="demo@gmail.com">
                                         @error('email')
                                         <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
                                     <div class="form-group">
-										<label class="input-label">Phone</label>
+										<label class="input-label">Số điện thoại</label>
 										<input type="text" value="{{old('phone')}}" id="" class="form-control" name="phone" placeholder="0123456789">
                                         @error('phone')
                                         <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
                                     <div class="form-group">
-										<label class="input-label">Address</label>
+										<label class="input-label">Địa chỉ</label>
 										<input type="text" value="{{old('address')}}" id="" class="form-control" name="address" placeholder="Viet Nam">
                                         @error('address')
                                         <i style="color: red">{{ $message }}</i>
                                         @enderror
 									</div>
                                     <div class="form-group">
-                                        <label>Gender</label>
+                                        <label>Giới tính</label>
                                             <div class="form-check">
                                                 <input class="form-check-input" value="0" type="radio" name="gender">
                                                 <label>
-                                                    Male
+                                                    Nam
                                                 </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" value="1" type="radio" name="gender">
                                                 <label>
-                                                    Female
+                                                    Nữ
                                                 </label>
                                             </div>
                                         @error('gender')
@@ -106,7 +106,7 @@
                                         @enderror
                                     </div>
 									<div class="form-group">
-										<label for="password" class="input-label">Password</label>
+										<label for="password" class="input-label">Mật khẩu</label>
 										<input id="password" value="{{old('password')}}" type="password" class="form-control" name="password" placeholder="********">
 										<i toggle="#password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
@@ -114,7 +114,7 @@
                                     <i style="color: red">{{ $message }}</i>
                                     @enderror
 									<div class="form-group">
-										<label for="c_password" class="input-label">Confirm Password</label>
+										<label for="c_password" class="input-label">Xác nhận lại mật khẩu</label>
 										<input id="c_password" type="password" class="form-control" name="enterpass" placeholder="********">
 										<i toggle="#c_password" class="fa fa-fw fa-eye toggle-password field-icon"></i>
 									</div>
@@ -125,17 +125,17 @@
 										<div class="fxt-checkbox-area">
 											<div class="checkbox">
 												<input checked id="checkbox1" type="checkbox" required="required">
-												<label for="checkbox1">I agree with the terms and condition</label>
+												<label for="checkbox1">Tôi đồng ý với các điều khoản và điều kiện</label>
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<button type="submit" class="fxt-btn-fill">Register</button>
+										<button type="submit" class="fxt-btn-fill">Đăng kí</button>
 									</div>
 								</form>
 							</div>
 							<div class="text-center">
-								<p>Have an account?<a href="{{Route('login')}}" class="switcher-text2 inline-text">Log in</a></p>
+								<p>Bạn đã có tài khoản ?<a href="{{Route('login')}}" class="switcher-text2 inline-text">Đăng nhập ngay !</a></p>
 							</div>
 						</div>
 					</div>

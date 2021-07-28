@@ -7,7 +7,7 @@
                         <tr>
                             <td style="padding:36px 48px;display:block">
                                 <h1 style="font-size:30px;font-weight:300;line-height:150%;margin:0;text-align:center;color:#ffffff;background-color:inherit">
-                                    Change password Tun<span style="color: red">z</span> Sneaker
+                                    Thay đổi mật khẩu Tun<span style="color: red">z</span> Sneaker
                                 </h1>
                             </td>
                         </tr>
@@ -25,13 +25,13 @@
                                     <tr>
                                         <td valign="top" style="padding:48px 48px 32px">
                                             <div style="color:#636363;font-size:14px;line-height:150%;text-align:left">
-                                                <p style="margin:0 0 16px">Hello <strong>{{$details['name']}}</strong> ,</p>
+                                                <p style="margin:0 0 16px">Xin chào <strong>{{$details['name']}}</strong> ,</p>
                                                 <p style="margin:0 0 16px">
-                                                    You have recently requested a password reset at Tun<span style="color:red;">z</span> 's system. Here is a <a target="_blank" href="{{'http://tunzsneaker.com:8080/change-password?_token='.$details['token'].'&email='.$details['email']}}">link</a>
-                                                    where you can change your password.
+                                                    Bạn đã yêu cầu thay đổi mật khẩu tại hệ thống cửa hàng Tun<span style="color:red;">z</span>. Đây là một đường <a target="_blank" href="{{'http://tunzsneaker.com:8080/change-password?_token='.$details['token'].'&email='.$details['email']}}">link</a>
+                                                    nơi mà bạn có thể thay đổi mật khẩu của mình .
                                                 </p>
                                                 <p style="margin:0 0 16px">
-                                                    <strong>Note : </strong> Do not provide links to any organization or individual. That will affect your personal interests.
+                                                    <strong>Lưu ý : </strong> Không cung cấp đường link trên cho bất kì cá nhân hay tổ chức nào . Điều đó có thể ảnh hưởng đến quyền lợi cá nhân của bạn !
                                                 </p>
                                                 <p style="margin:0 0 16px">We look forward to seeing you soon. Thanks you !</p>
                                             </div>

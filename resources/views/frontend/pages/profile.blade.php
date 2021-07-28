@@ -64,9 +64,9 @@
                                         <div class="row">
                                             <div class="col-0 col-lg-3 col-md-3 col-sm-3"></div>
                                             <div class="col-3 pr-0 pl-2 col-lg-3 col-md-3 col-sm-3">
-                                                <p><b>Phone</b></p>
+                                                <p><b>Số điện thoại</b></p>
                                                 <p><b>Email</b></p>
-                                                <p><b>Address</b></p>
+                                                <p><b>Địa Chỉ</b></p>
                                             </div>
                                             <div class="col-9 col-lg-5 col-md-5 col-sm-5 p-0">
                                                 <p>: {{\Illuminate\Support\Facades\Auth::user()->userinfo->phone}}</p>
@@ -84,7 +84,7 @@
                                     <div class="card-header abc" id="headingOne">
                                         <h5 class="mb-0">
                                             <div class="btn w-100" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                <p><b>Update Profile</b></p>
+                                                <p><b>Cập nhật thông tin</b></p>
                                             </div>
                                         </h5>
                                     </div>
@@ -95,7 +95,7 @@
                                                 @csrf
                                                 <div class="card-body">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Name</label>
+                                                        <label for="exampleInputEmail1">Tên</label>
                                                         <input type="text" class="form-control" id="" name="name" value="{{old('name',\Illuminate\Support\Facades\Auth::user()->name)==\Illuminate\Support\Facades\Auth::user()->name?\Illuminate\Support\Facades\Auth::user()->name:old('name')}}">
                                                         @error('name')
                                                         <i class="messcolor">{{ $message }}</i>
@@ -109,21 +109,21 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Phone</label>
+                                                        <label for="exampleInputEmail1">Số điện thoại</label>
                                                         <input type="text" class="form-control" name="phone" id="" value="{{old('phone',\Illuminate\Support\Facades\Auth::user()->userinfo->phone)==\Illuminate\Support\Facades\Auth::user()->userinfo->phone?\Illuminate\Support\Facades\Auth::user()->userinfo->phone:old('phone')}}">
                                                         @error('phone')
                                                         <i class="messcolor">{{ $message }}</i>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Address</label>
+                                                        <label for="exampleInputEmail1">Địa chỉ</label>
                                                         <input type="text" class="form-control" name="address" id="" value="{{old('address',\Illuminate\Support\Facades\Auth::user()->userinfo->address)==\Illuminate\Support\Facades\Auth::user()->userinfo->address?\Illuminate\Support\Facades\Auth::user()->userinfo->address:old('address')}}">
                                                         @error('address')
                                                         <i class="messcolor">{{ $message }}</i>
                                                         @enderror
                                                     </div>
                                                     <div class="form-group" style="display: none">
-                                                        <label for="exampleInputFile">Avatar</label>
+                                                        <label for="exampleInputFile"></label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
                                                                 <input id="imageUpload" type="file" name="avatar" class="custom-file-input" id="exampleInputFile">
@@ -139,7 +139,7 @@
                                                 <!-- /.card-body -->
 
                                                 <div class="w-50 m-auto">
-                                                    <button type="submit" class="btn btn-secondary rounded w-100">Update</button>
+                                                    <button type="submit" class="btn btn-secondary rounded w-100">Cập nhật</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -149,7 +149,7 @@
                                     <div class="card-header abc" id="headingTwo">
                                         <h5 class="mb-0">
                                             <div class="btn w-100 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                <b>Update Password</b>
+                                                <b>Đổi mật khẩu</b>
                                             </div>
                                         </h5>
                                     </div>
@@ -158,21 +158,21 @@
                                             <form action="{{Route('profile.update.pass',\Illuminate\Support\Facades\Auth::user()->id)}}" method="post" role="form" enctype="multipart/form-data">
                                             @csrf
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">A new password</label>
+                                                    <label for="exampleInputEmail1">Mật khẩu mới</label>
                                                     <input type="password" class="form-control" name="newpassword" id="" value="">
                                                     @error('newpassword')
                                                     <i class="messcolor">{{ $message }}</i>
                                                     @enderror
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1">Enter a new password</label>
+                                                    <label for="exampleInputEmail1">Xác nhận lại mật khẩu mới</label>
                                                     <input type="password" class="form-control" name="enterpass" id="" value="">
                                                     @error('enterpass')
                                                     <i class="messcolor">{{ $message }}</i>
                                                     @enderror
                                                 </div>
                                                 <div class="w-50 m-auto">
-                                                    <button type="submit" class="btn btn-secondary updatePass-confirm rounded w-100">Update</button>
+                                                    <button type="submit" class="btn btn-secondary updatePass-confirm rounded w-100">Cập nhật</button>
                                                 </div>
                                             </form>
                                         </div>

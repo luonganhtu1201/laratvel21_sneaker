@@ -25,7 +25,15 @@
     <!-- User style -->
     <link rel="stylesheet" href="/frontend/css/custom.css">
     <link rel="stylesheet" href="/frontend/css/skin-default.css">
-
+    <style>
+        body,.font-roboto{
+            font-family: 'Montserrat' !important;
+        }
+        .page-item.active .page-link{
+            background-color:#ff4f4f;
+            border-color: red;
+        }
+    </style>
     @yield('css')
     <!-- Modernizr JS -->
     <script src="/frontend/js/modernizr-2.8.3.min.js"></script>

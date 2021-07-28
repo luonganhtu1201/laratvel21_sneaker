@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Tunz Sneaker | Forgot Password</title>
+    <title>Tunz Sneaker | Quên mật khẩu</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -37,11 +37,11 @@
                                 <a href="" class="fxt-logo"><img src="/frontend/register/images/logo-14.png" alt="Logo"></a>
                             </div>
                             <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                <h1>Welcome To Tun<span style="color: red;">z</span></h1>
+                                <h1>Tun<span style="color: red;">z </span>Sneaker</h1>
                             </div>
                             <div class="fxt-transformY-50 fxt-transition-delay-3">
-                                <p>Welcome to the exclusive sneaker store in the North. Our team is sure to bring you the hottest shoes on the market, constantly updated with unmatched services and offers.
-                                    What are you waiting for without logging in to have a great experience...</p>
+                                <p>Chào mừng bạn đến với cửa hàng giày sneaker độc quyền tại Miền Bắc. Đội ngũ của chúng tôi chắc chắn sẽ mang đến cho bạn những đôi giày hot nhất trên thị trường, được cập nhật liên tục với những dịch vụ và ưu đãi chưa từng có.
+                                    Còn chờ gì nữa mà không đăng nhập để có những trải nghiệm tuyệt vời ...</p>
                             </div>
                         </div>
                         <ul class="fxt-socials">
@@ -55,12 +55,12 @@
                 </div>
                 <div class="col-md-6 col-12 order-md-1 fxt-bg-color">
                     <div class="fxt-content">
-                        <h2><span style="color: red">Forgot </span>Password</h2>
+                        <h2><span style="color: red">Quên </span>Mật khẩu</h2>
                         <div class="fxt-form">
                             <form action="{{Route('client.password.retrieval')}}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="email" class="input-label">Email Address</label>
+                                    <label for="email" class="input-label">Email</label>
                                     <input type="email" id="email" class="form-control" name="email" placeholder="demo@gmail.com">
                                 </div>
                                 @if($errors->any())
@@ -69,12 +69,12 @@
                                     @endforeach
                                 @endif
                                 <div class="form-group">
-                                    <button type="submit" class="fxt-btn-fill">Send</button>
+                                    <button type="submit" class="fxt-btn-fill">Gửi</button>
                                 </div>
                             </form>
                         </div>
                         <div class="text-center">
-                            <p>Did you remember the password ?<a href="{{Route('login')}}" class="switcher-text2 inline-text">Login</a></p>
+                            <p>Bạn đã nhớ lại mật khẩu của mình ?<a href="{{Route('login')}}" class="switcher-text2 inline-text">Đăng nhập ngay !</a></p>
                         </div>
                     </div>
                 </div>

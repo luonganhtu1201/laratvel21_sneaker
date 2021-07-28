@@ -8,14 +8,13 @@
                         <div class="title-tab-product-category row">
                             <div class="col-lg-12 text-center pb-60">
                                 <ul class="nav heading-style-3" role="tablist">
-                                    <li role="presentation"><a class="active shadow-box" href="#cart"
+                                    <li role="presentation"><a class="active shadow-box font-roboto" href="#cart"
                                                                aria-controls="cart" role="tab" data-toggle="tab"><span>01</span>
-                                            Shopping
-                                            cart</a></li>
+                                            Giỏ hàng</a></li>
                                     @if(count($items)!=0)
-                                        <li role="presentation"><a class="shadow-box" href="#checkout"
+                                        <li role="presentation"><a class="shadow-box font-roboto" href="#checkout"
                                                                    aria-controls="checkout" role="tab"
-                                                                   data-toggle="tab"><span>02</span>Checkout</a></li>
+                                                                   data-toggle="tab"><span>02</span>Thanh Toán</a></li>
                                     @endif
 
                                 </ul>
@@ -33,15 +32,15 @@
                                                 <table class="shop_table-2 cart table">
                                                     <thead>
                                                     <tr>
-                                                        <th>Image</th>
-                                                        <th>Product Name</th>
+                                                        <th>Ảnh</th>
+                                                        <th>Tên Sản phẩm</th>
 
-                                                        <th>Quantity</th>
+                                                        <th>Số lượng</th>
                                                         <th>Size</th>
-                                                        <th>Color</th>
-                                                        <th>Unit Price</th>
-                                                        <th>Total</th>
-                                                        <th>Remove</th>
+                                                        <th>Màu</th>
+                                                        <th>Giá bán</th>
+                                                        <th>Thành tiền</th>
+                                                        <th>Xóa</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -75,17 +74,6 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        {{--                                                                        <div class="product-qty">--}}
-                                                                        {{--                                                                            <div class="cart-quantity">--}}
-                                                                        {{--                                                                                <div class="cart-plus-minus">--}}
-                                                                        {{--                                                                                    <div class="dec qtybutton">---}}
-                                                                        {{--                                                                                    </div>--}}
-                                                                        {{--                                                                                    <input value="{{$item->qty}}" onchange="updateCart(this.value,'{{$item->rowId}}')" name="qtybutton" class="cart-plus-minus-box qty" type="text">--}}
-                                                                        {{--                                                                                    <div class="inc qtybutton">+--}}
-                                                                        {{--                                                                                    </div>--}}
-                                                                        {{--                                                                                </div>--}}
-                                                                        {{--                                                                            </div>--}}
-                                                                        {{--                                                                        </div>--}}
                                                                     </div>
                                                                 </td>
                                                                 <td>{{$item->options->size}}</td>
@@ -93,9 +81,9 @@
                                                                     <p style="width: 35px;height: 35px;background-color: {{'#'.$item->options->color}}"
                                                                        class="d-flex justify-content-center m-auto rounded-circle shadow p-3 mb-5 rounded"></p>
                                                                 </td>
-                                                                <td class="item-price">{{number_format($item->price) .' $'}}</td>
+                                                                <td class="item-price">{{number_format($item->price) .' VNĐ'}}</td>
                                                                 <td class="total-price">
-                                                                    <strong>{{number_format($item->price*$item->qty) .' $'}}</strong>
+                                                                    <strong>{{number_format($item->price*$item->qty) .' VNĐ'}}</strong>
                                                                 </td>
                                                                 <td class="remove-item">
                                                                     <a data-id="{{$item->rowId}}" class="delee"><i class="fa fa-trash-o"></i></a>
@@ -116,36 +104,30 @@
                                                         <div class="update-coupne-area">
                                                             <div class="update-continue-btn text-right pb-20">
                                                                 <form action="{{Route('frontend.cart.destroy')}}" method="GET" class="d-inline-block">
-                                                                    <a href="#" class="btn-def btn2 delete-confirm">Deletee All</a>
+                                                                    <a href="#" class="btn-def btn2 delete-confirm">XÓA TẤT CẢ</a>
                                                                 </form>
-                                                                <a href="{{Route('client.home')}}" class="btn-def btn2">Continue
-                                                                    Shopping</a>
+                                                                <a href="{{Route('client.home')}}" class="btn-def btn2">TIẾP TỤC MUA HÀNG</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-5">
                                                         <div class="cart-total-area">
                                                             <div class="catagory-title cat-tit-5 mb-20 text-right">
-                                                                <h3>Cart Totals</h3>
+                                                                <h3>Tổng thành tiền</h3>
                                                             </div>
                                                             <div class="sub-shipping border-top">
-                                                                <p>Shipping
+                                                                <p>Giao hàng
                                                                     <span>
-                                                                        Free
+                                                                        Miễn phí
                                                                     </span>
                                                                 </p>
                                                             </div>
                                                             <div class="process-cart-total border-top">
-                                                                <p>Total
+                                                                <p>Tổng
                                                                     <span>{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('order-product')->subtotal())  .' $'}}</span>
                                                                 </p>
                                                             </div>
-                                                            <p class="text-center border-top">The price of the product
-                                                                is inclusive of 10% VAT.</p>
-                                                            {{--                                                            <div class="process-checkout-btn text-right">--}}
-                                                            {{--                                                                <a class="btn-def btn2" href="#checkout">Process To--}}
-                                                            {{--                                                                    Checkout</a>--}}
-                                                            {{--                                                            </div>--}}
+                                                            <p class="text-center border-top">Giá của sản phẩm đã bao gồm 10% thuế VAT</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -167,15 +149,15 @@
                                                                 <div class="panel panel-checkout">
                                                                     <div class="panel-heading">
                                                                         <h4 class="panel-title">
-                                                                            Returning customer?
+                                                                            Bạn chưa đăng nhập ?
                                                                             <a href="{{Route('login.form')}}">
-                                                                                Click here to login
+                                                                                Bấm vào đây để đăng nhập !
                                                                             </a>
                                                                         </h4>
                                                                         <h4 class="panel-title">
-                                                                            Don't have an account?
+                                                                            Bạn không có tài khoản ?
                                                                             <a href="{{Route('login.form')}}">
-                                                                                Click here to register
+                                                                                Bấm vào đây để đăng kí !
                                                                             </a>
                                                                         </h4>
                                                                     </div>
@@ -190,16 +172,15 @@
                                                                 <div class="col-lg-6">
                                                                     <div class="billing-details">
                                                                         <div class="contact-text right-side">
-                                                                            <h2>Billing Details</h2>
+                                                                            <h2>Chi tiết thanh toán</h2>
 
                                                                             <div class="row">
                                                                                 <div class="col-lg-12">
-                                                                                    <p class="text-center"><b>YOUR
-                                                                                            INFO</b></p>
+                                                                                    <p class="text-center"><b>THÔNG TIN CỦA BẠN</b></p>
                                                                                 </div>
                                                                                 <div class="col-lg-12">
                                                                                     <div class="input-box mb-20">
-                                                                                        <label>Name</label>
+                                                                                        <label>TÊN</label>
                                                                                         <input type="text" name="name"
                                                                                                class="info"
                                                                                                placeholder="Your Name .... "
@@ -208,8 +189,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <div class="input-box mb-20">
-                                                                                        <label>Email
-                                                                                            Address<em>*</em></label>
+                                                                                        <label>Email<em>*</em></label>
                                                                                         <input type="email" name="email"
                                                                                                class="info"
                                                                                                placeholder="Your Email .... "
@@ -218,8 +198,7 @@
                                                                                 </div>
                                                                                 <div class="col-md-6">
                                                                                     <div class="input-box mb-20">
-                                                                                        <label>Phone
-                                                                                            Number<em>*</em></label>
+                                                                                        <label>Số điện thoại<em>*</em></label>
                                                                                         <input type="text" name="phone"
                                                                                                class="info"
                                                                                                placeholder="Your Phone Number ...."
@@ -228,7 +207,7 @@
                                                                                 </div>
                                                                                 <div class="col-lg-12">
                                                                                     <div class="input-box mb-20">
-                                                                                        <label>Address<em>*</em></label>
+                                                                                        <label>Địa chỉ<em>*</em></label>
                                                                                         <input type="text"
                                                                                                name="address"
                                                                                                class="info mb-10"
@@ -244,14 +223,14 @@
                                                                 <div class="col-lg-12">
                                                                     <div class="checkout-payment-area">
                                                                         <div class="checkout-total mt20">
-                                                                            <h3>Your order</h3>
+                                                                            <h3>Sản phẩm đã đặt</h3>
                                                                             <div class="table-responsive">
                                                                                 <table class="checkout-area table">
                                                                                     <thead>
                                                                                     <tr class="cart_item check-heading">
-                                                                                        <td class="ctg-type"> Product
+                                                                                        <td class="ctg-type"> Sản phẩm
                                                                                         </td>
-                                                                                        <td class="cgt-des"> Total</td>
+                                                                                        <td class="cgt-des"> Thành tiền</td>
                                                                                     </tr>
                                                                                     </thead>
                                                                                     <tbody>
@@ -261,20 +240,20 @@
                                                                                                 ×
                                                                                                 <span>{{$item->qty}}</span>
                                                                                             </td>
-                                                                                            <td class="cgt-des"> {{number_format($item->price*$item->qty) .' $'}}</td>
+                                                                                            <td class="cgt-des"> {{number_format($item->price*$item->qty) .' VNĐ'}}</td>
                                                                                         </tr>
                                                                                     @endforeach
 
                                                                                     <tr class="cart_item">
-                                                                                        <td class="ctg-type"> Shipping
+                                                                                        <td class="ctg-type"> Giao hàng
                                                                                         </td>
-                                                                                        <td class="cgt-des">FREE</td>
+                                                                                        <td class="cgt-des">Miễn phí</td>
                                                                                     </tr>
                                                                                     <tr class="cart_item">
                                                                                         <td class="ctg-type crt-total">
-                                                                                            Total
+                                                                                            Tổng
                                                                                         </td>
-                                                                                        <td class="cgt-des prc-total">{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('order-product')->subtotal()) .' $'}}</td>
+                                                                                        <td class="cgt-des prc-total">{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('order-product')->subtotal()) .' VNĐ'}}</td>
                                                                                     </tr>
                                                                                     </tbody>
                                                                                 </table>
@@ -282,9 +261,9 @@
                                                                         </div>
                                                                         <div>
                                                                             <div class="input-box">
-                                                                                <label>Order Notes</label>
+                                                                                <label>Ghi chú :</label>
                                                                                 <textarea name="note"
-                                                                                          placeholder="Notes about your order, e.g. special notes for delivery."
+                                                                                          placeholder="Ghi lại ghi chú cho shop , hoặc yêu cầu của bạn !"
                                                                                           class="area-tex"></textarea>
                                                                             </div>
                                                                         </div>
@@ -295,7 +274,7 @@
                                                                                        href="#"><input
                                                                                             type="submit"
                                                                                             class="border-0 h6 text-white"
-                                                                                            value="PLACE ORDER"></a>
+                                                                                            value="ĐẶT HÀNG"></a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -326,10 +305,10 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                title: `Delete all ?`,
-                text: "If deleted, you will not be able to recover ?",
+                title: `Xóa tất cả ?`,
+                text: "Nếu đồng ý , bạn sẽ không khôi phục lại được ?",
                 icon: "warning",
-                buttons: ["No", "Yes"],
+                buttons: ["Hủy", "Đồng ý"],
                 dangerMode: true,
             })
                 .then((willDelete) => {
@@ -345,10 +324,10 @@
             var id = $(this).attr('data-id');
             event.preventDefault();
             swal({
-                title: `Remove ?`,
-                text: "If removed, you will not be able to recover ?",
+                title: `Xóa sản phẩm này ?`,
+                text: "Nếu đồng ý , bạn sẽ không khôi phục lại được ?",
                 icon: "warning",
-                buttons: ["No", "Yes"],
+                buttons: ["Hủy", "Đồng ý"],
                 dangerMode: true,
             })
                 .then((willDelete) => {

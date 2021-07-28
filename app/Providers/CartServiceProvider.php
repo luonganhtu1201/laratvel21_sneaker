@@ -27,12 +27,12 @@ class CartServiceProvider extends ServiceProvider
         view()->composer([
             'frontend.includes.header',
             'frontend.layouts.master',
-            'frontend.client.home',
-            'frontend.client.cart',
-            'frontend.client.category-product',
-            'frontend.client.profile',
-            'frontend.client.single-product',
-            'frontend.client.statusCart',
+            'frontend.pages.home',
+            'frontend.pages.cart',
+            'frontend.pages.category-product',
+            'frontend.pages.profile',
+            'frontend.pages.single-product',
+            'frontend.pages.statusCart',
 
         ],CartProductComposer::class);
     }

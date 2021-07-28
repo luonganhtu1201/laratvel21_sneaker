@@ -239,42 +239,59 @@ class OrderController extends Controller
             $check[0]->update();
         }
         $order->update();
-        $now = Carbon::now()->format('Y-m-d');
-        if ($sta = Statistical::where('order_date', $now)->first()){
-            $price = $order->total;
+        $date = date('Y-m-d', strtotime($order->created_at));
+        $sta = Statistical::where('order_date', $date)->first();
+        $price = $order->total;
 
 
-            $profit = 0;
-            $count = 0;
-            foreach ($order->orderproducts as $order){
-                $prof = Product::find($order->product_id)->origin_price * $order->qty;
-                $count +=1;
-                $profit += $prof;
-            }
-
-            $st = $price - $profit;
-            $sta->profit = $sta->profit - $st;
-            $sta->revenue = $sta->revenue - $price;
-//            $sta->count_orders = $sta->count_orders;
-//            $sta->sales_volume = $sta->sales_volume;
-            $sta->order_date = $now;
-            $sta->save();
-        }else{
-            $sta = new Statistical();
-            $sta->revenue = -$order->total;
-            $profit = 0;
-            $count = 0;
-            foreach ($order->orderproducts as $order){
-                $prof = Product::find($order->product_id)->origin_price * $order->qty;
-                $count +=1;
-                $profit += $prof;
-            }
-            $sta->count_orders = 1;
-            $sta->sales_volume = $count;
-            $sta->profit = $sta->revenue + $profit;
-            $sta->order_date = $now;
-            $sta->save();
+        $profit = 0;
+        $count = 0;
+        foreach ($order->orderproducts as $order){
+            $prof = Product::find($order->product_id)->origin_price * $order->qty;
+            $count +=1;
+            $profit += $prof;
         }
+        $st = $price - $profit;
+        $sta->profit = $sta->profit - $st;
+        $sta->revenue = $sta->revenue - $price;
+        $sta->order_date = $date;
+        $sta->save();
+//        $now = Carbon::now()->format('Y-m-d');
+//        if ($sta = Statistical::where('order_date', $now)->first()){
+//            $price = $order->total;
+//
+//
+//            $profit = 0;
+//            $count = 0;
+//            foreach ($order->orderproducts as $order){
+//                $prof = Product::find($order->product_id)->origin_price * $order->qty;
+//                $count +=1;
+//                $profit += $prof;
+//            }
+//
+//            $st = $price - $profit;
+//            $sta->profit = $sta->profit - $st;
+//            $sta->revenue = $sta->revenue - $price;
+////            $sta->count_orders = $sta->count_orders;
+////            $sta->sales_volume = $sta->sales_volume;
+//            $sta->order_date = $now;
+//            $sta->save();
+//        }else{
+//            $sta = new Statistical();
+//            $sta->revenue = -$order->total;
+//            $profit = 0;
+//            $count = 0;
+//            foreach ($order->orderproducts as $order){
+//                $prof = Product::find($order->product_id)->origin_price * $order->qty;
+//                $count +=1;
+//                $profit += $prof;
+//            }
+//            $sta->count_orders = 1;
+//            $sta->sales_volume = $count;
+//            $sta->profit = $sta->revenue + $profit;
+//            $sta->order_date = $now;
+//            $sta->save();
+//        }
 
 
         $flag = 1;

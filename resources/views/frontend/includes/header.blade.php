@@ -6,11 +6,11 @@
                             <div class="login-register-area">
                                 <ul>
                                 @if(!(Illuminate\Support\Facades\Auth::user()))
-                                    <li><a href="{{Route('login')}}">Login</a></li>
-                                    <li><a href="{{Route('user.register.form')}}">Register</a></li>
+                                    <li><a href="{{Route('login')}}">Đăng nhập</a></li>
+                                    <li><a href="{{Route('user.register.form')}}">Đăng kí</a></li>
                                 @else
                                 <li><a href="{{route('client.profile')}}">{{Illuminate\Support\Facades\Auth::user()->name}}</a></li>
-                                <li><a href="{{Route('logout')}}">Logout</a></li>
+                                <li><a href="{{Route('logout')}}">Đăng xuất</a></li>
                                 @endif
                                 </ul>
                             </div>
@@ -33,7 +33,7 @@
 
                                     <li>
                                         <div class="header-cart">
-                                            <div class="cart-icon"> <a href="#">Cart<i class="zmdi zmdi-shopping-cart"></i></a>
+                                            <div class="cart-icon"> <a href="#">Giỏ<i class="zmdi zmdi-shopping-cart"></i></a>
                                                 <span>
                                                     @if($items)
                                                         {{count($items)}}
@@ -54,21 +54,21 @@
                                                             <div class="cart-content">
                                                                 <div class="cart-name"> <a href="#">{{$item->name}}</a>
                                                                 </div>
-                                                                <div class="cart-price">{{number_format($item->price).' $'}}</div>
-                                                                <div class="cart-qty"> Qty: <span>{{$item->qty}}</span> </div>
+                                                                <div class="cart-price">{{number_format($item->price).' VNĐ'}}</div>
+                                                                <div class="cart-qty"> Số lượng : <span>{{$item->qty}}</span> </div>
                                                             </div>
                                                             <div class="remove"> <a href="{{ route('frontend.cart.remove', ['id' => $item->rowId]) }}"><i class="zmdi zmdi-close"></i></a>
                                                             </div>
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                <div class="cart-subtotal"> Subtotal: <span>{{number_format($subtotal).' $'}}</span> </div>
+                                                <div class="cart-subtotal"> Tổng : <span>{{number_format($subtotal).' VNĐ'}}</span> </div>
                                                 <div class="cart-check-btn">
-                                                    <div class="view-cart"> <a class="btn-def" href="{{route('frontend.cart.index')}}">View Cart & Checkout</a> </div>
+                                                    <div class="view-cart"> <a class="btn-def" href="{{route('frontend.cart.index')}}">Giỏ Hàng & Thanh Toán</a> </div>
                                                 </div>
                                                 @if(\Illuminate\Support\Facades\Auth::user())
                                                     <div class="cart-check-btn">
-                                                        <div class="view-cart"> <a class="btn-def" href="{{route('frontend.cart.status')}}">Order Tracking</a> </div>
+                                                        <div class="view-cart"> <a class="btn-def" href="{{route('frontend.cart.status')}}">Theo dõi đơn hàng</a> </div>
                                                     </div>
                                                 @endif
                                             </div>
@@ -93,7 +93,7 @@
                                 <nav id="primary-menu">
                                     @if($menus)
                                         <ul class="main-menu">
-                                            <li class=""><a href="{{Route('client.home')}}">Home</a></li>
+                                            <li class=""><a href="{{Route('client.home')}}">Trang chủ</a></li>
                                             @foreach($menus as $value)
                                                 <li class="">
                                                     <a class="" href="{{Route('client.category').'?category='.$value->slug}}">{{$value->name}}</a>
@@ -124,7 +124,7 @@
                                         <div class="global-cell">
                                             <form action="{{route('client.category').'?key_search='.request()->key_search}}">
                                                 <div class="input-box">
-                                                    <input name="key_search" class="single-input" placeholder="Search anything"
+                                                    <input name="key_search" class="single-input" placeholder="Tìm kiếm ..."
                                                            type="text">
                                                     <button class="src-btn"><i class="fa fa-search"></i></button>
                                                 </div>
@@ -142,7 +142,7 @@
                                             <nav id="dropdown">
                                                 @if($menus)
                                                     <ul>
-                                                        <li class=""><a href="{{Route('client.home')}}">Home</a></li>
+                                                        <li class=""><a href="{{Route('client.home')}}">Trang Chủ</a></li>
                                                         @foreach($menus as $value)
                                                             <li class="">
                                                                 <a class="" href="{{Route('client.category').'?category='.$value->slug}}">{{$value->name}}</a>

@@ -29,6 +29,6 @@ class MailPassword extends Mailable
     public function build()
     {
         return $this->subject('You have requested a password reset')
-            ->view('frontend.client.mail-password');
+            ->view('frontend.pages.mail-password');
     }
 }

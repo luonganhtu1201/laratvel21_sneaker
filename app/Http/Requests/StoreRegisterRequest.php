@@ -36,41 +36,41 @@ class StoreRegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => ':attribute cannot be left blank .',
-            'name.min' => ':attribute is too short .',
-            'name.max' => ':attribute is too long .',
+            'name.required' => ':attribute không được để trống .',
+            'name.min' => ':attribute quá ngắn .',
+            'name.max' => ':attribute quá dài .',
 
-            'email.email' => ':attribute is wrong format (ex : example@abc.com) .',
-            'email.unique' => ':attribute already registered .',
+            'email.email' => ':attribute sai định dạng (ex : example@abc.com) .',
+            'email.unique' => ':attribute đã được đăng kí .',
 
-            'password.required' => ':attribute cannot be left blank .',
-            'password.min' => ':attribute is too short .',
-            'password.max' => ':attribute is too long .',
+            'password.required' => ':attribute không được để trống .',
+            'password.min' => ':attribute quá ngắn .',
+            'password.max' => ':attribute quá dài .',
 
-            'enterpass.required' => ':attribute can not be blank .',
-            'enterpass.min' => ':attribute is too short .',
-            'enterpass.max' => ':attribute is too long .',
-            'enterpass.same' => ':attribute incorrect .',
+            'enterpass.required' => ':attribute không được để trống .',
+            'enterpass.min' => ':attribute quá ngắn .',
+            'enterpass.max' => ':attribute quá dài .',
+            'enterpass.same' => ':attribute không đúng .',
 
-            'phone.required' => ':attribute cannot be left blank .',
-            'phone.digits_between' => ':attribute number is wrong format .',
-            'phone.regex' => ':attribute number must start with 0 .',
+            'phone.required' => ':attribute không được để trống .',
+            'phone.digits_between' => ':attribute sai định dạng .',
+            'phone.regex' => ':attribute phải bắt đầu bằng số 0 .',
 
-            'address.required' => ':attribute cannot be left blank .',
+            'address.required' => ':attribute không được để trống .',
 
-            'gender.required' => ':attribute has not been selected .',
+            'gender.required' => ':attribute chưa được chọn .',
         ];
     }
     public function attributes()
     {
         return [
-            'name' => 'Name',
+            'name' => 'Tên',
             'email' => 'Email',
-            'password' => 'Password',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'gender' => 'Gender',
-            'enterpass' => 'Confirmed password',
+            'password' => 'Mật khẩu',
+            'phone' => 'Số điện thoại',
+            'address' => 'Địa chỉ',
+            'gender' => 'Giới tính',
+            'enterpass' => 'Mật khẩu xác nhận',
         ];
     }
 }

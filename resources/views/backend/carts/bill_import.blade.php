@@ -7,20 +7,6 @@
 @endsection
 
 @section('content-header')
-    {{--    <div class="container-fluid">--}}
-    {{--        <div class="row mb-2">--}}
-    {{--            <div class="col-sm-6">--}}
-    {{--                <h1 class="m-0 text-dark">Hóa đơn Sản Phẩm</h1>--}}
-    {{--            </div><!-- /.col -->--}}
-    {{--            <div class="col-sm-6">--}}
-    {{--                <ol class="breadcrumb float-sm-right">--}}
-    {{--                    <li class="breadcrumb-item"><a href="#">Home</a></li>--}}
-    {{--                    <li class="breadcrumb-item"><a href="#">Danh mục</a></li>--}}
-    {{--                    <li class="breadcrumb-item active">Danh sách sản phẩm</li>--}}
-    {{--                </ol>--}}
-    {{--            </div><!-- /.col -->--}}
-    {{--        </div><!-- /.row -->--}}
-    {{--    </div>--}}
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -29,20 +15,6 @@
 
             <div class="col-12">
                 <div class="card">
-                {{--                    <div class="card-header">--}}
-                {{--                        <h3 class="card-title">Sản phẩm</h3>--}}
-
-                {{--                        <div class="card-tools">--}}
-                {{--                            <div class="input-group input-group-sm" style="width: 150px;">--}}
-                {{--                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">--}}
-
-                {{--                                <div class="input-group-append">--}}
-                {{--                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>--}}
-                {{--                                </div>--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                <!-- /.card-header -->
                     <div class="card-body table-responsive p-3">
                         <div class="row">
                             <div class="col-12">
@@ -102,8 +74,8 @@
                                     <td>{{$key+1}}</td>
                                     <td>{{$product->name}} × <span>{{$product->qty}}</span></td>
                                     <td><i class="fa fa-tint pr-3" style="color: {{'#'.$product->color}};text-shadow: 2px 1px gray" aria-hidden="true"></i></td>
-                                    <td>{{number_format($product->import_price).' $'}}</td>
-                                    <td>{{number_format($product->qty*$product->import_price) .' $'}}</td>
+                                    <td>{{number_format($product->import_price).' VNĐ'}}</td>
+                                    <td>{{number_format($product->qty*$product->import_price) .' VNĐ'}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -131,7 +103,7 @@
                                         </tr>
                                         <tr>
                                             <th>Tổng tiền :</th>
-                                            <td><b>{{number_format($order->total).' $'}}</b></td>
+                                            <td><b>{{number_format($order->total).' VNĐ'}}</b></td>
                                         </tr>
                                     </table>
                                 </div>

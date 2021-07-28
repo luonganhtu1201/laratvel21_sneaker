@@ -1812,7 +1812,7 @@ select option {
     margin-right: 5px;
 }
 .title-tab-product-category .heading-style-3 li a {
-    font-family: lato;
+    font-family: 'Roboto Condensed' !important;
     font-weight: normal;
     text-transform: capitalize;
 }

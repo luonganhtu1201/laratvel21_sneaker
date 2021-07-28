@@ -94,7 +94,7 @@
                                        class="d-flex justify-content-center m-auto rounded-circle shadow p-3 mb-5 rounded"></p>
                                 </td>
                                 <td>{{$item->price}}</td>
-                                <td>{{number_format($item->price*$item->qty).' $'}}</td>
+                                <td>{{number_format($item->price*$item->qty).' VNĐ'}}</td>
                                 <td class="remove-item"><a href="{{ route('backend.import.remove', ['id' => $item->rowId]) }}"><i class="fa fa-trash text-red"></i></a></td>
                             </tr>
                         @endforeach
@@ -124,7 +124,7 @@
                         </tr>
                         <tr>
                             <th>Tổng tiền :</th>
-                            <td><b>{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('import-product')->subtotal())  .' $'}}</b></td>
+                            <td><b>{{number_format(\Gloudemans\Shoppingcart\Facades\Cart::instance('import-product')->subtotal())  .' VNĐ'}}</b></td>
                         </tr>
                     </table>
                 </div>

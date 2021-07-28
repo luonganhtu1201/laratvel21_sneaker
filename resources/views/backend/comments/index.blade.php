@@ -33,18 +33,36 @@
                                 <th>ID</th>
                                 <th>Tên Người Dùng</th>
                                 <th>Nội dung</th>
-                                <th>Chức năng</th>
+                                <th>Trang chính</th>
+                                <th>Trạng thái</th>
+                                <th class="text-center">Chức năng</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($comments as $cmt)
+                            @foreach($comments as $key => $cmt)
+                                @php
+                                    $a = $cmt->product['slug'];
+                                @endphp
                                 <tr>
                                     <td>{{$cmt->id}}</td>
                                     <td>{{$cmt->user->name}}</td>
                                     <td>{{$cmt->content}}</td>
                                     <td>
+                                        <a href="{{route('productimg.home',"$a")}}" target="_blank">{{$cmt->product['name']}}</a>
+                                    </td>
+                                    @if($cmt->status == 0)
+                                        <td><span class="badge badge-secondary">{{$cmt->status_text}}</span></td>
+                                    @elseif($cmt->status == 1)
+                                        <td><span class="badge badge-success">{{$cmt->status_text}}</span></td>
+                                    @endif
+                                    <td class="text-center">
                                         @can('delete',$cmt)
-                                            <a onclick="return confirm('Bạn có muốn xóa ?')" class="btn btn-danger btn-sm" href="{{Route('backend.comments.destroy',$cmt->id)}}"><i class="fas fa-trash"></i></a>
+                                            @if($cmt->status == 0)
+                                                <a onclick="return confirm('Duyệt bình luận ?')" class="btn btn-success btn-sm" href="{{Route('backend.comments.success',$cmt->id)}}"><i class="fa fa-check"></i></a>
+                                                <a onclick="return confirm('Không duyệt ... Bình luận sẽ được xóa và bạn không thể khôi phục lại ?')" class="btn btn-danger btn-sm" href="{{Route('backend.comments.destroy',$cmt->id)}}"><i class="fa fa-ban"></i></a>
+                                            @elseif($cmt->status == 1)
+                                                <a onclick="return confirm('Xóa bình luận này ?')" class="btn btn-outline-danger btn-sm" href="{{Route('backend.comments.destroy',$cmt->id)}}"><i class="fa fa-trash mr-2"></i> Xóa</a>
+                                            @endif
                                         @endcan
                                     </td>
                                 </tr>

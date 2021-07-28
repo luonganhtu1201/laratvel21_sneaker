@@ -138,13 +138,13 @@ class Product extends Model
     {
         if ($request->has('price')){
             if( $request->get('price') == '1' ) {
-                $query->where('sale_price','<', 500)->where('status','<>',-1);
+                $query->where('sale_price','<', 500000)->where('status','<>',-1);
             } elseif ($request->get('price') == '2'){
-                $query->whereBetween('sale_price',[500,1000])->where('status','<>',-1);
+                $query->whereBetween('sale_price',[500000,1000000])->where('status','<>',-1);
             } elseif ($request->get('price') == '3'){
-                $query->whereBetween('sale_price',[1000,2500])->where('status','<>',-1);
+                $query->whereBetween('sale_price',[1000000,2500000])->where('status','<>',-1);
             }else{
-                $query->where('sale_price','>',2500)->where('status','<>',-1);
+                $query->where('sale_price','>',2500000)->where('status','<>',-1);
             }
         }
 

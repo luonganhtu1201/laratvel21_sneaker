@@ -5,13 +5,13 @@
                     <div class="col-xl-3 col-lg-3 col-md-4">
                         <div class="single-footer contact-us">
                             <div class="footer-title uppercase">
-                                <h5>Contact US</h5>
+                                <h5>Liên hệ</h5>
                             </div>
                             <ul>
                                 <li>
                                     <div class="contact-icon"> <i class="zmdi zmdi-pin-drop"></i> </div>
                                     <div class="contact-text">
-                                        <p>Address: Thai Hoa - Ba Vi - Ha Noi</p>
+                                        <p>Thái Hòa - Ba Vì - Hà Nội</p>
                                     </div>
                                 </li>
                                 <li>
@@ -32,15 +32,15 @@
                     <div class="col-xl-2 col-lg-2 col-md-4">
                         <div class="single-footer informaton-area">
                             <div class="footer-title uppercase">
-                                <h5>Information</h5>
+                                <h5>Thông tin</h5>
                             </div>
                             <div class="informatoin">
                                 <ul>
                                     @if(\Illuminate\Support\Facades\Auth::user())
-                                        <li><a href="{{route('client.profile')}}">My Account</a></li>
-                                        <li><a href="{{route('frontend.cart.status')}}">Order Tracking</a></li>
+                                        <li><a href="{{route('client.profile')}}">Tài khoản của bạn</a></li>
+                                        <li><a href="{{route('frontend.cart.status')}}">Theo dõi đơn hàng</a></li>
                                     @endif
-                                    <li><a href="{{route('frontend.cart.index')}}">View Cart & Checkout</a></li>
+                                    <li><a href="{{route('frontend.cart.index')}}">Giỏ hàng và thanh toán</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 offset-xl-1">
                         <div class="single-footer newslatter-area">
                             <div class="footer-title uppercase">
-                                <h5>Social Network</h5>
+                                <h5>Mạng xã hội</h5>
                             </div>
                             <div class="newslatter">
 

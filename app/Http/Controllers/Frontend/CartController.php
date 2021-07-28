@@ -17,7 +17,7 @@ class CartController extends Controller
 {
     public function index(){
         $items = Cart::instance('order-product')->content();
-        return view('frontend.client.cart')->with(['items'=>$items]);
+        return view('frontend.pages.cart')->with(['items'=>$items]);
     }
     public function add(Request $request,$id){
         $product =Product::where('slug',$id)->first();
@@ -37,9 +37,9 @@ class CartController extends Controller
         }
         $add = 1;
         if ($add) {
-            alert()->success('Add Cart', 'Successfully');
+            alert()->success('Thành công', 'Bạn đã thêm sản phẩm vào giỏ hàng');
         }else {
-            alert()->error('Add Cart', 'Something went wrong!');
+            alert()->error('Thất bại', 'Thêm sả phẩm thất bại!');
         }
 
         return redirect()->route('frontend.cart.index');
@@ -48,9 +48,9 @@ class CartController extends Controller
         Cart::instance('order-product')->remove($cart_id);
         $remove = 1;
         if ($remove) {
-            alert()->success('Remove', 'Remove Successfully');
+            alert()->success('Thành công', 'Xóa khỏi giỏ hàng thành công');
         }else {
-            alert()->error('Remove', 'Something went wrong!');
+            alert()->error('OOPS !', 'Xóa thất bại !');
         }
         return back();
     }
@@ -58,9 +58,9 @@ class CartController extends Controller
         Cart::instance('order-product')->destroy();
         $destroy = 1;
         if ($destroy) {
-            alert()->success('Delete All', 'Delete Successfully');
+            alert()->success('Thành công', 'Xóa tất cả thành công !');
         }else {
-            alert()->error('Delete All', 'Something went wrong!');
+            alert()->error('Lỗi', 'Xóa tất cả thất bại !');
         }
         return back();
     }
@@ -98,9 +98,9 @@ class CartController extends Controller
         $order = Order::where('user_id',$user)->orderBy('id','DESC')->get();
         $orderss = 1;
         if ($orderss) {
-            alert()->success('Order', 'Your order has been placed successfully');
+            alert()->success('Thành công', 'Bạn đã đặt hàng thành công');
         }else {
-            alert()->error('Order', 'There is a problem with your order !');
+            alert()->error('Lỗi', 'Đặt hàng thất bại !');
         }
         return redirect()->route('frontend.cart.status',[
             'user_info' => $order,
@@ -109,7 +109,7 @@ class CartController extends Controller
     public function statusCart(){
         $user = Auth::user()->id;
         $order = Order::where('user_id',$user)->orderBy('id','DESC')->get();
-        return view('frontend.client.statusCart',[
+        return view('frontend.pages.statusCart',[
             'user_info' => $order,
         ]);
     }
@@ -119,9 +119,9 @@ class CartController extends Controller
         $order->update();
         $flag = 1;
         if ($flag) {
-            alert()->success('Cancel Order', 'Your order has been successfully canceled');
+            alert()->success('Thành công', 'Bạn đã hủy đặt hàng !');
         }else {
-            alert()->error('Cancel Order', 'Your order has been canceled unsuccessfully');
+            alert()->error('Lỗi', 'Hủy đặt hàng thất bại');
         }
         return redirect()->route('frontend.cart.status');
     }
@@ -131,9 +131,9 @@ class CartController extends Controller
         $order->update();
         $flag = 1;
         if ($flag) {
-            alert()->success('Request a return', 'Product return request successful');
+            alert()->success('Thành công', 'Yêu cầu trả hàng thành công');
         }else {
-            alert()->error('Request a return', 'Product return request failed');
+            alert()->error('OOPS !', 'Yêu cầu trả hàng thất bại');
         }
         return redirect()->route('frontend.cart.status');
 

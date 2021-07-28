@@ -213,7 +213,7 @@
             </div>
         </div>
 
-        <div class="row w-100 text-center">
+        <div class="row w-100 m-0 text-center">
             <div class="col-6">
                 <div class="card">
                     <div class="card-body table-responsive p-0">

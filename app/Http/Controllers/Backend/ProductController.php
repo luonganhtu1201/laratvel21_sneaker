@@ -30,9 +30,6 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-
-//        $products = Product::orderBy('updated_at','desc')->paginate(5);
-
         $categories = Category::all();
         $products = Product::search($request)->orderBy('id','desc')->paginate(5);
         // $products = Product::paginate(5);
@@ -49,11 +46,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-//        $user = Auth::user();
-//        if ($user->cannot('create',Product::class)){
-//            abort(403);
-//        }
-//        cách 2
         $this->authorize('create',Product::class);
         $categories = Category::where('parent_id','<>',0)->get();
         return view('backend.products.create',[
@@ -90,28 +82,12 @@ class ProductController extends Controller
             $product->content_more = json_encode($arr1, JSON_UNESCAPED_UNICODE);
         }
         $product->status = -1;
-//        $product->size = $request->get('size');
-//        $product->color = $request->get('color');
-//        $product->import_goods = $request->get('import_goods');
         $product->user_id = Auth::user()->id;
         $product->save();
         if ($request->hasFile('image')){
             $files = $request->file('image');
             foreach ($files as $file) {
-//                Cách 1-----
-//            $path = Storage::putFile('images', $file);
-
-//            Cách 2----
-//            $name = time() .'-anh.' . $file->getClientOriginalExtension();
             $name = $file->getClientOriginalName();
-//            $path = Storage::disk('public')
-//                ->putFileAs('thu-muc', $file, $name);
-//            Cách 3
-//            $path = $file->store('file');
-//            Cách 4
-//            $name = $file->getClientOriginalName();
-//            $file->move('image_1',$name);
-//            dd(1);
                 $disk_name ='public';
                 $path = Storage::disk($disk_name)->putFileAs('images', $file, $name);
                 $image = new Image();
@@ -162,35 +138,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-//        $products = Product::find($product->id);
         $categories = Category::get();
         $ware = $product->warehouses;
-//        dd($ware);
-//        $user = User::find(1);
-//        forUser($user)->
-//        cach 1
-//        $user = Auth::user();
-//        if ($user->can('update', $products)) {
-//            return view('backend.products.edit',[
-//            'categories' => $categories,
-//            'product' => $products
-//        ]);
-//        }else{
-//            abort(403);
-//        }
-//    cách2
-//        if (Gate::denies('update-product',$products)){
-//            abort(403);
-//        }
-//        return view('backend.products.edit',[
-//            'categories' => $categories,
-//            'product' => $products
-//        ]);
-//        cách 3
-//        $this->authorize('update-product',$products);
-
         $images_product = $product->images;
-//        dd($images_product);
         return view('backend.products.edit',[
             'categories' => $categories,
             'product' => $product,
@@ -232,39 +182,7 @@ class ProductController extends Controller
         }else{
             $product->content_more = null;
         }
-
-        //status comment
-//        $product->status = $request->get('status');
-
-
-//        $product->size = $request->get('size');
-//        $product->color = $request->get('color');
-//        $product->import_goods = $request->get('import_goods');
         $product->user_id = Auth::user()->id;
-
-//        $ware = $product->warehouses;
-//        for ($i = 0 ; $i < count($ware) ; $i++){
-//            $ware[$i]->delete();
-//        }
-//        for ($j = 0 ; $j < count($request->color); $j++){
-//            $warehouse = new Warehouse();
-//            $warehouse->size = $request->size[$j];
-//            $warehouse->color = Str::replace('#','',$request->color[$j]);
-//            $warehouse->import_goods = $request->import_goods[$j];
-//            $warehouse->inventory = $request->import_goods[$j];
-//            $warehouse->product_id = $product->id;
-//            $warehouse->save();
-//        }
-
-
-
-
-
-//            for ($i = 0; $i<count($old_imgs);$i++){
-////                dd($old_imgs[$i]);
-//                $imgs = $product->images;
-//                $imgs->delete($old_imgs[$i]);
-//            }
         $disk_name ='public';
         if ($request->hasFile('image')){
             $files = $request->file('image');
@@ -333,10 +251,6 @@ class ProductController extends Controller
     public function showImages($id)
     {
         $imgs = Product::find($id);
-//        $img = $imgs->warehouses;
-//        for ($i = 0 ; $i<count($img);$i++){
-//            echo $img[$i]->size;
-//        }
 
         $imagez = $imgs->images;
         return view('backend.products.single-product',[

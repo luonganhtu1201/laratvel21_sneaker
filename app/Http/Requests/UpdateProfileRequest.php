@@ -34,31 +34,31 @@ class UpdateProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => ':attribute cannot be blank .',
-            'name.min' => ':attribute is too short .',
-            'name.max' => ':attribute is too long .',
+            'name.required' => ':attribute không được để trống .',
+            'name.min' => ':attribute quá ngắn .',
+            'name.max' => ':attribute quá dài .',
 
-            'email.email' => 'Wrong :attribute format (ex : example@abc.com) .',
+            'email.email' => ':attribute sai định dạng (vd : example@abc.com) .',
 
-            'phone.required' => ':attribute cannot be blank',
-            'phone.digits_between' => ':attribute number is wrong format .',
-            'phone.regex' => ':attribute number must start with 0 .',
+            'phone.required' => ':attribute không được để trống .',
+            'phone.digits_between' => ':attribute sai định dạng .',
+            'phone.regex' => ':attribute phải bắt đầu bằng số 0 .',
 
-            'address.required' => ':attribute cannot be blank .',
+            'address.required' => ':attribute không được để trống .',
 
-            'avatar.file' => 'Incorrect :attribute format .' ,
-            'avatar.mimes' => 'Incorrect :attribute format .' ,
-            'avatar.max' => ':attribute file is too big .' ,
+            'avatar.file' => ':attribute sai định dạng .' ,
+            'avatar.mimes' => ':attribute sai định dạng .' ,
+            'avatar.max' => 'Dung lượng file :attribute quá lớn .' ,
         ];
     }
     public function attributes()
     {
         return [
-            'name' => 'Name',
+            'name' => 'Tên',
             'email' => 'Email',
-            'phone' => 'Phone',
-            'address' => 'Address',
-            'avatar'=> 'Image',
+            'phone' => 'Số điện thoại',
+            'address' => 'Địa chỉ',
+            'avatar'=> 'Ảnh',
         ];
     }
 }

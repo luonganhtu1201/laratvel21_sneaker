@@ -31,20 +31,20 @@ class UpdatePassusRequest extends FormRequest
     public function messages()
     {
         return [
-            'newpassword.required' => ':attribute can not be blank.',
-            'newpassword.min' => ':attribute is too short.',
-            'newpassword.max' => ':attribute is too long.',
-            'enterpass.required' => ':attribute can not be blank.',
-            'enterpass.min' => ':attribute is too short.',
-            'enterpass.max' => ':attribute is too long.',
-            'enterpass.same' => ':attribute incorrect .',
+            'newpassword.required' => ':attribute không được để trống .',
+            'newpassword.min' => ':attribute quá ngắn .',
+            'newpassword.max' => ':attribute quá dài .',
+            'enterpass.required' => ':attribute không được để trống .',
+            'enterpass.min' => ':attribute quá ngắn .',
+            'enterpass.max' => ':attribute quá dài .',
+            'enterpass.same' => ':attribute không đúng .',
         ];
     }
     public function attributes()
     {
         return [
-            'newpassword' => 'New password',
-            'enterpass' => 'Confirmed password',
+            'newpassword' => 'Mật khẩu',
+            'enterpass' => 'Mật khẩu',
         ];
     }
 }

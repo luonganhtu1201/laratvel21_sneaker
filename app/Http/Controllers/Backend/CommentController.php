@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCommentRequest;
 use App\Models\Comment;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -15,7 +16,7 @@ class CommentController extends Controller
             'comments' => $comments,
         ]);
     }
-    public function delete($id){
+    public function CommentSpam($id){
         $comments = Comment::find($id);
         $comments->delete();
         if (!$comments->delete()){
@@ -24,21 +25,14 @@ class CommentController extends Controller
             return redirect()->route('backend.comments')->with('error','Xóa thất bại !');
         }
     }
-    public function edit(Comment $comment){
-        return view('backend.comments.edit',[
-            'comment' => $comment
-        ]);
-    }
-    public function store(StoreCommentRequest $request, $id){
-        $comments = Comment::find($id);
-        $comments->content = $request->get('content');
-        $comments->update();
-        $update = 1;
-        if ($update){
-            return redirect()->route('backend.comments')->with('success','Cập nhật sản phẩm thành công !');
+    public function CommentOk($id){
+        $comment = Comment::find($id);
+        $comment->status = 1;
+        $comment->update();
+        if ($comment->save()){
+            return redirect()->route('backend.comments')->with('success','Duyệt bình luận thành công !');
         }else{
-            return redirect()->route('backend.comments')->with('error','Cập nhật sản phẩm thất bại !');
+            return redirect()->route('backend.comments')->with('error','Duyệt bình luận thất bại !');
         }
-
     }
 }

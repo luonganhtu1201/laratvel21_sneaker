@@ -27,9 +27,9 @@ class CategoryServiceProvider extends ServiceProvider
     {
         View()->composer([
             'backend.dashboard',
-            'frontend.client.home',
+            'frontend.pages.home',
             'frontend.includes.children_menus',
-            'frontend.client.category-product',
+            'frontend.pages.category-product',
             'frontend.includes.header'
         ],MenuCategoryComposer::class);
     }

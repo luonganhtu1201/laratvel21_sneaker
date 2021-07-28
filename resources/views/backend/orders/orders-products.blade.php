@@ -74,8 +74,8 @@
                                 <td>{{$key+1}}</td>
                                 <td>{{$product->name}} × <span>{{$product->qty}}</span></td>
                                 <td><i class="fa fa-tint pr-3" style="color: {{'#'.$product->color}};text-shadow: 2px 1px gray" aria-hidden="true"></td>
-                                <td>{{number_format($product->sale_price).' $'}}</td>
-                                <td>{{number_format($product->qty*$product->sale_price) .' $'}}</td>
+                                <td>{{number_format($product->sale_price).' VNĐ'}}</td>
+                                <td>{{number_format($product->qty*$product->sale_price) .' VNĐ'}}</td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -103,7 +103,7 @@
                                         </tr>
                                         <tr>
                                             <th>Tổng tiền :</th>
-                                            <td><b>{{number_format($order->total).' $'}}</b></td>
+                                            <td><b>{{number_format($order->total).' VNĐ'}}</b></td>
                                         </tr>
                                     </table>
                                 </div>

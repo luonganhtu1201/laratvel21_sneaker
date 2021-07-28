@@ -49,7 +49,7 @@ class HomeController extends Controller
         $proOut = Product::where('status','<>',-1)->whereHas('warehouses',function ($q){
             $q->where('import_goods','>','30');
         })->get();
-        return view('frontend.client.home',[
+        return view('frontend.pages.home',[
             'products' => $products,
             'productt' => $productt,
             'topSale' => $topSalePrice,
@@ -92,7 +92,7 @@ class HomeController extends Controller
 
         $imagez = $imgs->images;
 
-        $cmt = $imgs->comments;
+        $cmt = Comment::where('product_id',$imgs->id)->where('status','<>',0)->get();
         if (count($cmt)!=0){
             foreach ($cmt as $cm){
                 $user[] = User::find($cm->user_id);
@@ -103,7 +103,7 @@ class HomeController extends Controller
         $proRelated = Product::where('status','<>',-1)->where('category_id',$imgs->category_id)->where('id','<>',$imgs->id)->orderBy('id','ASC')->limit(5)->get();
 //        dd($proRelated);
 
-        return view('frontend.client.single-product',[
+        return view('frontend.pages.single-product',[
             'imgg'=>$imagez,
             'infoProduct' => $imgs,
             'comments' => $cmt,
@@ -129,7 +129,7 @@ class HomeController extends Controller
 
 
 
-        return view('frontend.client.category-product',[
+        return view('frontend.pages.category-product',[
             'productAll' => $products,
             'categories' => $idcategory,
             'recent' => $recent
@@ -148,50 +148,43 @@ class HomeController extends Controller
             ->paginate(9)
         ;
         $recent = Product::where('status','<>',-1)->orderBy('id','DESC')->limit(4)->get();
-        return view('frontend.client.category-product',[
+        return view('frontend.pages.category-product',[
             'productAll' => $products,
             'categories' => $idcategory,
             'recent' => $recent
         ]);
     }
+
+    //Bình luận :
     public function comment(Request $request){
 //        dd($request->all());
         $cmt = new Comment();
         $cmt->user_id = Auth::user()->id;
         $cmt->content = $request->comment;
         $cmt->product_id = $request->product_id;
+        $cmt->created_at = Carbon::now();
+        $cmt->updated_at = Carbon::now();
         $cmt->save();
-        $id = $request->product_id;
-        $imgs = Product::find($id);
-        $cmt = $imgs->comments;
-        if (count($cmt)!=0){
-            foreach ($cmt as $cm){
-                $user[] = User::find($cm->user_id);
-            }
+        if($cmt->save()){
+            alert()->success('Chờ duyệt', 'Bình luận của bạn đang chờ duyệt .');
         }else{
-            $user[] = null ;
+            alert()->error('Thất bại', 'Bình luận thất bại ... Rất tiếc vì sự bất tiện này !');
         }
-
-        $imagez = $imgs->images;
-        return view('frontend.client.single-product',[
-            'imgg'=>$imagez,
-            'infoProduct' => $imgs,
-            'users' => $user,
-            'comments' => $cmt,
-        ]);
+        return back();
 
     }
+
     public function cart(){
-        return view('frontend.client.cart');
+        return view('frontend.pages.cart');
     }
     public function quickview(Request $request){
         $product_id = $request->product_id;
         $product = Product::find($product_id);
-        $output['product_id'] = '<a href="/show/'.$product->slug.'" class="btn btn-danger" type="submit"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> | See details</a>';
+        $output['product_id'] = '<a href="/show/'.$product->slug.'" class="btn btn-danger" type="submit"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> | Xem Chi Tiết</a>';
         $output['product_name'] = $product->name;
         $output['product_content'] = $product->content;
-        $output['product_origin_price'] = number_format($product->sale_price+$product->sale_price*40/100).' $';
-        $output['product_sale_price'] = number_format($product->sale_price).' $';
+        $output['product_origin_price'] = number_format($product->sale_price+$product->sale_price*40/100).' VNĐ';
+        $output['product_sale_price'] = number_format($product->sale_price).' VNĐ';
         if (count($product->images)==0){
             $output['product_imgone'] = '<a href="" aria-controls="view1" data-toggle="tab"><img  src="/frontend/images/no-image.png" alt></a>';
             $output['product_gallery'] = '<a href="" aria-controls="view1" data-toggle="tab"><img  src="/frontend/images/no-image.png" alt></a>';
@@ -206,7 +199,7 @@ class HomeController extends Controller
     }
     public function profile(){
         if(Auth::user()){
-            return view('frontend.client.profile');
+            return view('frontend.pages.profile');
         }else{
             return redirect()->route('client.home');
         }
@@ -235,9 +228,9 @@ class HomeController extends Controller
         $user->update();
         $update = 1;
         if ($update) {
-            alert()->success('Success', 'Your information has been updated successfully');
+            alert()->success('Thành công', 'Thông tin của bạn đã được cập nhật');
         }else {
-            alert()->error('Error', 'Something went wrong!');
+            alert()->error('Lỗi', 'Đx xảy ra lỗi . Bạn vui lòng kiểm tra lại !');
         }
         return back();
     }
@@ -247,7 +240,7 @@ class HomeController extends Controller
         $userz->update();
         if (Auth::attempt(['email'=>$userz->email,'password'=>$request->newpassword])) {
             $request->session()->regenerate();
-            Alert::success('Success','Your password has been changed successfully');
+            Alert::success('Thành công','Mật khẩu của bạn đã được cập nhật thành công ! ');
             return redirect()->intended('/my-account');
         }
     }
@@ -262,7 +255,7 @@ class HomeController extends Controller
     public function password_retrieval(UpdatePassforgotRequest $request){
         $user = User::where('email',$request->email)->first();
         if ($user == null){
-            Alert::error('OOPS !', 'Your email is not registered. Please check again .... ');
+            Alert::error('Lỗi !', 'Email này có thể chưa đặng kí . Bạn vui lòng kiểm tra lại ... ');
             return back();
         }else{
             $token = $request->_token;
@@ -278,7 +271,7 @@ class HomeController extends Controller
             $details['token'] = $token;
             $details['name'] = $nameUs;
             Mail::to($emails)->send(new MailPassword($details));
-            Alert::success('Success','You have successfully requested to reset your account password. Please check your email ! Thanks');
+            Alert::success('Thành công','Bạn đã yêu cầu thay đổi mật khẩu thành công ! Vui lòng kiểm tra lại email của bạn ...');
             return redirect()->route('client.home');
         }
 
@@ -303,11 +296,11 @@ class HomeController extends Controller
 //            dd('OK');
             if (Auth::attempt(['email'=>$request->emailPass,'password'=>$request->newpassword])) {
                 $request->session()->regenerate();
-                Alert::success('Success','Your password has been changed successfully');
+                Alert::success('Thành công','Mật khẩu của bạn đã được cập nhật thành công');
                 return redirect()->intended('/');
             }
         }else{
-            Alert::error('Error','Something went wrong !');
+            Alert::error('Lỗi','Bạn vui lòng kiểm tra lại !');
             return back();
         }
     }

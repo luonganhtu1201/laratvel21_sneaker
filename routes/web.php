@@ -127,9 +127,8 @@ Route::group([
     //Quản lý comments
     Route::group(['prefix'=>'comments'],function(){
         Route::get('/',[CommentController::class,'index'])->name('backend.comments');
-        Route::get('/delete/{comment}',[CommentController::class,'delete'])->name('backend.comments.destroy');
-        Route::get('/edit/{comment}',[CommentController::class,'edit'])->name('backend.comment.edit');
-        Route::post('/update/{comment}',[CommentController::class,'store'])->name('backend.comment.store');
+        Route::get('/delete/{comment}',[CommentController::class,'CommentSpam'])->name('backend.comments.destroy');
+        Route::get('/successful-comment/{comment}',[CommentController::class,'CommentOk'])->name('backend.comments.success');
     });
     //Quản lý Kho
     Route::group(['prefix'=>'warehouses'],function (){

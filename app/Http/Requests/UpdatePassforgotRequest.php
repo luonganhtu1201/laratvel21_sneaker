@@ -30,8 +30,8 @@ class UpdatePassforgotRequest extends FormRequest
     public function messages()
     {
         return [
-            'email.required' => ':attribute cannot be left blank .',
-            'email.email' => 'Wrong :attribute format (ex : example@abc.com) .'
+            'email.required' => ':attribute không được để trống .',
+            'email.email' => ':attribute sai định dạng (vd : example@abc.com) .'
         ];
     }
     public function attributes()

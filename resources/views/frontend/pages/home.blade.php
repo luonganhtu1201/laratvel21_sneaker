@@ -1,30 +1,31 @@
 @extends('frontend.layouts.master')
-
+@section('css')
+@endsection
 @section('content-carousel')
 <div class="slider-area pos-rltv carosule-pagi cp-line">
             <div class="active-slider">
                 <div class="single-slider pos-rltv">
                     <div class="slider-img"><img src="/frontend/images/sneaker3.jpg" alt></div>
                     <div class="slider-content pos-abs">
-                        <h4>Top Prize</h4>
-                        <h1 class="uppercase pos-rltv underline">Most loved brand 2019</h1>
-                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Shop Now</a>
+{{--                        <h4>Giải thưởng</h4>--}}
+                        <h1 class="uppercase pos-rltv underline">Thương hiệu Nổi Bật 2019</h1>
+                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Mua ngay</a>
                     </div>
                 </div>
                 <div class="single-slider pos-rltv">
                     <div class="slider-img"><img src="/frontend/images/sneaker2.jpg" alt></div>
                     <div class="slider-content pos-abs">
-                        <h4>Best Price</h4>
-                        <h1 class="uppercase pos-rltv underline">Competitive price</h1>
-                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Shop Now</a>
+{{--                        <h4>Giá tốt</h4>--}}
+                        <h1 class="uppercase pos-rltv underline">Giá cả cạnh tranh nhất</h1>
+                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Mua ngay</a>
                     </div>
                 </div>
                 <div class="single-slider pos-rltv">
                     <div class="slider-img"><img src="/frontend/images/sneaker4.jpg" alt></div>
                     <div class="slider-content pos-abs">
-                        <h4>Best Collection</h4>
-                        <h1 class="uppercase pos-rltv underline">Many shoe models</h1>
-                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Shop Now</a>
+{{--                        <h4>Đa Dạng</h4>--}}
+                        <h1 class="uppercase pos-rltv underline">Mẫu mới cập nhật liên tục</h1>
+                        <a href="{{Route('client.category')}}" class="btn-def btn-white">Mua ngay</a>
                     </div>
                 </div>
             </div>
@@ -37,25 +38,25 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="single-service shadow-box text-center">
                             <img src="/frontend/images/garantee.png" alt>
-                            <h5>Money Back <span style="color: red">120%</span></h5>
+                            <h5>Hoàn tiền <span style="color: red">120%</span></h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="single-service shadow-box text-center">
                             <img src="/frontend/images/coupon.png" alt>
-                            <h5>Gift Coupon</h5>
+                            <h5>Quà tặng khủng</h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="single-service shadow-box text-center">
                             <img src="/frontend/images/delivery.png" alt>
-                            <h5>Free Shipping</h5>
+                            <h5>Miễn phí ship</h5>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="single-service shadow-box text-center">
                             <img src="/frontend/images/support.png" alt>
-                            <h5>24x7 Support</h5>
+                            <h5>Hỗ trợ 24/7</h5>
                         </div>
                     </div>
                 </div>
@@ -85,16 +86,16 @@
                                     <div class="col-xl-5 col-lg-6 col-md-6">
                                         <div class="brand-content ptb-55">
                                             <div class="brand-text color-lightgrey">
-                                                <h6>Best Sale</h6>
+                                                <h6>Nổi bật</h6>
                                                 <h2 class="uppercase montserrat">{{$product->name}}</h2>
-                                                <h3 class="montserrat">{{number_format($product->sale_price).' $'}}</h3>
+                                                <h3 class="montserrat">{{number_format($product->sale_price).' VNĐ'}}</h3>
                                                 <div class="s-price-box">
-                                                    <h4 class="old-price">{{number_format($product->sale_price+$product->sale_price*30/100).' $'}}</h4>
+                                                    <h4 class="old-price">{{number_format($product->sale_price+$product->sale_price*30/100).' VNĐ'}}</h4>
                                                 </div>
                                                 <div class="social-icon-wraper mt-35">
                                                     <div class="social-icon">
                                                         <ul>
-                                                            <li><a href="{{route('productimg.home',['id'=>$product->slug])}}" style="width: 150px"><i class="zmdi zmdi-shopping-cart"></i> Shop now </a>
+                                                            <li><a href="{{route('productimg.home',['id'=>$product->slug])}}" style="width: 150px"><i class="zmdi zmdi-shopping-cart"></i> Mua ngay </a>
                                                             </li>
 {{--                                                            <input type="button"  data-toggle="modal" data-target="#xemnhanh" value="Xem nhanh" class="btn btn-default xemnhanh" data-id_product="{{$product->id}}" name="add-to-cart">--}}
 
@@ -127,7 +128,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                            <h5 class="uppercase">New Arrival</h5>
+                            <h5 class="uppercase">Mẫu mới về</h5>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -141,15 +142,15 @@
                                     <div class="product-label">
                                         @if($product->status == 1)
                                             <div class="new" style="background-color: red;color: white">
-                                                On Sale
+                                                Giảm giá
                                             </div>
                                         @elseif($product->status == 0)
                                             <div class="new" style="background-color: yellow;color: black">
-                                                Out of
+                                                Tạm hết hàng
                                             </div>
                                         @else
                                             <div class="new" style="background-color: grey;color: white">
-                                                Stop selling
+                                                Tạm dừng bán
                                             </div>
                                         @endif
                                     </div>
@@ -175,7 +176,7 @@
                                     </div>
                                     <div class="prodcut-ratting-price">
                                         <div class="prodcut-price">
-                                            <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                            <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -216,15 +217,15 @@
                                 <div class="col-md-12">
                                     <div class="sb-content mt-60">
                                         <div class="banner-text text-center">
-                                            <h5 class="lato">New Arrival</h5>
+                                            <h5 class="lato">Đặc biệt</h5>
                                             <h4 class="montserrat"><b>{{$top1import[0]->name}}</b></h4>
-                                            <h4 class="montserrat">{{number_format($top1import[0]->sale_price).' $'}}</h4>
+                                            <h4 class="montserrat">{{number_format($top1import[0]->sale_price).' VNĐ'}}</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <div class="w-50 m-auto">
-                                        <a class="btn-def  btn2 w-100 m-auto text-center" href="{{Route('productimg.home',['id'=>$top1import[0]->slug])}}">SHOP NOW</a>
+                                        <a class="btn-def  btn2 w-100 m-auto text-center" href="{{Route('productimg.home',['id'=>$top1import[0]->slug])}}">Mua ngay</a>
                                     </div>
                                 </div>
                             </div>
@@ -269,15 +270,15 @@
 
                                                                 @if($product->status == 1)
                                                                     <div class="new" style="background-color: red;color: white">
-                                                                        On Sale
+                                                                        Giảm giá
                                                                     </div>
                                                                 @elseif($product->status == 0)
                                                                     <div class="new" style="background-color: yellow;color: black">
-                                                                        Out of
+                                                                        Tạm hết hàng
                                                                     </div>
                                                                 @else
                                                                     <div class="new" style="background-color: grey;color: white">
-                                                                        Stop selling
+                                                                        Tạm dừng bán
                                                                     </div>
                                                                 @endif
 
@@ -304,7 +305,7 @@
                                                             </div>
                                                             <div class="prodcut-ratting-price">
                                                                 <div class="prodcut-price">
-                                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                                                    <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -325,15 +326,15 @@
 
                                                                 @if($product->status == 1)
                                                                     <div class="new" style="background-color: red;color: white">
-                                                                        On Sale
+                                                                        Giảm giá
                                                                     </div>
                                                                 @elseif($product->status == 0)
                                                                     <div class="new" style="background-color: yellow;color: black">
-                                                                        Out of
+                                                                        Tạm hết hàng
                                                                     </div>
                                                                 @else
                                                                     <div class="new" style="background-color: grey;color: white">
-                                                                        Stop selling
+                                                                        Tạm dừng bán
                                                                     </div>
                                                                 @endif
                                                             </div>
@@ -359,7 +360,7 @@
                                                             </div>
                                                             <div class="prodcut-ratting-price">
                                                                 <div class="prodcut-price">
-                                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                                                    <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -380,15 +381,15 @@
 
                                                                 @if($product->status == 1)
                                                                     <div class="new" style="background-color: red;color: white">
-                                                                        On Sale
+                                                                        Giảm giá
                                                                     </div>
                                                                 @elseif($product->status == 0)
                                                                     <div class="new" style="background-color: yellow;color: black">
-                                                                        Out of
+                                                                        Tạm hết hàng
                                                                     </div>
                                                                 @else
                                                                     <div class="new" style="background-color: grey;color: white">
-                                                                        Stop selling
+                                                                        Tạm dừng bán
                                                                     </div>
                                                                 @endif
 
@@ -415,7 +416,7 @@
                                                             </div>
                                                             <div class="prodcut-ratting-price">
                                                                 <div class="prodcut-price">
-                                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                                                    <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -454,7 +455,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-center">
                         <div class="heading-title heading-style pos-rltv mb-50 text-center">
-                            <h5 class="uppercase">Other</h5>
+                            <h5 class="uppercase">Khác</h5>
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -471,15 +472,15 @@
 
                                                 @if($product->status == 1)
                                                     <div class="new" style="background-color: red;color: white">
-                                                        On Sale
+                                                        Giảm giá
                                                     </div>
                                                 @elseif($product->status == 0)
                                                     <div class="new" style="background-color: yellow;color: black">
-                                                        Out of
+                                                        Tạm hết hàng
                                                     </div>
                                                 @else
                                                     <div class="new" style="background-color: grey;color: white">
-                                                        Stop selling
+                                                        Tạm dừng bán
                                                     </div>
                                                 @endif
 
@@ -506,7 +507,7 @@
                                             </div>
                                             <div class="prodcut-ratting-price">
                                                 <div class="prodcut-price">
-                                                    <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                                    <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                                 </div>
                                             </div>
                                         </div>

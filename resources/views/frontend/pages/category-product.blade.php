@@ -3,10 +3,10 @@
     <div class="breadcumb-area breadcumb-2 overlay pos-rltv">
         <div class="bread-main">
             <div class="bred-hading text-center">
-                <h5>Product Grid View</h5> </div>
+                <h5>Danh Mục Sản Phẩm</h5> </div>
             <ol class="breadcrumb">
-                <li class="home"><a title="Go to Home Page" href="index.html">Home</a></li>
-                <li class="active">Shop</li>
+                <li class="home"><a title="Go to Home Page" href="{{route('client.home')}}">Trang chủ</a></li>
+                <li class="active">Danh mục</li>
             </ol>
         </div>
     </div>
@@ -25,28 +25,28 @@
                                     <div class="col-xl-10 col-lg-10 col-md-10">
                                         <div class="row">
                                             <div class="col-2">
-                                                <label>Sort By</label>
+                                                <label>Sắp xếp</label>
                                             </div>
                                             <div class="product-type col-10">
                                                 <form action="{{Route('frontend.product.filter')}}" id="form_order" method="GET">
                                                 <div class="row">
                                                     <select name="category" id="" class="form-control col-3 mr-2">
-                                                        <option value="-1">--Select category--</option>
+                                                        <option value="-1">Theo danh mục</option>
                                                         @foreach($categories as $category)
                                                             <option {{old('category',$category->slug) == request()->category?'selected':''}} value="{{$category->slug}}">{{$category->name}}</option>
                                                         @endforeach
                                                     </select>
                                                     <select name="orderby" class="form-control col-3 mr-2" id="input-sort">
-                                                        <option {{old('orderby',request()->orderby)=='default'?'selected':''}} value="" selected>Default</option>
-                                                        <option {{old('orderby',request()->orderby)=='price_asc'?'selected':''}} value="price_asc">Prices go up</option>
-                                                        <option {{old('orderby',request()->orderby)=='price_desc'?'selected':''}} value="price_desc">Prices go down</option>
-                                                        <option {{old('orderby',request()->orderby)=='name_asc'?'selected':''}} value="name_asc">Name : A - Z</option>
-                                                        <option {{old('orderby',request()->orderby)=='name_desc'?'selected':''}} value="name_desc">Name : Z - A</option>
-                                                        <option {{old('orderby',request()->orderby)=='id_asc'?'selected':''}} value="id_asc">Oldest Product</option>
-                                                        <option {{old('orderby',request()->orderby)=='id_desc'?'selected':''}} value="id_desc">Latest Product</option>
+                                                        <option {{old('orderby',request()->orderby)=='default'?'selected':''}} value="" selected>Mặc định</option>
+                                                        <option {{old('orderby',request()->orderby)=='price_asc'?'selected':''}} value="price_asc">Giá tăng dần</option>
+                                                        <option {{old('orderby',request()->orderby)=='price_desc'?'selected':''}} value="price_desc">Giá giảm dần</option>
+                                                        <option {{old('orderby',request()->orderby)=='name_asc'?'selected':''}} value="name_asc">Tên : A - Z</option>
+                                                        <option {{old('orderby',request()->orderby)=='name_desc'?'selected':''}} value="name_desc">Tên : Z - A</option>
+                                                        <option {{old('orderby',request()->orderby)=='id_asc'?'selected':''}} value="id_asc">Cũ nhất</option>
+                                                        <option {{old('orderby',request()->orderby)=='id_desc'?'selected':''}} value="id_desc">Mới nhất</option>
                                                     </select>
                                                     <div class="col-2 d-flex justify-content-center">
-                                                        <button type="submit" class="btn btn-light w-100 h-100">Filter</button>
+                                                        <button type="submit" class="btn btn-light w-100 h-100">Lọc</button>
                                                     </div>
 
 {{--                                                    <input type="submit" value="Lọc" >--}}
@@ -86,15 +86,15 @@
                                                         <div class="product-label">
                                                             @if($product->status == 1)
                                                                 <div class="new" style="background-color: red;color: white">
-                                                                    On Sale
+                                                                    Giảm giá
                                                                 </div>
                                                             @elseif($product->status == 0)
                                                                 <div class="new" style="background-color: yellow;color: black">
-                                                                    Out of
+                                                                    Tạm hết hàng
                                                                 </div>
                                                             @else
                                                                 <div class="new" style="background-color: grey;color: white">
-                                                                    Stop selling
+                                                                    Tạm dừng bán
                                                                 </div>
                                                             @endif
                                                         </div>
@@ -119,7 +119,7 @@
                                                         </div>
                                                         <div class="prodcut-ratting-price">
                                                             <div class="prodcut-price">
-                                                                <div class="new-price">{{ number_format($product->sale_price).' $' }}</div>
+                                                                <div class="new-price">{{ number_format($product->sale_price).' VNĐ' }}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -148,7 +148,7 @@
                         <aside class="single-aside search-aside search-box">
                             <form action="" method="GET">
                                 <div class="input-box">
-                                    <input name="key_search" class="single-input" value="{{request()->key_search}}" placeholder="Search...." type="text">
+                                    <input name="key_search" class="single-input" value="{{request()->key_search}}" placeholder="Tìm kiếm ..." type="text">
                                     <button class="src-btn sb-2"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>
@@ -158,7 +158,7 @@
                         <!--single aside start-->
                         <aside class="single-aside catagories-aside">
                             <div class="heading-title aside-title pos-rltv">
-                                <h5 class="uppercase">categories</h5>
+                                <h5 class="uppercase">DANH MỤC</h5>
                             </div>
                             @if($menus)
                                 <div id="cat-treeview" class="product-cat">
@@ -194,15 +194,15 @@
                         <!--single aside start-->
                         <aside class="single-aside price-aside fix">
                             <div class="heading-title aside-title pos-rltv mb-4">
-                                <h5 class="uppercase">price</h5>
+                                <h5 class="uppercase">Giá</h5>
                             </div>
                             <div class="">
                                 <div id=""></div>
                                 <div>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>1])}}"> Less than 500 $</a></i></p>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>2])}}"> From 500 $ to 1.000 $</a></i></p>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>3])}}"> From 1.000 $ to 2.500 $</a></i></p>
-                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>4])}}"> Over 2.500 $</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>1])}}"> Dưới 500.000</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>2])}}"> Từ 500.000 đến 1.000.000</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>3])}}"> Từ 1.000.000 đến 2.500.000</a></i></p>
+                                    <p><i class="fa fa-caret-right price_a" aria-hidden="true"><a class="price_a" href="{{request()->fullUrlWithQuery(['price'=>4])}}"> Trên 2.500.000</a></i></p>
                                 </div>
                             </div>
                         </aside>
@@ -213,7 +213,7 @@
                         <!--single aside start-->
                         <aside class="single-aside size-aside">
                             <div class="heading-title aside-title pos-rltv">
-                                <h5 class="uppercase">Size Option</h5>
+                                <h5 class="uppercase">Size</h5>
                             </div>
                             <ul class="size-filter mt-30">
                                 @foreach(\App\Models\Product::$size_text as $key => $value)
@@ -224,7 +224,7 @@
                         <!--single aside start-->
                         <aside class="single-aside product-aside">
                             <div class="heading-title aside-title pos-rltv">
-                                <h5 class="uppercase">Recent Product</h5>
+                                <h5 class="uppercase">Đề xuất</h5>
                             </div>
                             <div class="recent-prodcut-wraper total-rectnt-slider">
                                 <div class="single-rectnt-slider">
@@ -244,11 +244,11 @@
                                                 </div>
                                             </div>
                                             <div class="product-text col-7">
-                                                <div class="prodcut-name"> <a href="single-product.html">{{$product->name}}</a> </div>
+                                                <div class="prodcut-name"> <a href="{{Route('productimg.home',['id'=>$product->slug])}}">{{$product->name}}</a> </div>
                                                 <div class="prodcut-ratting-price">
-                                                    <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star-o"></i></a> </div>
+{{--                                                    <div class="prodcut-ratting"> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star"></i></a> <a href="#"><i class="fa fa-star-o"></i></a> </div>--}}
                                                     <div class="prodcut-price">
-                                                        <div class="new-price">{{number_format($product->sale_price).' $'}}</div>
+                                                        <div class="new-price">{{number_format($product->sale_price).' VNĐ'}}</div>
                                                     </div>
                                                 </div>
                                             </div>

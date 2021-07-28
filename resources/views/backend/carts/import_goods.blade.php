@@ -85,7 +85,7 @@
                                     <td>{{$order->name}}</td>
                                     <td>{{$order->phone}}</td>
                                     <td>{{$order->address}}</td>
-                                    <td>{{number_format($order->total).' $'}}</td>
+                                    <td>{{number_format($order->total).' VNĐ'}}</td>
                                     <td>
                                         @if($order->status == 1)
                                             <a href="{{Route('backend.bill.import',['id'=>$order->id])}}">Chi tiết</a>

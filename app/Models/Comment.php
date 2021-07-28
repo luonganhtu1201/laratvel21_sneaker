@@ -15,4 +15,11 @@ class Comment extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function getStatusTextAttribute(){
+        if($this->status == 0){
+            return "Chờ duyệt";
+        }elseif($this->status == 1){
+            return "Đã duyệt";
+        }
+    }
 }
