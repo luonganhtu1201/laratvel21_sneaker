@@ -83,7 +83,7 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{$product->id}}</td>
-                                    <td><a href="{{ Route('productimg.home',['id'=>$product->id]) }}" target="_blank">{{$product->name}}</a></td>
+                                    <td><a href="{{ Route('productimg.home',['id'=>$product->slug]) }}" target="_blank">{{$product->name}}</a></td>
                                     <td>
                                         @if(count($product->images)>0)
                                             {{--                                        <img src="{{url(\Illuminate\Support\Facades\Storage::url($product->images[0]->path))}}">--}}

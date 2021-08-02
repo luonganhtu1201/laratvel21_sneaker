@@ -150,13 +150,13 @@
                                                                     <div class="panel-heading">
                                                                         <h4 class="panel-title">
                                                                             Bạn chưa đăng nhập ?
-                                                                            <a href="{{Route('login.form')}}">
+                                                                            <a href="{{Route('login')}}">
                                                                                 Bấm vào đây để đăng nhập !
                                                                             </a>
                                                                         </h4>
                                                                         <h4 class="panel-title">
                                                                             Bạn không có tài khoản ?
-                                                                            <a href="{{Route('login.form')}}">
+                                                                            <a href="{{Route('user.register.form')}}">
                                                                                 Bấm vào đây để đăng kí !
                                                                             </a>
                                                                         </h4>
